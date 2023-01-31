@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&display=swap');
+.category-card {
+    font-family: 'DM Sans', sans-serif;
+    position: relative;
+
+    .category-card__title {
+        font-size: 29px;
+        color: #fff;
+        position: absolute;
+        font-weight: 700;
+        top: 21px;
+        left: 22px;
+    }
+}
