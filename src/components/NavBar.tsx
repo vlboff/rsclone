@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   SpotifyLogo,
   HomeIcon,
   HomeIconActive,
   SearchIcon,
   SearchIconActive,
-  AddPlayList,
+  AddPlayListIcon,
 } from "../icons";
 
 interface IListItem {
@@ -40,8 +40,8 @@ function NavBar() {
       name: listItemNames.search,
     },
     {
-      icon: <AddPlayList fill={currentIconColor} />,
-      activIcon: <AddPlayList fill={currentIconColor} />,
+      icon: <AddPlayListIcon fill={currentIconColor} />,
+      activIcon: <AddPlayListIcon fill={currentIconColor} />,
       name: listItemNames.createPlaylist,
     },
   ];

@@ -1,8 +1,9 @@
 .settings-bar {
+  position: fixed;
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  padding: 10px;
+  padding: 20px;
 }
 
 .settings-bar-icon {

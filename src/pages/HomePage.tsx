@@ -14,9 +14,11 @@ function HomePage() {
   return (
     <div className="home-page">
       <SettingsBar />
-      {blockName.map((item) => (
-        <MixesBlock name={item} />
-      ))}
+      <div className="mixes-block-wrapper">
+        {blockName.map((item) => (
+          <MixesBlock name={item} />
+        ))}
+      </div>
     </div>
   );
 }
