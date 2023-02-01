@@ -1,9 +1,30 @@
 import React from 'react';
-import { ButtonBack, ButtonNext, ButtonPlay, Heart, Microphone, Queue, Repeat, Show, Shuffle, VolumeOn } from '../../icons';
+import { ButtonBack, ButtonNext, ButtonPlay, Heart, Hide, Microphone, Queue, Repeat, Show, Shuffle, VolumeOn } from '../../icons';
 
 function PlayingBar() {
+
+  function expandCoverArt() {
+    (document.querySelector('.playing-widget') as HTMLElement).style.transform = 'translate(-72px)';
+    (document.querySelector('.cover-art_expanded') as HTMLElement).style.transform = 'translateY(-100%)';
+  }
+
+  function shrinkCoverArt() {
+    (document.querySelector('.cover-art_expanded') as HTMLElement).style.transform = 'translateY(0)';
+    (document.querySelector('.playing-widget') as HTMLElement).style.transform = 'translate(0px)';
+  }
+
   return (
     <footer className='playing-bar'>
+      <div className="cover-art_expanded">
+        <a href="/">
+          <div>
+            <img src="https://i.scdn.co/image/ab67706f00000002708c623e2e1df4607775381b" alt='cover art' />
+          </div>
+        </a>
+        <button className='hide-button' onClick={shrinkCoverArt}>
+          <Hide />
+        </button>
+      </div>
       <div className='playing-bar__wrapper'>
         <div className='playing-widget'>
           <div className='cover-art'>
@@ -13,7 +34,7 @@ function PlayingBar() {
                   <img src="https://i.scdn.co/image/ab67706f00000002708c623e2e1df4607775381b" alt='cover art' />
                 </div>
               </a>
-              <button className='show-botton'>
+              <button className='show-button' onClick={expandCoverArt}>
                 <Show />
               </button>
             </div>
@@ -54,15 +75,7 @@ function PlayingBar() {
           </div>
           <div className="playback-bar">
             <div className='playback-position'>1:45</div>
-            <div className='playback-range'>
-              <div className='playback-range__container'>
-                <div className="playback-range__background">
-                  <div className="playback-range__progress"></div>
-                </div>
-                <div className="playback-range__slider-thumb"></div>
-              </div>
-              <input type="range" id="playback-range__input" />
-            </div>
+            <input type="range" id="playback-range__input" />
             <div className='playback-duration'>3:51</div>
           </div>
         </div>
@@ -81,7 +94,7 @@ function PlayingBar() {
           </div>
         </div>
       </div>
-    </footer>
+    </footer >
   )
 }
 
