@@ -1,0 +1,16 @@
+.settings-bar {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 10px;
+}
+
+.settings-bar-icon {
+  cursor: pointer;
+}
+
+.settings-bar-icon:active {
+  transform: scale(0.97);
+  transition: all 0.3s;
+}
+
