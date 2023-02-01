@@ -1,4 +1,5 @@
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -9,6 +10,7 @@
   border-radius: 6px;
   cursor: pointer;
 }
+
 
 .card-img {
   width: 167px;
@@ -37,4 +39,23 @@
   white-space: normal;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.card-play-btn {
+  display: none;
+  position: absolute;
+  top: 130px;
+  left: 130px;
+  border-radius: 50%;
+}
+
+.card-play-btn:hover {
+  transform: scale(1.1);
+  transition: all 0.5s;
+  cursor: default;
+}
+
+.hover {
+  display: flex;
+  background: #3b3b3b;
 }
