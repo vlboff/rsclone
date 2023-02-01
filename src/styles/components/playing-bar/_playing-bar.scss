@@ -1,0 +1,14 @@
+.playing-bar {
+  background-color: $playing-bar-background;
+  color: $text-additional-color;
+  border-top: 1px solid #282828;
+}
+
+.playing-bar__wrapper {
+  height: 90px;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
