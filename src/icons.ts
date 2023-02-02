@@ -9,5 +9,23 @@ import { ReactComponent as Repeat } from "./assets/icons/repeat.svg";
 import { ReactComponent as Microphone } from "./assets/icons/microphone.svg";
 import { ReactComponent as Queue } from "./assets/icons/queue.svg";
 import { ReactComponent as VolumeOn } from "./assets/icons/volume-on.svg";
+import { ReactComponent as SpotifyLogo } from "./assets/spotify-logo.svg";
+import { ReactComponent as HomeIcon } from "./assets/home-icon.svg";
+import { ReactComponent as HomeIconActive } from "./assets/home-icon-active.svg";
+import { ReactComponent as SearchIcon } from "./assets/search-icon.svg";
+import { ReactComponent as SearchIconActive } from "./assets/search-icon-active.svg";
+import { ReactComponent as AddPlayListIcon } from "./assets/add-playlist-icon.svg";
+import { ReactComponent as SettingsIcon } from "./assets/settings-icon.svg";
+import { ReactComponent as PlayCardIcon } from "./assets/playCard-icon.svg";
 
-export { Heart, Show, Hide, Shuffle, ButtonBack, ButtonPlay, ButtonNext, Repeat, Microphone, Queue, VolumeOn }
+export {
+  Heart, Show, Hide, Shuffle, ButtonBack, ButtonPlay, ButtonNext, Repeat, Microphone, Queue, VolumeOn,
+  SpotifyLogo,
+  HomeIcon,
+  HomeIconActive,
+  SearchIcon,
+  SearchIconActive,
+  AddPlayListIcon,
+  SettingsIcon,
+  PlayCardIcon,
+};
