@@ -7,7 +7,7 @@ function SearchPage() {
     <div className='search'>
       {/* <div className="search__arrows"></div>
       <SearchBar/> */}
-      <h3 className='search__cards-title'>Все оcтальное</h3>
+      <h3 className='search__cards-title'>Browse all</h3>
       <div className="search__cards">
         <CategoryCard/>
         <CategoryCard/>

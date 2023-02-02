@@ -7,7 +7,7 @@ function ButtonMenu() {
         <div className="button-menu__avatar">
             <img src="" alt="" />
         </div>
-        <span className="button-menu__name">Иван Иванов</span>
+        <span className="button-menu__name">John Johnson</span>
         <ArrowDownIcon className='button-menu__icon'/>
     </button>
   )

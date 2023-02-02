@@ -6,7 +6,7 @@ function SearchBar() {
     <form className='search__form'>
        <label className='search__label'>
           <SearchIcon className='search__svg'/>
-          <input className='search__input' type="text" placeholder='Что хочешь послушать?'/>
+          <input className='search__input' type="text" placeholder='What do you want to listen to?'/>
        </label>
     </form>
   )
