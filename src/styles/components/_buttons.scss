@@ -1,0 +1,42 @@
+.player-tool-button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  svg {
+    fill: $text-additional-color;
+
+    &:hover {
+      fill: $text-main-color;
+    }
+  }
+}
+
+.play-pause-button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background-color: $text-main-color;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  svg {
+    fill: $playing-bar-background;
+  }
+
+  &:hover {
+    transform: scale(1.06);
+  }
+
+  &:active {
+    transform: scale(0.99);
+  }
+}

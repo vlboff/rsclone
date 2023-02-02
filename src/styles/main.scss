@@ -1,4 +1,13 @@
 @import './base/normalize';
+
+@import './abstracts/variables';
+
+@import './components/Buttons';
+@import './components/PlayingBar/PlayingBar';
+@import './components/PlayingBar/PlayingWidget';
+@import './components/PlayingBar/PlayerControls';
+@import './components/PlayingBar/PlayerTools';
+
 @import './layout/NavBar';
 @import './components/SettingsBar';
 @import './layout/HomePage';
