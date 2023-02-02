@@ -1,0 +1,43 @@
+.mixes-block {
+  padding: 20px 20px 20px 290px;
+}
+
+.mixes-block-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-family: 'DM Sans';
+  font-weight: 700;
+}
+
+.mixes-block-header-title {
+  font-size: 24px;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.mixes-block-header-title:hover {
+  text-decoration: underline;
+  transition: all 0.5s;
+}
+
+.mixes-block-header-show {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #FFFFFF;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.mixes-block-header-show:hover {
+  text-decoration: underline;
+  transition: all 0.5s;
+}
+
+.mixes {
+  display: flex;
+  padding-top: 20px;
+  gap: 24px;
+  overflow: hidden;
+}

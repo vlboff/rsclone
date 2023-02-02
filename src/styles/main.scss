@@ -1,8 +1,31 @@
 @import './base/normalize';
 
-@import './layout/SearchPage';
+@import './abstracts/variables';
 
+@import './components/Buttons';
+@import './components/PlayingBar/PlayingBar';
+@import './components/PlayingBar/PlayingWidget';
+@import './components/PlayingBar/PlayerControls';
+@import './components/PlayingBar/PlayerTools';
+
+@import './layout/NavBar';
+@import './components/SettingsBar';
+@import './layout/HomePage';
+@import './components/MixesBlock';
+@import './components/Mix';
+
+@import './layout/SearchPage';
 @import './components/SearchBar';
 @import './components/Header';
 @import './components/CategoryCard';
-@import './components/ButtonMenu'
+@import './components/ButtonMenu';
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+main {
+  display: flex;
+}

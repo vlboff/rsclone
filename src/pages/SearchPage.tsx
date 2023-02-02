@@ -1,6 +1,6 @@
 import React from 'react'
-import CategoryCard from '../../components/CategoryCard'
-import SearchBar from '../../components/SearchBar'
+import CategoryCard from '../components/CategoryCard'
+import SearchBar from '../components/SearchBar'
 
 function SearchPage() {
   return (
