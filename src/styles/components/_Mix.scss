@@ -1,0 +1,61 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 207px;
+  min-height: 300px;
+  padding: 20px;
+  background: #181818;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+.card-img {
+  width: 167px;
+  height: 167px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.2275) 26.44%);
+  border-radius: 6px;
+}
+
+.card-name {
+  font-family: 'DM Sans';
+  font-weight: 700;
+  font-size: 18px;
+  color: #FFFFFF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-dscr {
+  font-family: 'DM Sans';
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: #b3b3b3;
+  max-height: 40px;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-play-btn {
+  display: none;
+  position: absolute;
+  top: 130px;
+  left: 130px;
+  border-radius: 50%;
+}
+
+.card-play-btn:hover {
+  transform: scale(1.1);
+  transition: all 0.5s;
+  cursor: default;
+}
+
+.hover {
+  display: flex;
+  background: #3b3b3b;
+}

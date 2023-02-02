@@ -1,1 +1,16 @@
 @import './base/normalize';
+@import './layout/NavBar';
+@import './components/SettingsBar';
+@import './layout/HomePage';
+@import './components/MixesBlock';
+@import './components/Mix';
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+main {
+  display: flex;
+}
