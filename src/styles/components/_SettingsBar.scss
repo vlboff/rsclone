@@ -2,17 +2,65 @@
   position: fixed;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   width: 100%;
   padding: 20px;
   z-index: 1;
 }
 
 .settings-bar-icon {
+  margin: 5px 0 0 50px;
   cursor: pointer;
 }
 
 .settings-bar-icon:active {
   transform: scale(0.97);
   transition: all 0.3s;
+}
+
+.login-btn {
+  width: 80px;
+  height: 30px;
+  background: #1ED760;
+  border: none;
+  border-radius: 500px;
+  font-family: 'DM Sans';
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.05em;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  transform: scale(1.1);
+  transition: all 0.3s;
+}
+
+.logout-btn {
+  width: 80px;
+  height: 30px;
+  border: 1px solid #b3b3b3;
+  background: none;
+  border-radius: 500px;
+  font-family: 'DM Sans';
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.05em;
+  color: #b3b3b3;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  transform: scale(1.1);
+  transition: all 0.3s;
+  border: 1px solid #FFFFFF;
+  color: #FFFFFF;
 }
 
