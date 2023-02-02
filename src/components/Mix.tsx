@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { PlayCardIcon } from "../icons";
+import { IconPlayCard } from "../icons";
 
 interface IMix {
   name: string;
@@ -23,7 +23,7 @@ function Mix({ name }: IMix) {
         minim veniam, quis nostrud exercitation
       </div>
       <div className={`card-play-btn ${activeCardMode}`}>
-        <PlayCardIcon />
+        <IconPlayCard />
       </div>
     </div>
   );

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import {
-  SpotifyLogo,
-  HomeIcon,
-  HomeIconActive,
-  SearchIcon,
-  SearchIconActive,
-  AddPlayListIcon,
+  IconSpotifyLogo,
+  IconHome,
+  IconHomeActive,
+  IconSearch,
+  IconSearchActive,
+  IconAddPlayListIcon,
 } from "../icons";
 
 interface IListItem {
@@ -30,18 +30,18 @@ function NavBar() {
 
   const listItem: IListItem[] = [
     {
-      icon: <HomeIcon fill={currentIconColor} />,
-      activIcon: <HomeIconActive fill={currentIconColor} />,
+      icon: <IconHome fill={currentIconColor} />,
+      activIcon: <IconHomeActive fill={currentIconColor} />,
       name: listItemNames.home,
     },
     {
-      icon: <SearchIcon fill={currentIconColor} />,
-      activIcon: <SearchIconActive fill={currentIconColor} />,
+      icon: <IconSearch fill={currentIconColor} />,
+      activIcon: <IconSearchActive fill={currentIconColor} />,
       name: listItemNames.search,
     },
     {
-      icon: <AddPlayListIcon fill={currentIconColor} />,
-      activIcon: <AddPlayListIcon fill={currentIconColor} />,
+      icon: <IconAddPlayListIcon fill={currentIconColor} />,
+      activIcon: <IconAddPlayListIcon fill={currentIconColor} />,
       name: listItemNames.createPlaylist,
     },
   ];
@@ -59,7 +59,7 @@ function NavBar() {
   return (
     <nav className="nav-bar">
       <div className="nav-bar_logo">
-        <SpotifyLogo fill="white" stroke="white" />
+        <IconSpotifyLogo fill="white" stroke="white" />
       </div>
       <ul>
         {listItem.map((item) => (

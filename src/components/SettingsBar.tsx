@@ -1,5 +1,5 @@
 import React from "react";
-import { SettingsIcon } from "../icons";
+import { IconSettings } from "../icons";
 
 enum iconColor {
   white = "white",
@@ -11,7 +11,7 @@ function SettingsBar() {
   return (
     <div className="settings-bar">
       <div className="settings-bar-icon">
-        <SettingsIcon fill={currentIconColor} />
+        <IconSettings fill={currentIconColor} />
       </div>
     </div>
   );

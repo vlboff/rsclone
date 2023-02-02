@@ -1,31 +1,31 @@
-import { ReactComponent as Heart } from "./assets/icons/heart_add-to-favorites.svg";
-import { ReactComponent as Show } from "./assets/icons/show-arrow.svg";
-import { ReactComponent as Hide } from "./assets/icons/hide-arrow.svg";
-import { ReactComponent as Shuffle } from "./assets/icons/shuffle.svg";
-import { ReactComponent as ButtonBack } from "./assets/icons/button-back.svg";
-import { ReactComponent as ButtonPlay } from "./assets/icons/button-play.svg";
-import { ReactComponent as ButtonNext } from "./assets/icons/button-next.svg";
-import { ReactComponent as Repeat } from "./assets/icons/repeat.svg";
-import { ReactComponent as Microphone } from "./assets/icons/microphone.svg";
-import { ReactComponent as Queue } from "./assets/icons/queue.svg";
-import { ReactComponent as VolumeOn } from "./assets/icons/volume-on.svg";
-import { ReactComponent as SpotifyLogo } from "./assets/spotify-logo.svg";
-import { ReactComponent as HomeIcon } from "./assets/home-icon.svg";
-import { ReactComponent as HomeIconActive } from "./assets/home-icon-active.svg";
-import { ReactComponent as SearchIcon } from "./assets/search-icon.svg";
-import { ReactComponent as SearchIconActive } from "./assets/search-icon-active.svg";
-import { ReactComponent as AddPlayListIcon } from "./assets/add-playlist-icon.svg";
-import { ReactComponent as SettingsIcon } from "./assets/settings-icon.svg";
-import { ReactComponent as PlayCardIcon } from "./assets/playCard-icon.svg";
+import { ReactComponent as IconHeart } from "./assets/icons/heart_add-to-favorites.svg";
+import { ReactComponent as IconShow } from "./assets/icons/show-arrow.svg";
+import { ReactComponent as IconHide } from "./assets/icons/hide-arrow.svg";
+import { ReactComponent as IconShuffle } from "./assets/icons/shuffle.svg";
+import { ReactComponent as IconButtonBack } from "./assets/icons/button-back.svg";
+import { ReactComponent as IconButtonPlay } from "./assets/icons/button-play.svg";
+import { ReactComponent as IconButtonNext } from "./assets/icons/button-next.svg";
+import { ReactComponent as IconRepeat } from "./assets/icons/repeat.svg";
+import { ReactComponent as IconMicrophone } from "./assets/icons/microphone.svg";
+import { ReactComponent as IconQueue } from "./assets/icons/queue.svg";
+import { ReactComponent as IconVolumeOn } from "./assets/icons/volume-on.svg";
+import { ReactComponent as IconSpotifyLogo } from "./assets/icons/spotify-logo.svg";
+import { ReactComponent as IconHome } from "./assets/icons/home-icon.svg";
+import { ReactComponent as IconHomeActive } from "./assets/icons/home-icon-active.svg";
+import { ReactComponent as IconSearch } from "./assets/icons/search-icon.svg";
+import { ReactComponent as IconSearchActive } from "./assets/icons/search-icon-active.svg";
+import { ReactComponent as IconAddPlayListIcon } from "./assets/icons/add-playlist-icon.svg";
+import { ReactComponent as IconSettings } from "./assets/icons/settings-icon.svg";
+import { ReactComponent as IconPlayCard } from "./assets/icons/playCard-icon.svg";
 
 export {
-  Heart, Show, Hide, Shuffle, ButtonBack, ButtonPlay, ButtonNext, Repeat, Microphone, Queue, VolumeOn,
-  SpotifyLogo,
-  HomeIcon,
-  HomeIconActive,
-  SearchIcon,
-  SearchIconActive,
-  AddPlayListIcon,
-  SettingsIcon,
-  PlayCardIcon,
+  IconHeart, IconShow, IconHide, IconShuffle, IconButtonBack, IconButtonPlay, IconButtonNext, IconRepeat, IconMicrophone, IconQueue, IconVolumeOn,
+  IconSpotifyLogo,
+  IconHome,
+  IconHomeActive,
+  IconSearch,
+  IconSearchActive,
+  IconAddPlayListIcon,
+  IconSettings,
+  IconPlayCard,
 };

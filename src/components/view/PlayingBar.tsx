@@ -1,5 +1,5 @@
 import React from 'react';
-import { ButtonBack, ButtonNext, ButtonPlay, Heart, Hide, Microphone, Queue, Repeat, Show, Shuffle, VolumeOn } from '../../icons';
+import { IconButtonBack, IconButtonNext, IconButtonPlay, IconHeart, IconHide, IconMicrophone, IconQueue, IconRepeat, IconShow, IconShuffle, IconVolumeOn } from '../../icons';
 
 function PlayingBar() {
 
@@ -14,7 +14,7 @@ function PlayingBar() {
   }
 
   return (
-    <>
+    <div className='playing-bar__container'>
       <div className="cover-art_expanded">
         <a href="/">
           <div>
@@ -22,7 +22,7 @@ function PlayingBar() {
           </div>
         </a>
         <button className='hide-button' onClick={shrinkCoverArt}>
-          <Hide />
+          <IconHide />
         </button>
       </div>
       <footer className='playing-bar'>
@@ -36,7 +36,7 @@ function PlayingBar() {
                   </div>
                 </a>
                 <button className='show-button' onClick={expandCoverArt}>
-                  <Show />
+                  <IconShow />
                 </button>
               </div>
             </div>
@@ -49,28 +49,28 @@ function PlayingBar() {
               </div>
             </div>
             <button className='add-button player-tool-button'>
-              <Heart />
+              <IconHeart />
             </button>
           </div>
           <div className='player-controls'>
             <div className="player-controls__buttons">
               <div className="player-controls__buttons-left">
                 <button className='player-tool-button'>
-                  <Shuffle />
+                  <IconShuffle />
                 </button>
                 <button className='player-tool-button'>
-                  <ButtonBack />
+                  <IconButtonBack />
                 </button>
               </div>
               <button className='play-pause-button'>
-                <ButtonPlay />
+                <IconButtonPlay />
               </button>
               <div className="player-controls__buttons-right">
                 <button className='player-tool-button'>
-                  <ButtonNext />
+                  <IconButtonNext />
                 </button>
                 <button className='player-tool-button'>
-                  <Repeat />
+                  <IconRepeat />
                 </button>
               </div>
             </div>
@@ -82,21 +82,21 @@ function PlayingBar() {
           </div>
           <div className='player-tools'>
             <button className='player-tool-button'>
-              <Microphone />
+              <IconMicrophone />
             </button>
             <button className='player-tool-button'>
-              <Queue />
+              <IconQueue />
             </button>
             <div className="volume-bar">
               <button className='player-tool-button'>
-                <VolumeOn />
+                <IconVolumeOn />
               </button>
               <input type="range" id="volume-bar__range" />
             </div>
           </div>
         </div>
       </footer >
-    </>
+    </div>
   )
 }
 
