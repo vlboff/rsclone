@@ -1,16 +1,27 @@
 import React from 'react'
-import './SearchPage.scss'
-import CategoryCard from '../../components/CategoryCard/CategoryCard'
+import CategoryCard from '../../components/CategoryCard'
+import SearchBar from '../../components/SearchBar'
 
 function SearchPage() {
   return (
     <div className='search'>
-      <div className="search__arrows"></div>
-      <div className="search__input">
-        <input type="text" />
-      </div>
+      {/* <div className="search__arrows"></div>
+      <SearchBar/> */}
+      <h3 className='search__cards-title'>Все оcтальное</h3>
       <div className="search__cards">
-        <h3 className='search__cards-title'>Все оcтальное</h3>
+        <CategoryCard/>
+        <CategoryCard/>
+        <CategoryCard/>
+        <CategoryCard/>
+        <CategoryCard/>
+        <CategoryCard/>
+        <CategoryCard/>
+        <CategoryCard/>
+        <CategoryCard/>
+        <CategoryCard/>
+        <CategoryCard/>
+        <CategoryCard/>
+        <CategoryCard/>
         <CategoryCard/>
       </div>
     </div>

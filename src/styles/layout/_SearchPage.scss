@@ -4,13 +4,20 @@
     font-family: 'DM Sans', sans-serif;
     background-color: #0E0E0E;
     max-width: 1620px;
-    height: 400px;
-    padding: 0 40px;
+    padding: 20px 40px 0 40px;
     margin: 0 auto;
+
+    .search__cards {
+        display: grid;
+        gap: 24px;
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    }
 
     .search__cards-title {
         color: #fff;
         font-weight: 700;
-        font-size: 31px;
+        font-size: 24px;
+        margin: 0;
+        padding: 25px 0;
     }
 }
