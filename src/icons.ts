@@ -17,9 +17,23 @@ import { ReactComponent as IconSearchActive } from "./assets/icons/search-icon-a
 import { ReactComponent as IconAddPlayListIcon } from "./assets/icons/add-playlist-icon.svg";
 import { ReactComponent as IconSettings } from "./assets/icons/settings-icon.svg";
 import { ReactComponent as IconPlayCard } from "./assets/icons/playCard-icon.svg";
+import { ReactComponent as IconRSSLogo } from "./assets/icons/rs_school_js.svg";
+import { ReactComponent as IconSpotifyLogoWithoutName } from "./assets/icons/Spotify-Icon-Black-Logo.svg";
 
 export {
-  IconHeart, IconShow, IconHide, IconShuffle, IconButtonBack, IconButtonPlay, IconButtonNext, IconRepeat, IconMicrophone, IconQueue, IconVolumeOn,
+  IconHeart, 
+  IconShow, 
+  IconHide, 
+  IconShuffle, 
+  IconButtonBack, 
+  IconButtonPlay, 
+  IconButtonNext, 
+  IconRepeat, 
+  IconMicrophone, 
+  IconQueue, 
+  IconVolumeOn,
+  IconSpotifyLogoWithoutName,
+  IconRSSLogo,
   IconSpotifyLogo,
   IconHome,
   IconHomeActive,

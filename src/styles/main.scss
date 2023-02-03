@@ -13,10 +13,16 @@
 @import './components/MixesBlock';
 @import './components/Mix';
 
+@import './pages/AuthPage';
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+body {
+  font-family: 'DM Sans';
 }
 
 main {
