@@ -13,7 +13,14 @@
 @import './components/MixesBlock';
 @import './components/Mix';
 
+@import './layout/SearchPage';
+@import './components/SearchBar';
+@import './components/Header';
+@import './components/CategoryCard';
+@import './components/ButtonMenu';
+
 @import './pages/AuthPage';
+
 
 * {
   box-sizing: border-box;

@@ -6,6 +6,7 @@ import AuthPage from "./pages/AuthPage";
 import HomePage from "./pages/HomePage";
 import SettingsBar from "./components/SettingsBar";
 import "./styles/main.scss";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
         <div className="main-view">
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/search_page" element={<SearchPage/>} />
           </Routes>
         </div>
         <PlayingBar />
