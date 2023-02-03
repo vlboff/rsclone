@@ -4,6 +4,7 @@ import NavBar from "./components/NavBar";
 import PlayingBar from "./components/view/PlayingBar";
 import AuthPage from "./pages/AuthPage";
 import HomePage from "./pages/HomePage";
+import SettingsBar from "./components/SettingsBar";
 import "./styles/main.scss";
 
 function App() {
@@ -38,15 +39,16 @@ function App() {
           <Route path="/" element={<AuthPage CLIENT_ID={CLIENT_ID} REDIRECT_URI={REDIRECT_URI} AUTH_ENDPOINT={AUTH_ENDPOINT} RESPONSE_TYPE={RESPONSE_TYPE} />} />
         </Routes>
         :
-        <>
-          <main>
-            <NavBar />
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-            </Routes>
-          </main>
-          <PlayingBar />
-        </>
+        <main>
+        <SettingsBar />
+        <NavBar />
+        <div className="main-view">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+          </Routes>
+        </div>
+        <PlayingBar />
+      </main>
       }
     </Router>
   );
