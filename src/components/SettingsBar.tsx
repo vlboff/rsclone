@@ -8,6 +8,7 @@ enum iconColor {
 
 function SettingsBar() {
   const currentIconColor = iconColor.white;
+
   return (
     <div className="settings-bar">
       <div className="settings-bar-icon">
