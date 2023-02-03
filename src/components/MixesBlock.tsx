@@ -14,7 +14,6 @@ function MixesBlock({ name }: IMixesBlock) {
     "Extreme Metal Workout",
     "Hype",
     "Motivation Mix",
-    "Folk Feast",
   ];
   return (
     <div className="mixes-block">
@@ -24,7 +23,7 @@ function MixesBlock({ name }: IMixesBlock) {
       </div>
       <div className="mixes">
         {mixName.map((item) => (
-          <Mix name={item} />
+          <Mix key={item} name={item} />
         ))}
       </div>
     </div>

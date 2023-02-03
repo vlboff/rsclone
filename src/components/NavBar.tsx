@@ -48,13 +48,10 @@ function NavBar() {
 
   const [activeMode, setActiveMode] = useState<string>(listItem[0].name);
 
-  const isActive = (item: IListItem): React.SVGProps<SVGSVGElement> => {
-    if (item.name === activeMode) {
-      return item.activIcon as React.SVGProps<SVGSVGElement>;
-    } else {
-      return item.icon as React.SVGProps<SVGSVGElement>;
-    }
-  };
+  const isActive = (item: IListItem): React.SVGProps<SVGSVGElement> =>
+    item.name === activeMode
+      ? (item.activIcon as React.SVGProps<SVGSVGElement>)
+      : (item.icon as React.SVGProps<SVGSVGElement>);
 
   return (
     <nav className="nav-bar">
