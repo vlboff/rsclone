@@ -6,11 +6,7 @@ enum iconColor {
   black = "black",
 }
 
-interface ISettingsBar {
-  setCurrentToken: React.Dispatch<React.SetStateAction<string>>;
-}
-
-function SettingsBar({ setCurrentToken }: ISettingsBar) {
+function SettingsBar() {
   const currentIconColor = iconColor.white;
 
   const CLIENT_ID = "c670609555524d21a059cc5ba625d29f";
@@ -35,7 +31,6 @@ function SettingsBar({ setCurrentToken }: ISettingsBar) {
       window.localStorage.setItem("token", token);
     }
     setToken(token);
-    setCurrentToken(token);
   }, []);
 
   const logout = () => {

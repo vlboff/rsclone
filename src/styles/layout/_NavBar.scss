@@ -1,7 +1,6 @@
 .nav-bar {
-  position: fixed;
+  grid-area: nav-bar;
   width: 260px;
-  height: 100vh;
   padding: 25px;
   background-color: black;
 }
