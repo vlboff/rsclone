@@ -18,8 +18,11 @@
 @import './components/Header';
 @import './components/CategoryCard';
 @import './components/ButtonMenu';
+@import './components/SearchResultArtist';
+@import './components/SearchResultSong';
 
 @import './pages/AuthPage';
+@import './pages/SearchPage';
 
 
 * {

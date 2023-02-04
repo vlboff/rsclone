@@ -24,6 +24,7 @@ import { ReactComponent as  ArrowRightIcon} from "./assets/icons/arrow-right.svg
 import { ReactComponent as  ArrowLeftIcon} from "./assets/icons/arrow-left.svg";
 import { ReactComponent as IconRSSLogo } from "./assets/icons/rs_school_js.svg";
 import { ReactComponent as IconSpotifyLogoWithoutName } from "./assets/icons/Spotify-Icon-Black-Logo.svg";
+import { ReactComponent as IconMoreInfo } from "./assets/icons/more-info.svg";
 
 export {
   IconHeart, 
@@ -51,5 +52,6 @@ export {
   ArrowUpIcon, 
   SearchIcon, 
   ArrowRightIcon, 
-  ArrowLeftIcon
+  ArrowLeftIcon,
+  IconMoreInfo
 };

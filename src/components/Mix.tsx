@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import { IconPlayCard } from "../icons";
 
-interface IMix {
-  name: string;
-}
-
-function Mix({ name }: IMix) {
+function Mix(props: { image: string; name: string; description: string }) {
   const [activeCardMode, setActiveCardMode] = useState("");
 
   return (
@@ -14,13 +10,12 @@ function Mix({ name }: IMix) {
       onMouseEnter={() => setActiveCardMode("hover")}
       onMouseLeave={() => setActiveCardMode("")}
     >
-      <div className="card-img"></div>
-      <div className="card-name">{name}</div>
+      <div className="card-img">
+        <img src={props.image } alt="/" />
+      </div>
+      <div className="card-name">{props.name}</div>
       <div className="card-dscr">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation et dolore magna aliqua. Ut enim ad
-        minim veniam, quis nostrud exercitation
+        { props.description }
       </div>
       <div className={`card-play-btn ${activeCardMode}`}>
         <IconPlayCard />

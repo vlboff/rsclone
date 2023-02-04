@@ -46,7 +46,7 @@ function App() {
         <div className="main-view">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/search_page" element={<SearchPage/>} />
+            <Route path="/search" element={<SearchPage/>} />
           </Routes>
         </div>
         <PlayingBar />

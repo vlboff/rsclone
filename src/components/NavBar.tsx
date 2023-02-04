@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import {
   IconSpotifyLogo,
   IconHome,
@@ -53,6 +54,8 @@ function NavBar() {
       ? (item.activIcon as React.SVGProps<SVGSVGElement>)
       : (item.icon as React.SVGProps<SVGSVGElement>);
 
+
+
   return (
     <nav className="nav-bar">
       <div className="nav-bar_logo">
@@ -67,7 +70,7 @@ function NavBar() {
           >
             <>
               {isActive(item)}
-              {item.name}
+              <NavLink to={item.name === 'Search' ? 'search' : ''}>{item.name}</NavLink>
             </>
           </li>
         ))}
