@@ -32,9 +32,9 @@ function MixesBlock({ name, categoryID }: IMixesBlock) {
           ? playlists.map((playlist: IPlaylistItems) => (
               <Mix
                 key={playlist.name}
-                image=""
+                image={playlist.images[0].url}
                 name={playlist.name}
-                description="lorem"
+                description={playlist.description}
               />
             ))
           : ""}
