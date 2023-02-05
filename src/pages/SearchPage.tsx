@@ -20,7 +20,7 @@ function SearchPage() {
     };
     foo();
   }, []);
- 
+
   function renderSearchResult() {
 
     function convertDuration(ms: number) {
@@ -90,17 +90,21 @@ function SearchPage() {
       </form>
       {searchResult
         ? renderSearchResult()
-        : <>
-          <h3 className='search__cards-title'>Browse all</h3>
-          <div className="search__cards">
-            {categories.length > 0
-              ? categories.map((category: ICategory) => {
-                return <CategoryCard image={category.icons[0].url} name={category.name} key={category.name} />
-              })
-              : ''
-            }
-          </div>
-        </>
+        :
+        (document.querySelector('.search__input') as HTMLInputElement) !== null &&
+          (document.querySelector('.search__input') as HTMLInputElement).value === ''
+          ? <>
+            <h3 className='search__cards-title'>Browse all</h3>
+            <div className="search__cards">
+              {categories.length > 0
+                ? categories.map((category: ICategory) => {
+                  return <CategoryCard image={category.icons[0].url} name={category.name} key={category.name} />
+                })
+                : ''
+              }
+            </div>
+          </>
+          : ''
       }
     </div>
   )
