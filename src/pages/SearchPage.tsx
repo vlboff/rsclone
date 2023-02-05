@@ -1,18 +1,28 @@
-import React, { useState } from 'react'
-import { ISearchResult } from '../components/interfaces/apiInterfaces';
+import React, { useEffect, useState } from 'react'
+import { ICategory, ISearchResult } from '../components/interfaces/apiInterfaces';
 import Mix from '../components/Mix';
 import SearchResultArtist from '../components/view/SearchResultArtist';
 import SearchResultSong from '../components/view/SearchResultSong';
 import { SearchIcon } from '../icons'
 import { searchItems } from '../api/searchItems';
+import { getCategories } from '../api/getCategories';
+import CategoryCard from '../components/CategoryCard';
 
 function SearchPage() {
   const token = window.localStorage.getItem('token');
   const [searchKey, setSearchKey] = useState("")
-  const [searchResult, setSearchResult] = useState<ISearchResult | null>(null)
+  const [searchResult, setSearchResult] = useState<ISearchResult | null>(null);
+  const [categories, setCategories] = useState([]);
 
+  useEffect(() => {
+    async function foo() {
+      setCategories(await getCategories(token));
+    };
+    foo();
+  }, []);
+ 
   function renderSearchResult() {
-    
+
     function convertDuration(ms: number) {
       const minutes = Math.floor(ms / 60000);
       const seconds = ((ms % 60000) / 1000).toFixed(0);
@@ -83,6 +93,12 @@ function SearchPage() {
         : <>
           <h3 className='search__cards-title'>Browse all</h3>
           <div className="search__cards">
+            {categories.length > 0
+              ? categories.map((category: ICategory) => {
+                return <CategoryCard image={category.icons[0].url} name={category.name} key={category.name} />
+              })
+              : ''
+            }
           </div>
         </>
       }

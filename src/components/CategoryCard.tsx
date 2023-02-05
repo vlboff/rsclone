@@ -1,11 +1,11 @@
 import React from 'react'
 
-function CategoryCard() {
+function CategoryCard(props: { name: string;  image: string}) {
   return (
-    <a href='#' className='category-card'>
+    <a href='#' className='category-card' style={{backgroundColor: `#${Math.random().toString(16).slice(3, 9)}`}}>
         <div>
-          <span className='category-card__title'>Podcasts</span>
-          <img src="https://i.scdn.co/image/567158eb895ad26718a814345af0fc43ee785ec5" alt="" />
+        <span className='category-card__title'>{props.name}</span>
+          <img src={props.image} alt="" />
         </div>
     </a>
   )

@@ -132,3 +132,16 @@ export interface ISearchResult {
     total: number;
   };
 }
+
+export interface ICategory {
+  href: string;
+  icons: [
+    {
+      height: number;
+      url: string;
+      width: number;
+    }
+  ];
+  id: string;
+  name: string;
+}
