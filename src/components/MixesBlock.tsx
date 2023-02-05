@@ -23,7 +23,7 @@ function MixesBlock({ name }: IMixesBlock) {
       </div>
       <div className="mixes">
         {mixName.map((item) => (
-          <Mix key={item} name={item} />
+          <Mix key={item} image='' name={item} description='lorem'/>
         ))}
       </div>
     </div>

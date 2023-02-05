@@ -18,7 +18,6 @@ function SettingsBar() {
           <button className='arrow btn-reset'><ArrowLeftIcon className='arrow--left'/></button>
           <button className='arrow btn-reset'><ArrowRightIcon className='arrow--right'/></button>
         </div>
-        <SearchBar/>
       </div>
       <ButtonMenu/>
       {/* <div className="settings-bar-icon">

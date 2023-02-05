@@ -36,6 +36,11 @@ li {
   font-size: 14px;
   gap: 16px;
   cursor: pointer;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
 }
 
 li:hover {

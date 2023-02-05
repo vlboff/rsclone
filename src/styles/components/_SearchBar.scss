@@ -10,7 +10,10 @@ input:focus {
 }
 
 .search__form {
-    position: relative;
+    position: absolute;
+    top: 12px;
+    transform: translateX(100px);
+    z-index: 1;
     width: 364px;
 
     font-family: 'DM Sans', sans-serif;
