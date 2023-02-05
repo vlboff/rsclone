@@ -1,45 +1,51 @@
 import React, { useEffect, useState } from "react";
 import MixesBlock from "../components/MixesBlock";
-import SettingsBar from "../components/SettingsBar";
-import axios from "axios";
-
-interface ICategories {
-  name: string;
-}
+import { getCategories } from "../api/getCategories";
+import { ICategory } from "../components/interfaces/apiInterfaces";
 
 function HomePage() {
-  // const [currentToken, setCurrentToken] = useState<string>("");
-  // const [categories, setCategories] = useState<ICategories[]>([]);
+  const token = window.localStorage.getItem("token");
+  const [categories, setCategories] = useState([]);
 
-  // const addCategories = async () => {
-  //   const { data } = await axios.get(
-  //     "https://api.spotify.com/v1/browse/categories",
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${currentToken}`,
-  //       },
-  //     }
-  //   );
-  //   setCategories(data.categories.items);
-  // };
+  useEffect(() => {
+    async function foo() {
+      setCategories(await getCategories(token));
+    }
+    foo();
+  }, []);
 
-  // useEffect(() => {
-  //   addCategories();
-  // }, []);
+  const getTenRandomCategories = () => {
+    let arr = [...categories];
+    let newArr: never[] = [];
+    for (let i = 0; i < 10; i++) {
+      let random = Math.floor(Math.random() * (10 - i)) + i;
+      newArr.push(arr[random]);
+      let category = arr[random];
+      arr[random] = arr[i];
+      arr[i] = category;
+    }
+    return newArr;
+  };
 
-  const blockName = [
-    "Today's biggest hits",
-    "Featured Charts",
-    "Workout",
-    "Fresh new music",
-    "Mood",
-  ];
+  let homePageCategory: ICategory[] = [];
+
+  if (categories.length > 0) {
+    homePageCategory = getTenRandomCategories();
+  }
 
   return (
     <div className="home-page">
-      {blockName.map((item) => (
-        <MixesBlock key={item} name={item} />
-      ))}
+      {homePageCategory.length > 0
+        ? homePageCategory.map((category: ICategory) => {
+            return (
+              <MixesBlock
+                key={category.name}
+                name={category.name}
+                categoryID={category.id}
+              />
+            );
+          })
+        : ""}
     </div>
   );
 }
