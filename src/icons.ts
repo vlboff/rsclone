@@ -53,5 +53,5 @@ export {
   SearchIcon, 
   ArrowRightIcon, 
   ArrowLeftIcon,
-  IconMoreInfo
+  IconMoreInfo,
 };
