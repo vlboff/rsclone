@@ -1,5 +1,5 @@
 import React from 'react'
-import { ArrowDownIcon } from '../icons';
+import { ArrowDownIcon, ArrowUpIcon } from '../icons';
 import { useEffect, useState } from 'react';
 import { getUser } from './../api/getUser';
 
@@ -28,7 +28,11 @@ function ButtonMenu() {
               <img src="" alt="" />
           </div>
           <span className="button-menu__name">{user}</span>
-          <ArrowDownIcon className='button-menu__icon'/>
+          {active ?
+            <ArrowDownIcon className='button-menu__icon'/>
+            : <ArrowUpIcon className='button-menu__icon'/>
+          }
+          
       </button>
 
       <div className={active ? 'modal hidden' : 'modal'} hidden>
