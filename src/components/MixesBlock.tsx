@@ -19,8 +19,6 @@ function MixesBlock({ name, categoryID }: IMixesBlock) {
     foo();
   }, []);
 
-  console.log(playlists);
-
   return (
     <div className="mixes-block">
       <div className="mixes-block-header">

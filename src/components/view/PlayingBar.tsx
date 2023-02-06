@@ -95,6 +95,7 @@ function PlayingBar() {
             </div>
           </div>
         </div>
+        <audio className='playback'></audio>
       </footer >
     </div>
   )

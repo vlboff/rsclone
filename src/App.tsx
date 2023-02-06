@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage";
 import SettingsBar from "./components/SettingsBar";
 import "./styles/main.scss";
 import SearchPage from "./pages/SearchPage";
+import { listen } from "./utils/listen";
 
 function App() {
 
@@ -23,7 +24,6 @@ function App() {
 
     if (!token && hash) {
       token = hash.substring(1).split('&').find(el => el.startsWith('access_token'))?.split('=')[1] as string;
-      console.log(token);
 
       window.location.hash = '';
       window.localStorage.setItem('token', token);
@@ -31,6 +31,8 @@ function App() {
 
     setToken(token);
   }, [])
+
+  listen();
 
   return (
     <Router>

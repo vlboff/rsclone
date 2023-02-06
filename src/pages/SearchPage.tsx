@@ -53,6 +53,7 @@ function SearchPage() {
                       name={item.name}
                       author={item.artists[0].name}
                       duration={convertDuration(item.duration_ms)}
+                      id={item.id}
                     />
                   )
                 }

@@ -46,7 +46,7 @@ interface IResponseAlbum {
   uri: string;
 }
 
-interface IResponseTrack {
+export interface IResponseTrack {
   album: {
     album_type: string;
     artists: [
@@ -97,7 +97,7 @@ interface IResponseTrack {
   is_local: boolean;
   name: string;
   popularity: number;
-  preview_url: null;
+  preview_url: string |   null;
   track_number: number;
   type: string;
   uri: string;
