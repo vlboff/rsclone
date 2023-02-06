@@ -7,6 +7,8 @@ export async function getCategories(token: string | null){
     },
     params: {
       limit: 30,
+      country: 'BY',
+      locale: 'en',
     }
   })
   return data.categories.items;
