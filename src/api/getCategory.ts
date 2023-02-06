@@ -12,6 +12,7 @@ export async function getCategoryPlaylists(
       },
       params: {
         limit: 7,
+        country: "BY",
       },
     }
   );
