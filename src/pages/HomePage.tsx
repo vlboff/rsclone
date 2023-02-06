@@ -3,7 +3,11 @@ import MixesBlock from "../components/MixesBlock";
 import { getCategories } from "../api/getCategories";
 import { ICategory } from "../components/interfaces/apiInterfaces";
 
-function HomePage() {
+interface IHomePage {
+  setPlaylistsID: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function HomePage({ setPlaylistsID }: IHomePage) {
   const token = window.localStorage.getItem("token");
   const [categories, setCategories] = useState([]);
 
@@ -39,9 +43,10 @@ function HomePage() {
         ? homePageCategory.map((category: ICategory) => {
             return (
               <MixesBlock
-                key={category.name}
                 name={category.name}
                 categoryID={category.id}
+                setPlaylistsID={setPlaylistsID}
+                key={category.name}
               />
             );
           })

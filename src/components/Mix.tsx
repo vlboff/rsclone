@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { IconPlayCard } from "../icons";
 
-function Mix(props: { image: string; name: string; description: string }) {
+interface IMix {
+  image: string;
+  name: string;
+  description: string;
+  id: string;
+  setPlaylistsID: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function Mix({ image, name, description, id, setPlaylistsID }: IMix) {
   const [activeCardMode, setActiveCardMode] = useState("");
 
   const dscrWithoutLinks = (description: string) => {
@@ -23,9 +31,10 @@ function Mix(props: { image: string; name: string; description: string }) {
       className={`card ${activeCardMode}`}
       onMouseEnter={() => setActiveCardMode("hover")}
       onMouseLeave={() => setActiveCardMode("")}
+      onClick={() => setPlaylistsID(id)}
     >
       <div className="card-img">
-        <img src={props.image} alt="/" />
+        <img src={image} alt="/" />
         <div className={`card-play-btn ${activeCardMode}`}>
           <div className="circle">
             <IconPlayCard />
@@ -33,8 +42,8 @@ function Mix(props: { image: string; name: string; description: string }) {
         </div>
       </div>
       <div className="card-text">
-        <div className="card-name">{props.name}</div>
-        <div className="card-dscr">{dscrWithoutLinks(props.description)}</div>
+        <div className="card-name">{name}</div>
+        <div className="card-dscr">{dscrWithoutLinks(description)}</div>
       </div>
     </div>
   );
