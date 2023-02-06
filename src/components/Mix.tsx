@@ -26,13 +26,15 @@ function Mix(props: { image: string; name: string; description: string }) {
     >
       <div className="card-img">
         <img src={props.image} alt="/" />
+        <div className={`card-play-btn ${activeCardMode}`}>
+          <div className="circle">
+            <IconPlayCard />
+          </div>
+        </div>
       </div>
       <div className="card-text">
         <div className="card-name">{props.name}</div>
         <div className="card-dscr">{dscrWithoutLinks(props.description)}</div>
-      </div>
-      <div className={`card-play-btn ${activeCardMode}`}>
-        <IconPlayCard />
       </div>
     </div>
   );
