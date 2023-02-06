@@ -6,7 +6,6 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  font-family: 'DM Sans';
   font-weight: 700;
 }
 
@@ -22,6 +21,7 @@
 }
 
 .mixes-block-header-show {
+  margin-bottom: 20px;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
