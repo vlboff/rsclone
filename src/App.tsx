@@ -7,7 +7,6 @@ import HomePage from "./pages/HomePage";
 import SettingsBar from "./components/SettingsBar";
 import "./styles/main.scss";
 import SearchPage from "./pages/SearchPage";
-import { listen } from "./utils/listen";
 
 function App() {
 
@@ -31,8 +30,6 @@ function App() {
 
     setToken(token);
   }, [])
-
-  listen();
 
   return (
     <Router>
