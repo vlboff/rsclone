@@ -1,0 +1,18 @@
+.tracklist-row {
+  display: grid;
+  grid-template-columns: [index] 16px [first] 6fr [var1] 4fr [var2] 3fr [last] minmax(120px,1fr);
+  height: 56px;
+  grid-gap: 16px;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.track-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.track-img {
+  width: 40px;
+  height: 40px;
+}

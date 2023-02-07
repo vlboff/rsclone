@@ -3,6 +3,7 @@ import { getPlaylists } from "../api/getPlaylist";
 import { IPlaylist } from "../components/interfaces/apiInterfaces";
 import extractColors from "extract-colors";
 import { IconHeart, IconPlayCard, IconClock } from "../icons";
+import TracklistRow from "../components/TracklistRow";
 
 interface IPlaylistPage {
   playlistID: string;
@@ -79,14 +80,14 @@ function PlaylistPage({ playlistID }: IPlaylistPage) {
           </div>
         </div>
       </div>
-      <div className="playlist-table">
+      <div className="tracklist-table">
         <div className="control-panel">
           <div className="play-btn">
             <IconPlayCard height={28} width={28} />
           </div>
           <IconHeart height={32} width={32} className={"like-btn"} />
         </div>
-        <div className="playlist-table_title">
+        <div className="tracklist-table_title">
           <div className="title-number">#</div>
           <div className="title-info">title</div>
           <div className="title-album">album</div>
@@ -96,6 +97,18 @@ function PlaylistPage({ playlistID }: IPlaylistPage) {
           </div>
         </div>
         <div className="line"></div>
+        {playlist?.tracks.items.map((item, index) => (
+          <TracklistRow
+            key={item.track.name}
+            number={index + 1}
+            image={item.track.album.images[0].url}
+            name={item.track.name}
+            artist={item.track.artists[0].name}
+            album={item.track.album.name}
+            data={item.added_at}
+            duration={item.track.duration_ms}
+          />
+        ))}
       </div>
     </div>
   );
