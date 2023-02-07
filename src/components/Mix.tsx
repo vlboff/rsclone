@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { IconPlayCard } from "../icons";
 
 interface IMix {
@@ -26,25 +27,36 @@ function Mix({ image, name, description, id, setPlaylistsID }: IMix) {
     }
   };
 
+  const playMusic = () => {
+    // play
+  };
+
   return (
     <div
-      className={`card ${activeCardMode}`}
+      className="card-wrapper"
       onMouseEnter={() => setActiveCardMode("hover")}
       onMouseLeave={() => setActiveCardMode("")}
-      onClick={() => setPlaylistsID(id)}
     >
-      <div className="card-img">
-        <img src={image} alt="/" />
-        <div className={`card-play-btn ${activeCardMode}`}>
-          <div className="circle">
-            <IconPlayCard />
-          </div>
+      <div className={`card-play-btn ${activeCardMode}`}>
+        <div className="circle" onClick={playMusic}>
+          <IconPlayCard />
         </div>
       </div>
-      <div className="card-text">
-        <div className="card-name">{name}</div>
-        <div className="card-dscr">{dscrWithoutLinks(description)}</div>
-      </div>
+
+      <Link to={"/playlist"}>
+        <div
+          className={`card ${activeCardMode}`}
+          onClick={() => setPlaylistsID(id)}
+        >
+          <div className="card-img">
+            <img src={image} alt="/" />
+          </div>
+          <div className="card-text">
+            <div className="card-name">{name}</div>
+            <div className="card-dscr">{dscrWithoutLinks(description)}</div>
+          </div>
+        </div>
+      </Link>
     </div>
   );
 }

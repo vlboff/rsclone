@@ -30,16 +30,14 @@ function MixesBlock({ name, categoryID, setPlaylistsID }: IMixesBlock) {
       <div className="mixes">
         {playlists.length > 0
           ? playlists.map((playlist: IPlaylistsItems) => (
-              <Link to={"/playlist"}>
-                <Mix
-                  key={playlist.name}
-                  image={playlist.images[0].url}
-                  name={playlist.name}
-                  description={playlist.description}
-                  id={playlist.id}
-                  setPlaylistsID={setPlaylistsID}
-                />
-              </Link>
+              <Mix
+                key={playlist.name}
+                image={playlist.images[0].url}
+                name={playlist.name}
+                description={playlist.description}
+                id={playlist.id}
+                setPlaylistsID={setPlaylistsID}
+              />
             ))
           : ""}
       </div>

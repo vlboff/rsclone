@@ -1,3 +1,77 @@
 .playlist-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
   height: 340px;
+  background: linear-gradient(transparent 0,rgba(0,0,0,.5) 100%);
+  padding: 0 32px 24px 32px;
+}
+
+.playlist-header_cover {
+  width: 232px;
+  height: 232px;
+}
+
+.playlist-header_item {
+  display: flex;
+  flex-direction: column;
+  padding-left: 24px;
+}
+
+.playlist_title {
+  font-size: .75rem;
+  margin-top: 4px;
+  padding-left: 5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.playlist_name {
+  font-size: 6rem;
+  color: #FFFFFF;
+  margin: 0.08em 0px 0.12em;
+  font-weight: 700;
+}
+
+.playlist_dscr {
+  font-size: .75rem;
+  padding-left: 5px;
+  color: hsla(0,0%,100%,.7);
+}
+
+.playlist_info {
+  display: flex;
+  margin-top: 10px;
+  color: #FFFFFF;
+  font-size: 0.875rem;
+}
+
+.playlist_owner {
+  padding-left: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.playlist_owner::after {
+  content: '';
+  background: #FFFFFF;
+  width: 4px;
+  height: 4px;
+  margin: 0 5px;
+  border-radius: 50%;
+}
+
+.playlist_followers {
+  display: flex;
+  align-items: center;
+}
+
+.playlist_followers::after {
+  content: '';
+  background: #FFFFFF;
+  width: 4px;
+  height: 4px;
+  margin: 0 5px;
+  border-radius: 50%;
 }
