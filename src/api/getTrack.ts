@@ -6,7 +6,7 @@ export async function getTrack(token: string | null, id: string) {
       Authorization: `Bearer ${token}`
     },
     params: {
-      market: 'ES',
+      market: 'BY',
     }
   });
   return data;

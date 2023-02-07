@@ -7,6 +7,7 @@ import { SearchIcon } from '../icons'
 import { searchItems } from '../api/searchItems';
 import { getCategories } from '../api/getCategories';
 import CategoryCard from '../components/CategoryCard';
+import { convertTrackTime } from '../utils/utils';
 
 function SearchPage() {
   const token = window.localStorage.getItem('token');
@@ -22,12 +23,6 @@ function SearchPage() {
   }, []);
 
   function renderSearchResult() {
-
-    function convertDuration(ms: number) {
-      const minutes = Math.floor(ms / 60000);
-      const seconds = ((ms % 60000) / 1000).toFixed(0);
-      return minutes + ":" + (+seconds < 10 ? '0' : '') + seconds;
-    }
 
     return (
       <>
@@ -52,7 +47,7 @@ function SearchPage() {
                       image={item.album.images[0].url}
                       name={item.name}
                       author={item.artists[0].name}
-                      duration={convertDuration(item.duration_ms)}
+                      duration={convertTrackTime(item.duration_ms)}
                       id={item.id}
                       key={item.id}
                     />

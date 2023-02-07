@@ -8,7 +8,7 @@ export async function searchItems(searchKey: string, token: string | null) {
       },
       params: {
         q: searchKey,
-        market: 'ES',
+        market: 'BY',
       }
     });
     return data;
