@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getPlaylists } from "../api/getPlaylist";
 import { IPlaylist } from "../components/interfaces/apiInterfaces";
 import extractColors from "extract-colors";
+import { IconHeart, IconPlayCard, IconClock } from "../icons";
 
 interface IPlaylistPage {
   playlistID: string;
@@ -78,8 +79,23 @@ function PlaylistPage({ playlistID }: IPlaylistPage) {
           </div>
         </div>
       </div>
-      <div className="playlist-main">
-        <div className="control-panel"></div>
+      <div className="playlist-table">
+        <div className="control-panel">
+          <div className="play-btn">
+            <IconPlayCard height={28} width={28} />
+          </div>
+          <IconHeart height={32} width={32} className={"like-btn"} />
+        </div>
+        <div className="playlist-table_title">
+          <div className="title-number">#</div>
+          <div className="title-info">title</div>
+          <div className="title-album">album</div>
+          <div className="title-date">date added</div>
+          <div className="title-time">
+            <IconClock fill="#b3b3b3" />
+          </div>
+        </div>
+        <div className="line"></div>
       </div>
     </div>
   );

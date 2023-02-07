@@ -17,26 +17,27 @@ import { ReactComponent as IconSearchActive } from "./assets/icons/search-icon-a
 import { ReactComponent as IconAddPlayListIcon } from "./assets/icons/add-playlist-icon.svg";
 import { ReactComponent as IconSettings } from "./assets/icons/settings-icon.svg";
 import { ReactComponent as IconPlayCard } from "./assets/icons/playCard-icon.svg";
-import { ReactComponent as  ArrowDownIcon} from "./assets/icons/arrow-down.svg";
-import { ReactComponent as  ArrowUpIcon} from "./assets/icons/arrow-up.svg";
-import { ReactComponent as  SearchIcon} from "./assets/icons/search.svg";
-import { ReactComponent as  ArrowRightIcon} from "./assets/icons/arrow-right.svg";
-import { ReactComponent as  ArrowLeftIcon} from "./assets/icons/arrow-left.svg";
+import { ReactComponent as ArrowDownIcon } from "./assets/icons/arrow-down.svg";
+import { ReactComponent as ArrowUpIcon } from "./assets/icons/arrow-up.svg";
+import { ReactComponent as SearchIcon } from "./assets/icons/search.svg";
+import { ReactComponent as ArrowRightIcon } from "./assets/icons/arrow-right.svg";
+import { ReactComponent as ArrowLeftIcon } from "./assets/icons/arrow-left.svg";
 import { ReactComponent as IconRSSLogo } from "./assets/icons/rs_school_js.svg";
 import { ReactComponent as IconSpotifyLogoWithoutName } from "./assets/icons/Spotify-Icon-Black-Logo.svg";
 import { ReactComponent as IconMoreInfo } from "./assets/icons/more-info.svg";
+import { ReactComponent as IconClock } from "./assets/icons/clock.svg";
 
 export {
-  IconHeart, 
-  IconShow, 
-  IconHide, 
-  IconShuffle, 
-  IconButtonBack, 
-  IconButtonPlay, 
-  IconButtonNext, 
-  IconRepeat, 
-  IconMicrophone, 
-  IconQueue, 
+  IconHeart,
+  IconShow,
+  IconHide,
+  IconShuffle,
+  IconButtonBack,
+  IconButtonPlay,
+  IconButtonNext,
+  IconRepeat,
+  IconMicrophone,
+  IconQueue,
   IconVolumeOn,
   IconSpotifyLogoWithoutName,
   IconRSSLogo,
@@ -48,10 +49,11 @@ export {
   IconAddPlayListIcon,
   IconSettings,
   IconPlayCard,
-  ArrowDownIcon, 
-  ArrowUpIcon, 
-  SearchIcon, 
-  ArrowRightIcon, 
+  ArrowDownIcon,
+  ArrowUpIcon,
+  SearchIcon,
+  ArrowRightIcon,
   ArrowLeftIcon,
   IconMoreInfo,
+  IconClock,
 };
