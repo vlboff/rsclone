@@ -7,9 +7,7 @@ function SearchResultSong(props: { image: string; name: string; author: string; 
     <div className='search-result-song' id={props.id}>
       <div className='search-result-song__image'>
         <img src={props.image} alt="/" />
-        <button className='player-tool-button play-pause-song'
-          onClick={() => { playPauseTrack(props.id) }
-          }>
+        <button className='player-tool-button play-pause-song' onClick={() => {playPauseTrack(props.id)}}>
           <IconButtonPlay />
         </button>
       </div>
