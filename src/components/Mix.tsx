@@ -8,9 +8,17 @@ interface IMix {
   description: string;
   id: string;
   setPlaylistsID: React.Dispatch<React.SetStateAction<string>>;
+  setRandomColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function Mix({ image, name, description, id, setPlaylistsID }: IMix) {
+function Mix({
+  image,
+  name,
+  description,
+  id,
+  setPlaylistsID,
+  setRandomColor,
+}: IMix) {
   const [activeCardMode, setActiveCardMode] = useState("");
 
   const dscrWithoutLinks = (description: string) => {
@@ -43,7 +51,13 @@ function Mix({ image, name, description, id, setPlaylistsID }: IMix) {
         </div>
       </div>
 
-      <Link to={"/playlist"}>
+      <Link
+        to={`/playlist/${id}`}
+        className={"playlist-link"}
+        onClick={() =>
+          setRandomColor(`#${Math.random().toString(16).slice(3, 9)}`)
+        }
+      >
         <div
           className={`card ${activeCardMode}`}
           onClick={() => setPlaylistsID(id)}

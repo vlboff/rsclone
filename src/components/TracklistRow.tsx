@@ -1,7 +1,6 @@
 import React from "react";
 
 interface ITracklistRow {
-  key: string;
   number: number;
   image: string;
   name: string;
@@ -12,7 +11,6 @@ interface ITracklistRow {
 }
 
 function TracklistRow({
-  key,
   number,
   image,
   name,

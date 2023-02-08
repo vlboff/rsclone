@@ -2,7 +2,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
-  height: 340px;
+  height: 280px;
   background: linear-gradient(transparent 0,rgba(0,0,0,.5) 100%);
   padding: 0 32px 24px 32px;
 }
@@ -77,8 +77,17 @@
 }
 
 .tracklist-table {
-padding: 24px 32px;
-background: #222222;
+  position: relative;
+  padding: 24px 32px;
+  background: #222222;
+}
+
+.tracklist-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 128px;
 }
 
 .control-panel{
@@ -97,6 +106,7 @@ background: #222222;
   height: 56px;
   background: #1ED760;
   border-radius: 50%;
+  z-index: 1;
 }
 
 .play-btn:hover {
@@ -106,6 +116,7 @@ background: #222222;
 
 .like-btn {
   fill: #FFFFFF70;
+  z-index: 1;
 }
 
 .like-btn:hover {

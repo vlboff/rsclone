@@ -8,9 +8,15 @@ interface IMixesBlock {
   name: string;
   categoryID: string;
   setPlaylistsID: React.Dispatch<React.SetStateAction<string>>;
+  setRandomColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function MixesBlock({ name, categoryID, setPlaylistsID }: IMixesBlock) {
+function MixesBlock({
+  name,
+  categoryID,
+  setPlaylistsID,
+  setRandomColor,
+}: IMixesBlock) {
   const token = window.localStorage.getItem("token");
   const [playlists, setPlaylists] = useState([]);
 
@@ -37,6 +43,7 @@ function MixesBlock({ name, categoryID, setPlaylistsID }: IMixesBlock) {
                 description={playlist.description}
                 id={playlist.id}
                 setPlaylistsID={setPlaylistsID}
+                setRandomColor={setRandomColor}
               />
             ))
           : ""}

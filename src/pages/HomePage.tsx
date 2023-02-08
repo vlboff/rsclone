@@ -5,9 +5,10 @@ import { ICategory } from "../components/interfaces/apiInterfaces";
 
 interface IHomePage {
   setPlaylistsID: React.Dispatch<React.SetStateAction<string>>;
+  setRandomColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function HomePage({ setPlaylistsID }: IHomePage) {
+function HomePage({ setPlaylistsID, setRandomColor }: IHomePage) {
   const token = window.localStorage.getItem("token");
   const [categories, setCategories] = useState([]);
 
@@ -46,6 +47,7 @@ function HomePage({ setPlaylistsID }: IHomePage) {
                 name={category.name}
                 categoryID={category.id}
                 setPlaylistsID={setPlaylistsID}
+                setRandomColor={setRandomColor}
                 key={category.name}
               />
             );

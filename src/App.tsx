@@ -17,6 +17,9 @@ function App() {
 
   const [token, setToken] = useState<string | null>("");
   const [playlistID, setPlaylistsID] = useState<string>("");
+  const [scrollHeight, setScrollHeight] = useState<number>(0);
+  const [randomColor, setRandomColor] = useState<string>("");
+  const [playlistName, setPlaylistName] = useState<string>("");
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -55,21 +58,43 @@ function App() {
         </Routes>
       ) : (
         <main>
-          <SettingsBar />
+          <SettingsBar
+            scrollHeight={scrollHeight}
+            playlistName={playlistName}
+          />
           <NavBar />
-          <div className="main-view">
+          <div
+            className="main-view"
+            onScroll={(e) => setScrollHeight(e.currentTarget.scrollTop)}
+          >
             <Routes>
               <Route
                 path="/"
-                element={<HomePage setPlaylistsID={setPlaylistsID} />}
+                element={
+                  <HomePage
+                    setPlaylistsID={setPlaylistsID}
+                    setRandomColor={setRandomColor}
+                  />
+                }
               />
               <Route
                 path="/search"
-                element={<SearchPage setPlaylistsID={setPlaylistsID} />}
+                element={
+                  <SearchPage
+                    setPlaylistsID={setPlaylistsID}
+                    setRandomColor={setRandomColor}
+                  />
+                }
               />
               <Route
-                path="/playlist"
-                element={<PlaylistPage playlistID={playlistID} />}
+                path={`/playlist/${playlistID}`}
+                element={
+                  <PlaylistPage
+                    playlistID={playlistID}
+                    randomColor={randomColor}
+                    setPlaylistName={setPlaylistName}
+                  />
+                }
               />
             </Routes>
           </div>

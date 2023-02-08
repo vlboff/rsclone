@@ -13,9 +13,10 @@ import CategoryCard from "../components/CategoryCard";
 
 interface ISearchPage {
   setPlaylistsID: React.Dispatch<React.SetStateAction<string>>;
+  setRandomColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function SearchPage({ setPlaylistsID }: ISearchPage) {
+function SearchPage({ setPlaylistsID, setRandomColor }: ISearchPage) {
   const token = window.localStorage.getItem("token");
   const [searchKey, setSearchKey] = useState("");
   const [searchResult, setSearchResult] = useState<ISearchResult | null>(null);
@@ -84,6 +85,7 @@ function SearchPage({ setPlaylistsID }: ISearchPage) {
                     }`}
                     id={item.id}
                     setPlaylistsID={setPlaylistsID}
+                    setRandomColor={setRandomColor}
                   />
                 ))}
               </div>

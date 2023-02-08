@@ -7,9 +7,15 @@ import TracklistRow from "../components/TracklistRow";
 
 interface IPlaylistPage {
   playlistID: string;
+  randomColor: string;
+  setPlaylistName: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function PlaylistPage({ playlistID }: IPlaylistPage) {
+function PlaylistPage({
+  playlistID,
+  randomColor,
+  setPlaylistName,
+}: IPlaylistPage) {
   const token = window.localStorage.getItem("token");
   const [playlist, setPlaylists] = useState<IPlaylist | null>(null);
 
@@ -22,15 +28,15 @@ function PlaylistPage({ playlistID }: IPlaylistPage) {
     }
   }, [setPlaylists]);
 
-  console.log(playlist);
+  useEffect(() => {
+    setPlaylistName(playlist ? playlist.name : "");
+  }, [playlist]);
 
   // extractColors(
   //   document.querySelector(".playlist-header_cover") as HTMLImageElement
   // )
   //   .then(console.log)
   //   .catch(console.error);
-
-  const randomColor = `#${Math.random().toString(16).slice(3, 9)}`;
 
   const getFollowers = (followers: string) => {
     const reverse = followers.split("").reverse().join("");
@@ -81,6 +87,12 @@ function PlaylistPage({ playlistID }: IPlaylistPage) {
         </div>
       </div>
       <div className="tracklist-table">
+        <div
+          className="tracklist-gradient"
+          style={{
+            background: `linear-gradient(0deg, #22222260 0, ${randomColor} 500%)`,
+          }}
+        ></div>
         <div className="control-panel">
           <div className="play-btn">
             <IconPlayCard height={28} width={28} />
@@ -99,7 +111,7 @@ function PlaylistPage({ playlistID }: IPlaylistPage) {
         <div className="line"></div>
         {playlist?.tracks.items.map((item, index) => (
           <TracklistRow
-            key={item.track.name}
+            key={`${item.track.name}${Math.random()}`}
             number={index + 1}
             image={item.track.album.images[0].url}
             name={item.track.name}
