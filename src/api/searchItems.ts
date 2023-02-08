@@ -1,4 +1,7 @@
 import axios from "axios";
+import { IResponseTrack } from "../components/interfaces/apiInterfaces";
+
+export let searchedTracks: IResponseTrack[] = [];
 
 export async function searchItems(searchKey: string, token: string | null) {
   if (searchKey !== '') {
@@ -11,6 +14,7 @@ export async function searchItems(searchKey: string, token: string | null) {
         market: 'BY',
       }
     });
+    searchedTracks = data.tracks.items;
     return data;
   }
 }

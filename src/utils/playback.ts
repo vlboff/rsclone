@@ -1,4 +1,5 @@
 import { getTrack } from "../api/getTrack";
+import { searchedTracks } from "../api/searchItems";
 import { IResponseTrack } from "../components/interfaces/apiInterfaces";
 import { convertTrackTime } from "./utils";
 
@@ -6,6 +7,7 @@ export let isPlaying = false;
 let isMuted = false;
 const token = window.localStorage.getItem('token');
 let currentVolume = 1;
+let trackIndex: number;
 
 setTimeout(handleVolume, 100);
 
@@ -25,6 +27,12 @@ export async function playPauseTrack(id: string) {
   } else {
     audio.pause();
   }
+
+  const currentTrackId = searchedTracks.filter((track) => {
+    return track.id === id;
+  })[0];
+
+  trackIndex = searchedTracks.indexOf(currentTrackId);
 }
 
 function togglePlayPauseIcon(id: string) {
@@ -174,3 +182,29 @@ export function handlePlayingBarControls() {
   }
 }
 
+export function nextTrack() {
+  ++trackIndex;
+    trackIndex = trackIndex > searchedTracks.length - 1 ? 0 : trackIndex;
+    if (!isPlaying) {
+      playPauseTrack(searchedTracks[trackIndex].id);
+    } else {
+      isPlaying = false;
+      playPauseTrack(searchedTracks[trackIndex].id);
+    }
+}
+
+export function prevTrack() {
+  const audio = document.querySelector('.playback') as HTMLAudioElement;
+  if (audio.currentTime > 3) {
+    audio.currentTime = 0;
+  } else {
+    --trackIndex;
+    trackIndex = trackIndex < 0 ? 0 : trackIndex;
+    if (!isPlaying) {
+      playPauseTrack(searchedTracks[trackIndex].id);
+    } else {
+      isPlaying = false;
+      playPauseTrack(searchedTracks[trackIndex].id);
+    }
+  }
+}

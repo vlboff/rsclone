@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconButtonBack, IconButtonNext, IconButtonPlay, IconHeart, IconHide, IconMicrophone, IconQueue, IconRepeat, IconShow, IconShuffle, IconVolumeOn } from '../../icons';
-import { handlePlayingBarControls } from '../../utils/playback';
+import { handlePlayingBarControls, nextTrack, prevTrack } from '../../utils/playback';
 
 function PlayingBar() {
 
@@ -59,7 +59,7 @@ function PlayingBar() {
                 <button className='player-tool-button'>
                   <IconShuffle />
                 </button>
-                <button className='player-tool-button'>
+                <button className='player-tool-button' id='prev' onClick={() => prevTrack()}>
                   <IconButtonBack />
                 </button>
               </div>
@@ -67,7 +67,7 @@ function PlayingBar() {
                 <IconButtonPlay />
               </button>
               <div className="player-controls__buttons-right">
-                <button className='player-tool-button'>
+                <button className='player-tool-button next' id='next' onClick={() => nextTrack()}>
                   <IconButtonNext />
                 </button>
                 <button className='player-tool-button'>
