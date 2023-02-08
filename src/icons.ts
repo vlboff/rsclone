@@ -26,6 +26,7 @@ import { ReactComponent as IconRSSLogo } from "./assets/icons/rs_school_js.svg";
 import { ReactComponent as IconSpotifyLogoWithoutName } from "./assets/icons/Spotify-Icon-Black-Logo.svg";
 import { ReactComponent as IconMoreInfo } from "./assets/icons/more-info.svg";
 import { ReactComponent as IconClock } from "./assets/icons/clock.svg";
+import { ReactComponent as IconPlayTracklistRow } from "./assets/icons/play-tracklist-row.svg";
 
 export {
   IconHeart,
@@ -56,4 +57,5 @@ export {
   ArrowLeftIcon,
   IconMoreInfo,
   IconClock,
+  IconPlayTracklistRow,
 };

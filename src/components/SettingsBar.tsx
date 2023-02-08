@@ -42,7 +42,7 @@ function SettingsBar({ scrollHeight, playlistName }: ISettingsBar) {
         </div>
         <div className={`settings-bar__control  ${activeMode}`}>
           <div className="play-btn">
-            <IconPlayCard height={28} width={28} />
+            <IconPlayCard height={24} width={24} />
           </div>
           <p className="playlist-name">{playlistName}</p>
         </div>

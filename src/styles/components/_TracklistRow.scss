@@ -5,14 +5,77 @@
   grid-gap: 16px;
   align-items: center;
   padding: 0 16px;
+  font-size: 0.875rem;
+  color: #b3b3b3;
+
+  .track-number {
+    justify-self: end;
+    font-size: 1rem;
+  }
+
+  .track-info {
+    display: flex;
+    flex-direction: row;
+
+    .track-img {
+      margin-right: 16px;
+      width: 40px;
+      height: 40px;
+    }
+
+    .track-dscr {
+      .track-name {
+        position: relative;
+        font-size: 1rem;
+        color: #FFFFFF;
+        cursor: pointer;
+      }
+
+      .track-name:hover {
+        text-decoration: underline;
+      }
+
+      .track-artist {
+        cursor: pointer;
+      }
+
+      .track-artist:hover {
+        color: #FFFFFF;
+        text-decoration: underline;
+      }
+
+    }
+  }
+
+  .track-album {
+    cursor: pointer;
+  }
+
+  .track-album:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+  }
+
+
+  .last-block {
+    display: flex;
+    gap: 40px;
+  }
+
 }
 
-.track-info {
-  display: flex;
-  flex-direction: row;
+.tracklist-hover {
+  background: hsla(0,0%,100%,.1);
+  border-radius: 4px;
 }
 
-.track-img {
-  width: 40px;
-  height: 40px;
+.tracklist-active {
+  background: hsla(0,0%,100%,.3);
+  border-radius: 4px;
 }
+
+
+
+
+
+
