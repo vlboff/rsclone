@@ -38,39 +38,36 @@
 
 .timeline {
   width: 100%;
+}
+
+#timeline__range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
   height: 4px;
   background: #535353;
+  background: linear-gradient(to right, #fff 0%, #fff 50%, #535353 50%, #535353 100%);
   border-radius: 5px;
   cursor: pointer;
+}
 
-  .progress {
-    position: relative;
-    width: 0%;
-    height: 4px;
-    border-radius: 5px;
-    background-color: $text-main-color;
-    cursor: pointer;
-
-    .thumb {
-      position: absolute;
-      visibility: hidden;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: $text-main-color;
-      top: -4px;
-      right: -6px;
-      cursor: pointer;
-    }
-  }
+#timeline__range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0;
+  height: 0;
 }
 
 .timeline:hover {
-  .progress {
-    background-color: #1db954;
+  #timeline__range {
+    background: linear-gradient(to right, #1db954 0%, #1db954 50%, #535353 50%, #535353 100%);
   }
-  .thumb {
-    visibility: visible;
+  #timeline__range::-webkit-slider-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: $text-main-color;
+    cursor: pointer;
   }
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconButtonBack, IconButtonNext, IconButtonPlay, IconHeart, IconHide, IconMicrophone, IconQueue, IconRepeat, IconShow, IconShuffle, IconVolumeOn } from '../../icons';
-import { handlePlayingBarControls, handleVolumeClick } from '../../utils/playback';
+import { handlePlayingBarControls } from '../../utils/playback';
 
 function PlayingBar() {
 
@@ -78,9 +78,7 @@ function PlayingBar() {
             <div className="playback-bar">
               <div className='playback-position'>--:--</div>
               <div className="timeline">
-                <div className="progress">
-                  <div className="thumb"></div>
-                </div>
+                <input type="range" id="timeline__range" />
               </div>
               <div className='playback-duration'>--:--</div>
             </div>
@@ -96,10 +94,8 @@ function PlayingBar() {
               <button className='player-tool-button'>
                 <IconVolumeOn />
               </button>
-              <div className="volume-bar__range" onClick={() => handleVolumeClick()}>
-                <div className="volume-bar__level">
-                  <div className="thumb"></div>
-                </div>
+              <div className="volume-bar__range">
+                <input type="range" id="volume-bar__range-input" />
               </div>
             </div>
           </div>

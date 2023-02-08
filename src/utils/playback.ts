@@ -14,7 +14,7 @@ export async function playPauseTrack(id: string) {
   showTrackInfo(data);
   showTrackDuration(audio);
   showTrackCurrentTime(audio);
-  handleClickOnTimeline(audio);
+  handleVolume(audio);
 
   if (!isPlaying) {
     audio.play();
@@ -74,21 +74,27 @@ function showTrackDuration(audio: HTMLAudioElement) {
 
 function showTrackCurrentTime(audio: HTMLAudioElement) {
   const currentTime = document.querySelector('.playing-bar .playback-position') as HTMLElement;
-  const progress = document.querySelector('.timeline .progress') as HTMLElement
+  const timeline = document.querySelector('#timeline__range') as HTMLInputElement;
+  audio.onloadedmetadata = function () {
+    timeline.max = audio.duration.toString();
+    timeline.step = '0.001';
+  };
   audio.ontimeupdate = function () {
     currentTime.innerHTML = convertTrackTime(audio.currentTime * 1000);
-    progress.style.width = (audio.currentTime * 100 / audio.duration) + '%';
-  }
+    timeline.value = audio.currentTime.toString();
+    timeline.style.background = `linear-gradient(to right, #fff 0%, #fff ${audio.currentTime * 100 / audio.duration}%, #535353 ${audio.currentTime * 100 / audio.duration}%, #535353 100%)`;
+  };
+  timeline.addEventListener('input', () => {
+    timeline.style.background = `linear-gradient(to right, #fff 0%, #fff ${+timeline.value * 100 / audio.duration}%, #535353 ${+timeline.value * 100 / audio.duration}%, #535353 100%)`;
+    audio.currentTime = +timeline.value;
+  });
 }
 
-function handleClickOnTimeline(audio: HTMLAudioElement) {
-  const timeline = document.querySelector('.timeline') as HTMLElement;
-  const progress = document.querySelector('.timeline .progress') as HTMLElement;
-  const currentTime = document.querySelector('.playing-bar .playback-position') as HTMLElement;
-  timeline.addEventListener('click', (e) => {
-    audio.currentTime = audio.duration * e.offsetX / timeline.clientWidth;
-    progress.style.width = (audio.currentTime * 100 / audio.duration) + '%';
-    currentTime.innerHTML = convertTrackTime(audio.currentTime * 1000);
+function handleVolume(audio: HTMLAudioElement) {
+  const volume = document.querySelector('#volume-bar__range-input') as HTMLInputElement;
+  volume.addEventListener('input', () => {
+    volume.style.background = `linear-gradient(to right, #fff 0%, #fff ${+volume.value * 100}%, #535353 ${+volume.value * 100}%, #535353 100%)`;
+    audio.volume = +volume.value;
   })
 }
 
@@ -104,12 +110,3 @@ export function handlePlayingBarControls() {
   }
 }
 
-export function handleVolumeClick() {
-  const audio = document.querySelector('.playback') as HTMLAudioElement;
-  const volumeBar = document.querySelector('.volume-bar__range') as HTMLElement;
-  const currentVolume = document.querySelector('.volume-bar__level') as HTMLElement;
-  volumeBar.addEventListener('click', (e) => {
-    audio.volume = e.offsetX / volumeBar.clientWidth;
-    currentVolume.style.width = (audio.volume * 100) + '%';
-  });
-}
