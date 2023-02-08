@@ -1,5 +1,6 @@
 import React from 'react';
 import { IconButtonBack, IconButtonNext, IconButtonPlay, IconHeart, IconHide, IconMicrophone, IconQueue, IconRepeat, IconShow, IconShuffle, IconVolumeOn } from '../../icons';
+import { handlePlayingBarControls, handleVolumeClick } from '../../utils/playback';
 
 function PlayingBar() {
 
@@ -18,7 +19,7 @@ function PlayingBar() {
       <div className="cover-art_expanded">
         <a href="/">
           <div>
-            <img src="https://i.scdn.co/image/ab67706f00000002708c623e2e1df4607775381b" alt='cover art' />
+            <img src="https://lab.possan.se/thirtify/images/placeholder-playlist.png" alt='cover art' />
           </div>
         </a>
         <button className='hide-button' onClick={shrinkCoverArt}>
@@ -32,7 +33,7 @@ function PlayingBar() {
               <div className='cover-art__container'>
                 <a href="/">
                   <div>
-                    <img src="https://i.scdn.co/image/ab67706f00000002708c623e2e1df4607775381b" alt='cover art' />
+                    <img src="https://lab.possan.se/thirtify/images/placeholder-playlist.png" alt='cover art' />
                   </div>
                 </a>
                 <button className='show-button' onClick={expandCoverArt}>
@@ -42,10 +43,10 @@ function PlayingBar() {
             </div>
             <div className="track-info">
               <div className='track-name'>
-                <a href="/">Lorem, ipsum dolor.</a>
+                <a href="/"></a>
               </div>
               <div className='track-author'>
-                <a href="/">Lorem, ipsum.</a>
+                <a href="/"></a>
               </div>
             </div>
             <button className='add-button player-tool-button'>
@@ -62,7 +63,7 @@ function PlayingBar() {
                   <IconButtonBack />
                 </button>
               </div>
-              <button className='play-pause-button'>
+              <button className='play-pause-button' onClick={() => handlePlayingBarControls()}>
                 <IconButtonPlay />
               </button>
               <div className="player-controls__buttons-right">
@@ -75,9 +76,13 @@ function PlayingBar() {
               </div>
             </div>
             <div className="playback-bar">
-              <div className='playback-position'>1:45</div>
-              <input type="range" id="playback-range__input" />
-              <div className='playback-duration'>3:51</div>
+              <div className='playback-position'>--:--</div>
+              <div className="timeline">
+                <div className="progress">
+                  <div className="thumb"></div>
+                </div>
+              </div>
+              <div className='playback-duration'>--:--</div>
             </div>
           </div>
           <div className='player-tools'>
@@ -91,7 +96,11 @@ function PlayingBar() {
               <button className='player-tool-button'>
                 <IconVolumeOn />
               </button>
-              <input type="range" id="volume-bar__range" />
+              <div className="volume-bar__range" onClick={() => handleVolumeClick()}>
+                <div className="volume-bar__level">
+                  <div className="thumb"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

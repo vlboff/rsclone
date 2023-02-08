@@ -1,6 +1,6 @@
 import React from 'react';
-import { IconButtonPause, IconButtonPlay, IconHeart, IconMoreInfo } from '../../icons';
-import { isPlaying, playPauseTrack } from '../../utils/playback';
+import { IconButtonPlay, IconHeart, IconMoreInfo } from '../../icons';
+import { playPauseTrack } from '../../utils/playback';
 
 function SearchResultSong(props: { image: string; name: string; author: string; duration: string | number; id: string }) {
   return (
