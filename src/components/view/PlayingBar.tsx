@@ -78,7 +78,7 @@ function PlayingBar() {
             <div className="playback-bar">
               <div className='playback-position'>--:--</div>
               <div className="timeline">
-                <input type="range" id="timeline__range" />
+                <input type="range" id="timeline__range"/>
               </div>
               <div className='playback-duration'>--:--</div>
             </div>
