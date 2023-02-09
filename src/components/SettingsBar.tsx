@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+
+import { useAppSelector } from "../store/hook";
 import { ArrowRightIcon, ArrowLeftIcon, IconPlayCard } from "../icons";
 import ButtonMenu from "./ButtonMenu";
 
@@ -9,12 +11,13 @@ enum Paths {
 }
 
 interface ISettingsBar {
-  scrollHeight: number;
   playlistName: string;
 }
 
-function SettingsBar({ scrollHeight, playlistName }: ISettingsBar) {
+function SettingsBar({ playlistName }: ISettingsBar) {
   const [activeMode, setActiveMode] = useState<string>("");
+
+  const scrollHeight = useAppSelector((state) => state.scroll.scrollHeight);
 
   useEffect(() => {
     const path = window.location.pathname.slice(

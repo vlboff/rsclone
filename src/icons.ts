@@ -27,6 +27,7 @@ import { ReactComponent as IconSpotifyLogoWithoutName } from "./assets/icons/Spo
 import { ReactComponent as IconMoreInfo } from "./assets/icons/more-info.svg";
 import { ReactComponent as IconClock } from "./assets/icons/clock.svg";
 import { ReactComponent as IconPlayTracklistRow } from "./assets/icons/play-tracklist-row.svg";
+import { ReactComponent as IconPreloader } from "./assets/icons/preloader.svg";
 
 export {
   IconHeart,
@@ -58,4 +59,5 @@ export {
   IconMoreInfo,
   IconClock,
   IconPlayTracklistRow,
+  IconPreloader,
 };

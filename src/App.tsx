@@ -8,6 +8,8 @@ import SettingsBar from "./components/SettingsBar";
 import "./styles/main.scss";
 import SearchPage from "./pages/SearchPage";
 import PlaylistPage from "./pages/PlaylistPage";
+import { useAppDispatch } from "./store/hook";
+import { addScrollHeight } from "./store/scrollHeightSlice";
 
 function App() {
   const CLIENT_ID = "1f1f06f4b7fc4796921496a5f9a14d20";
@@ -17,9 +19,9 @@ function App() {
 
   const [token, setToken] = useState<string | null>("");
   const [playlistID, setPlaylistsID] = useState<string>("");
-  const [scrollHeight, setScrollHeight] = useState<number>(0);
   const [randomColor, setRandomColor] = useState<string>("");
   const [playlistName, setPlaylistName] = useState<string>("");
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -58,14 +60,13 @@ function App() {
         </Routes>
       ) : (
         <main>
-          <SettingsBar
-            scrollHeight={scrollHeight}
-            playlistName={playlistName}
-          />
+          <SettingsBar playlistName={playlistName} />
           <NavBar />
           <div
             className="main-view"
-            onScroll={(e) => setScrollHeight(e.currentTarget.scrollTop)}
+            onScroll={(e) =>
+              dispatch(addScrollHeight(e.currentTarget.scrollTop))
+            }
           >
             <Routes>
               <Route

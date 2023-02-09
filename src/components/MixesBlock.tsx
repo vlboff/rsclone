@@ -37,7 +37,7 @@ function MixesBlock({
         {playlists.length > 0
           ? playlists.map((playlist: IPlaylistsItems) => (
               <Mix
-                key={playlist.name}
+                key={`${playlist.name}${Math.random()}`}
                 image={playlist.images[0].url}
                 name={playlist.name}
                 description={playlist.description}

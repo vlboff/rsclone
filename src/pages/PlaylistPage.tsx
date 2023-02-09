@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getPlaylists } from "../api/getPlaylist";
 import { IPlaylist } from "../components/interfaces/apiInterfaces";
 import extractColors from "extract-colors";
-import { IconHeart, IconPlayCard, IconClock } from "../icons";
+import { IconHeart, IconPlayCard, IconClock, IconPreloader } from "../icons";
 import TracklistRow from "../components/TracklistRow";
 
 interface IPlaylistPage {
@@ -61,7 +61,7 @@ function PlaylistPage({
       ? getFollowers(String(playlist?.followers.total))
       : playlist?.followers.total;
 
-  return (
+  return playlist ? (
     <div className="playlist-page">
       <div
         className="playlist-header"
@@ -77,15 +77,26 @@ function PlaylistPage({
         />
         <div className="playlist-header_item">
           <h2 className="playlist_title">playlist</h2>
-          <h1 className="playlist_name">{`${playlist?.name}`}</h1>
-          <p className="playlist_dscr">{`${playlist?.description}`}</p>
+          <h1 className="playlist_name">{`${
+            playlist ? playlist.name : ""
+          }`}</h1>
+          <p className="playlist_dscr">{`${
+            playlist ? playlist.description : ""
+          }`}</p>
           <div className="playlist_info">
-            <span className="playlist_owner">{`${playlist?.owner.display_name}`}</span>
-            <span className="playlist_followers">{`${followers} likes`}</span>
-            <span className="playlist_tracks">{`${playlist?.tracks.total} songs`}</span>
+            <span className="playlist_owner">{`${
+              playlist ? playlist.owner.display_name : ""
+            }`}</span>
+            <span className="playlist_followers">{`${
+              playlist ? followers : 0
+            } likes`}</span>
+            <span className="playlist_tracks">{`${
+              playlist ? playlist.tracks.total : 0
+            } songs`}</span>
           </div>
         </div>
       </div>
+
       <div className="tracklist-table">
         <div
           className="tracklist-gradient"
@@ -122,6 +133,10 @@ function PlaylistPage({
           />
         ))}
       </div>
+    </div>
+  ) : (
+    <div className="preloader">
+      <IconPreloader width={50} height={50} />
     </div>
   );
 }
