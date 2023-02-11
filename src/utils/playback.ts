@@ -20,6 +20,7 @@ export async function selectAndGetTrack(id: string) {
   document.querySelectorAll('.track').forEach((track) => track.classList.remove('track_selected'));
   selectedTrack.classList.add('track_selected');
 
+  if (audio.dataset.track_id === id) return;
   audio.src = data.preview_url;
   audio.dataset.track_id = id;
 
