@@ -73,7 +73,9 @@ function SearchPage({ setPlaylistsID, setRandomColor }: ISearchPage) {
                   </div>
                   <div className="mixes">
                     {searchResult.albums.items.map((item) => (
-                      <Mix key={item.id} image={item.images[0].url} name={item.artists[0].name} description={`${item.release_date.split('-')[0]} • ${item.name}`} />
+                      <Mix key={item.id} image={item.images[0].url} name={item.artists[0].name} description={`${item.release_date.split('-')[0]} • ${item.name}`} id={item.id}
+                        setPlaylistsID={setPlaylistsID}
+                        setRandomColor={setRandomColor} />
                     ))}
                   </div>
                 </div>
@@ -113,11 +115,11 @@ function SearchPage({ setPlaylistsID, setRandomColor }: ISearchPage) {
                 ? categories.map((category: ICategory) => {
                   return <CategoryCard image={category.icons[0].url} name={category.name} key={category.name} />
                 })
-              : ""}
-          </div>
-        </>
-      ) : (
-        ""
+                : ""}
+            </div>
+            </>
+       : (
+      ""
       )}
     </div>
   );
