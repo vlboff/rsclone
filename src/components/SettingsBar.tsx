@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { IconSettings, ArrowRightIcon, ArrowLeftIcon } from "../icons";
+import { IconSettings, ArrowRightIcon, ArrowLeftIcon, IconPlayCard } from "../icons";
 import SearchBar from './SearchBar';
 import ButtonMenu from './ButtonMenu';
 import { useAppSelector } from "../store/hook";
