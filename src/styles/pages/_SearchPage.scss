@@ -24,3 +24,13 @@
     margin-top: 30px;
   }
 }
+
+.no-results {
+  padding-top: 200px;
+  color: $text-main-color;
+  text-align: center;
+
+  h2 {
+    padding-bottom: 10px;
+  }
+}

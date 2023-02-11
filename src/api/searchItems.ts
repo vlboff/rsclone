@@ -11,9 +11,12 @@ export async function searchItems(searchKey: string, token: string | null) {
       },
       params: {
         q: searchKey,
-        market: 'BY',
+        market: 'BY'
       }
     });
+    
+    const filteredTracks = data.tracks.items.filter((item: { preview_url: null; }) => item.preview_url !== null);
+    data.tracks.items = filteredTracks;
     searchedTracks = data.tracks.items;
     return data;
   }

@@ -11,21 +11,33 @@ let trackIndex: number;
 
 setTimeout(handleVolume, 100);
 
-export async function playPauseTrack(id: string) {
+export async function selectAndGetTrack(id: string) {
   const data: IResponseTrack = await getTrack(token, id);
   const audio = document.querySelector('.playback') as HTMLAudioElement;
+  const selectedTrack = document.getElementById(id) as HTMLElement;
+
+  document.querySelectorAll('.track').forEach((track) => track.classList.remove('track_selected'));
+  selectedTrack.classList.add('track_selected');
+
+  audio.src = data.preview_url;
   audio.dataset.track_id = id;
-  audio.src = data.preview_url ? data.preview_url : '';
-  togglePlayPauseIcon(id);
+
   showTrackInfo(data);
   showTrackDuration(audio);
+  showCoverArts(data);
+}
+
+export function playPauseTrack(id: string) {
+  const audio = document.querySelector('.playback') as HTMLAudioElement;
+  
+  togglePlayPauseIcon(id);
   showTrackCurrentTimeAndTimeline(audio);
 
   if (!isPlaying) {
-    audio.play();
-    showCoverArts(data);
+    setTimeout(() => audio.play(), 200);
+    console.log('Is playing');
   } else {
-    audio.pause();
+    setTimeout(() => audio.pause(), 200);
   }
 
   const currentTrackId = searchedTracks.filter((track) => {
@@ -78,7 +90,9 @@ function showTrackInfo(data: IResponseTrack) {
 
 function showTrackDuration(audio: HTMLAudioElement) {
   const duration = document.querySelector('.playing-bar .playback-duration') as HTMLElement;
+  const startTime = document.querySelector('.playing-bar .playback-position') as HTMLElement;
   audio.onloadeddata = function () {
+    startTime.innerText = '0:00';
     duration.innerText = convertTrackTime(audio.duration * 1000);
   }
 }

@@ -27,46 +27,54 @@ function SearchPage() {
     return (
       <>
         {searchResult &&
-          <div className='render-search-results'>
-            <div className='render-search-results__artist-and-track-container'>
-              <div className="search-result-artist__container">
-                <div className="mixes-block-header">
-                  <p className="mixes-block-header-title">Artists</p>
+          <>
+            {searchResult.artists.items.length === 0
+              ? <div className='no-results'>
+                <h2>No results found.</h2>
+                <p>Please make sure your words are spelled correctly or use less or different keywords.</p>
+              </div>
+              : <div className='render-search-results'>
+                <div className='render-search-results__artist-and-track-container'>
+                  <div className="search-result-artist__container">
+                    <div className="mixes-block-header">
+                      <p className="mixes-block-header-title">Artists</p>
+                    </div>
+                    <SearchResultArtist
+                      artistImage={searchResult.artists.items[0].images ? searchResult.artists.items[0].images[0].url : ''}
+                      artistName={searchResult.artists.items[0].name} />
+                  </div>
+                  <div className='search-result-songs__container'>
+                    <div className="mixes-block-header">
+                      <p className="mixes-block-header-title">Songs</p>
+                    </div>
+                    {searchResult.tracks.items.slice(0, 4).map(item => {
+                      return (
+                        <SearchResultSong
+                          image={item.album.images[0].url}
+                          name={item.name}
+                          author={item.artists[0].name}
+                          duration={convertTrackTime(item.duration_ms)}
+                          id={item.id}
+                          key={item.id + item.album.images[0].url}
+                        />
+                      )
+                    }
+                    )}
+                  </div>
                 </div>
-                <SearchResultArtist
-                  artistImage={searchResult.artists.items[0].images ? searchResult.artists.items[0].images[0].url : ''}
-                  artistName={searchResult.artists.items[0].name} />
-              </div>
-              <div className='search-result-songs__container'>
-                <div className="mixes-block-header">
-                  <p className="mixes-block-header-title">Songs</p>
+                <div className='render-search-results__albums'>
+                  <div className="mixes-block-header">
+                    <p className="mixes-block-header-title">Albums</p>
+                  </div>
+                  <div className="mixes">
+                    {searchResult.albums.items.map((item) => (
+                      <Mix key={item.id} image={item.images[0].url} name={item.artists[0].name} description={`${item.release_date.split('-')[0]} • ${item.name}`} />
+                    ))}
+                  </div>
                 </div>
-                {searchResult.tracks.items.slice(0, 4).map(item => {
-                  return (
-                    <SearchResultSong
-                      image={item.album.images[0].url}
-                      name={item.name}
-                      author={item.artists[0].name}
-                      duration={convertTrackTime(item.duration_ms)}
-                      id={item.id}
-                      key={item.id}
-                    />
-                  )
-                }
-                )}
               </div>
-            </div>
-            <div className='render-search-results__albums'>
-              <div className="mixes-block-header">
-                <p className="mixes-block-header-title">Albums</p>
-              </div>
-              <div className="mixes">
-                {searchResult.albums.items.map((item) => (
-                  <Mix key={item.id} image={item.images[0].url} name={item.artists[0].name} description={`${item.release_date.split('-')[0]} • ${item.name}`} />
-                ))}
-              </div>
-            </div>
-          </div>
+            }
+          </>
         }
       </>
     )
@@ -86,7 +94,7 @@ function SearchPage() {
         </label>
       </form>
       {searchResult
-        ? renderSearchResult()
+        ? (renderSearchResult())
         :
         (document.querySelector('.search__input') as HTMLInputElement) !== null &&
           (document.querySelector('.search__input') as HTMLInputElement).value === ''
