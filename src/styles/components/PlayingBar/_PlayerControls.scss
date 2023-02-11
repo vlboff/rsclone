@@ -96,3 +96,27 @@
     }
   }
 }
+
+.shuffle_active {
+  position: relative;
+  svg {
+    fill: #1db954;
+  }
+
+  &::after {
+    position: absolute;
+    top: 22px;
+    color: #1db954;
+    content: "•";
+  }
+}
+
+.player-tool-button.shuffle_active {
+  svg {
+    fill: #1db954;
+
+    &:hover {
+      fill: #1db954;
+    }
+  }
+}

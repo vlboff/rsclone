@@ -1,11 +1,11 @@
 import { getTrack } from "../api/getTrack";
 import { searched4Tracks } from "../api/searchItems";
 import { IResponseTrack } from "../components/interfaces/apiInterfaces";
-import { convertTrackTime } from "./utils";
+import { convertTrackTime, getRandomNumber } from "./utils";
 
 export let isPlaying = false;
 let isMuted = false;
-let isRepeated = false;
+let isShuffled = false;
 const token = window.localStorage.getItem('token');
 let currentVolume = 1;
 let trackIndex: number;
@@ -201,7 +201,14 @@ export function handlePlayingBarControls() {
 }
 
 export function nextTrack() {
-  ++trackIndex;
+  if (!isShuffled) {
+    ++trackIndex;
+  } else {
+    const currentIndex = trackIndex;
+    while (currentIndex === trackIndex) {
+      trackIndex = getRandomNumber(0, 4);
+    }
+  }
   trackIndex = trackIndex > searched4Tracks.length - 1 ? 0 : trackIndex;
   selectAndGetTrack(searched4Tracks[trackIndex].id);
   playPauseTrack(searched4Tracks[trackIndex].id);
@@ -224,4 +231,10 @@ export function repeatTrack() {
   const audio = document.querySelector('.playback') as HTMLAudioElement;
   repeatButton.classList.toggle('repeat_active');
   audio.loop = !audio.loop;
+}
+
+export function shuffleTracks() {
+  const shuffleButton = document.querySelector('.shuffle') as HTMLButtonElement;
+  shuffleButton.classList.toggle('shuffle_active');
+  isShuffled = !isShuffled;
 }
