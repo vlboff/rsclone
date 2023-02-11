@@ -9,16 +9,21 @@ import { getCategories } from '../api/getCategories';
 import CategoryCard from '../components/CategoryCard';
 import { convertTrackTime } from '../utils/utils';
 
-function SearchPage() {
-  const token = window.localStorage.getItem('token');
-  const [searchKey, setSearchKey] = useState("")
+interface ISearchPage {
+  setPlaylistsID: React.Dispatch<React.SetStateAction<string>>;
+  setRandomColor: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function SearchPage({ setPlaylistsID, setRandomColor }: ISearchPage) {
+  const token = window.localStorage.getItem("token");
+  const [searchKey, setSearchKey] = useState("");
   const [searchResult, setSearchResult] = useState<ISearchResult | null>(null);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     async function foo() {
       setCategories(await getCategories(token));
-    };
+    }
     foo();
   }, []);
 
@@ -77,20 +82,23 @@ function SearchPage() {
           </>
         }
       </>
-    )
+    );
   }
 
   return (
-    <div className='search'>
-      <form className='search__form'>
-        <label className='search__label'>
-          <SearchIcon className='search__svg' />
+    <div className="search">
+      <form className="search__form">
+        <label className="search__label">
+          <SearchIcon className="search__svg" />
           <input
-            className='search__input'
+            className="search__input"
             type="text"
-            placeholder='What do you want to listen to?'
-            onChange={e => setSearchKey(e.target.value)}
-            onKeyUp={async () => setSearchResult(await searchItems(searchKey, token))} />
+            placeholder="What do you want to listen to?"
+            onChange={(e) => setSearchKey(e.target.value)}
+            onKeyUp={async () =>
+              setSearchResult(await searchItems(searchKey, token))
+            }
+          />
         </label>
       </form>
       {searchResult
@@ -105,14 +113,14 @@ function SearchPage() {
                 ? categories.map((category: ICategory) => {
                   return <CategoryCard image={category.icons[0].url} name={category.name} key={category.name} />
                 })
-                : ''
-              }
-            </div>
-          </>
-          : ''
-      }
+              : ""}
+          </div>
+        </>
+      ) : (
+        ""
+      )}
     </div>
-  )
+  );
 }
 
 export default SearchPage;
