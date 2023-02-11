@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconButtonBack, IconButtonNext, IconButtonPlay, IconHeart, IconHide, IconMicrophone, IconQueue, IconRepeat, IconShow, IconShuffle, IconVolumeOn } from '../../icons';
-import { handlePlayingBarControls, nextTrack, prevTrack } from '../../utils/playback';
+import { handlePlayingBarControls, nextTrack, prevTrack, repeatTrack } from '../../utils/playback';
 
 function PlayingBar() {
 
@@ -70,7 +70,7 @@ function PlayingBar() {
                 <button className='player-tool-button next' id='next' onClick={() => nextTrack()}>
                   <IconButtonNext />
                 </button>
-                <button className='player-tool-button'>
+                <button className='player-tool-button repeat' onClick={() => repeatTrack()}>
                   <IconRepeat />
                 </button>
               </div>

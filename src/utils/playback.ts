@@ -5,6 +5,7 @@ import { convertTrackTime } from "./utils";
 
 export let isPlaying = false;
 let isMuted = false;
+let isRepeated = false;
 const token = window.localStorage.getItem('token');
 let currentVolume = 1;
 let trackIndex: number;
@@ -15,7 +16,6 @@ export async function selectAndGetTrack(id: string) {
   const data: IResponseTrack = await getTrack(token, id);
   const audio = document.querySelector('.playback') as HTMLAudioElement;
   const selectedTrack = document.getElementById(id) as HTMLElement;
-  isPlaying = false;
 
   document.querySelectorAll('.track').forEach((track) => track.classList.remove('track_selected'));
   selectedTrack.classList.add('track_selected');
@@ -113,6 +113,7 @@ function showTrackCurrentTimeAndTimeline(audio: HTMLAudioElement) {
     currentTime.innerHTML = convertTrackTime(audio.currentTime * 1000);
     timelineInput.value = audio.currentTime.toString();
     timelineInput.style.background = `linear-gradient(to right, ${backgroundColor} 0%, ${backgroundColor} ${audio.currentTime * 100 / audio.duration}%, #535353 ${audio.currentTime * 100 / audio.duration}%, #535353 100%)`;
+    if (audio.currentTime === audio.duration) nextTrack();
   };
   timelineInput.addEventListener('input', () => {
     timelineInput.style.background = `linear-gradient(to right, ${backgroundColor} 0%, ${backgroundColor} ${+timelineInput.value * 100 / audio.duration}%, #535353 ${+timelineInput.value * 100 / audio.duration}%, #535353 100%)`;
@@ -216,4 +217,11 @@ export function prevTrack() {
     selectAndGetTrack(searched4Tracks[trackIndex].id);
     playPauseTrack(searched4Tracks[trackIndex].id);
   }
+}
+
+export function repeatTrack() {
+  const repeatButton = document.querySelector('.repeat') as HTMLButtonElement;
+  const audio = document.querySelector('.playback') as HTMLAudioElement;
+  repeatButton.classList.toggle('repeat_active');
+  audio.loop = !audio.loop;
 }
