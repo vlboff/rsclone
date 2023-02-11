@@ -60,6 +60,7 @@
         background-color: transparent;
         display: flex;
         align-items: center;
+        cursor: pointer;
   
         &:first-of-type {
             margin-right: 16px;
@@ -67,7 +68,17 @@
         &:last-of-type {
             margin-right: 12px;
         }
-  
+
+        &:disabled {
+          cursor: not-allowed;
+
+          svg {
+            path {
+              fill: #a2a0a0;
+            }
+          }
+        }
+
         .arrow--right {
             position: absolute;
             top: 50%; 
@@ -114,4 +125,3 @@
     opacity: 1;
   }
 }
-
