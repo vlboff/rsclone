@@ -18,6 +18,7 @@ export async function searchItems(searchKey: string, token: string | null) {
     const filteredTracks = data.tracks.items.filter((item: { preview_url: null; }) => item.preview_url !== null);
     data.tracks.items = filteredTracks;
     searchedTracks = data.tracks.items;
+    console.log(data);
     return data;
   }
 }

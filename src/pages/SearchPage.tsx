@@ -40,7 +40,7 @@ function SearchPage() {
                       <p className="mixes-block-header-title">Artists</p>
                     </div>
                     <SearchResultArtist
-                      artistImage={searchResult.artists.items[0].images ? searchResult.artists.items[0].images[0].url : ''}
+                      artistImage={searchResult.artists.items[0].images?.length ? searchResult.artists.items[0].images[0].url : 'https://lab.possan.se/thirtify/images/placeholder-playlist.png'}
                       artistName={searchResult.artists.items[0].name} />
                   </div>
                   <div className='search-result-songs__container'>
