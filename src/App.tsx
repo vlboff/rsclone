@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage";
 import SettingsBar from "./components/SettingsBar";
 import "./styles/main.scss";
 import SearchPage from "./pages/SearchPage";
+import Library from "./pages/Library";
 
 function App() {
 
@@ -47,6 +48,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/search" element={<SearchPage/>} />
+            <Route path="/library" element={<Library/>} />
           </Routes>
         </div>
         <PlayingBar />

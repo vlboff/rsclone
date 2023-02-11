@@ -7,18 +7,29 @@ import {
   IconSearch,
   IconSearchActive,
   IconAddPlayListIcon,
+  IconLibrary,
+  IconLibraryActive
 } from "../icons";
 
 interface IListItem {
   icon: React.SVGProps<SVGSVGElement>;
   activIcon?: React.SVGProps<SVGSVGElement>;
   name: string;
+  page: string;
 }
 
 enum listItemNames {
   home = "Home",
   search = "Search",
+  library = 'Your Library',
   createPlaylist = "Create Playlist",
+}
+
+enum listPages {
+  home = '',
+  search = 'search',
+  library = 'library',
+  createPlaylist = 'library'
 }
 
 enum iconColor {
@@ -34,16 +45,25 @@ function NavBar() {
       icon: <IconHome fill={currentIconColor} />,
       activIcon: <IconHomeActive fill={currentIconColor} />,
       name: listItemNames.home,
+      page: listPages.home,
     },
     {
       icon: <IconSearch fill={currentIconColor} />,
       activIcon: <IconSearchActive fill={currentIconColor} />,
       name: listItemNames.search,
+      page: listPages.search,
+    },
+    {
+      icon: <IconLibrary />,
+      activIcon: <IconLibraryActive fill={currentIconColor} />,
+      name: listItemNames.library,
+      page: listPages.library,
     },
     {
       icon: <IconAddPlayListIcon fill={currentIconColor} />,
       activIcon: <IconAddPlayListIcon fill={currentIconColor} />,
       name: listItemNames.createPlaylist,
+      page: listPages.createPlaylist,
     },
   ];
 
@@ -70,7 +90,7 @@ function NavBar() {
           >
             <>
               {isActive(item)}
-              <NavLink to={item.name === 'Search' ? 'search' : ''}>{item.name}</NavLink>
+              <NavLink to={item.page}>{item.name}</NavLink>
             </>
           </li>
         ))}
