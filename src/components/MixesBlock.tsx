@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Mix from "./Mix";
-import { IPlaylistItems } from "./interfaces/apiInterfaces";
-import { getCategoryPlaylists } from "../api/getCategory";
+import { IPlaylistsItems } from "./interfaces/apiInterfaces";
+import { getCategoryPlaylists } from "../api/getCategoryPlaylists";
+import { Link } from "react-router-dom";
 
 interface IMixesBlock {
   name: string;
   categoryID: string;
+  setPlaylistsID: React.Dispatch<React.SetStateAction<string>>;
+  setRandomColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function MixesBlock({ name, categoryID }: IMixesBlock) {
+function MixesBlock({
+  name,
+  categoryID,
+  setPlaylistsID,
+  setRandomColor,
+}: IMixesBlock) {
   const token = window.localStorage.getItem("token");
   const [playlists, setPlaylists] = useState([]);
 
@@ -19,8 +27,6 @@ function MixesBlock({ name, categoryID }: IMixesBlock) {
     foo();
   }, []);
 
-  console.log(playlists);
-
   return (
     <div className="mixes-block">
       <div className="mixes-block-header">
@@ -29,12 +35,15 @@ function MixesBlock({ name, categoryID }: IMixesBlock) {
       </div>
       <div className="mixes">
         {playlists.length > 0
-          ? playlists.map((playlist: IPlaylistItems) => (
+          ? playlists.map((playlist: IPlaylistsItems) => (
               <Mix
-                key={playlist.name}
+                key={`${playlist.name}${Math.random()}`}
                 image={playlist.images[0].url}
                 name={playlist.name}
                 description={playlist.description}
+                id={playlist.id}
+                setPlaylistsID={setPlaylistsID}
+                setRandomColor={setRandomColor}
               />
             ))
           : ""}

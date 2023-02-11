@@ -93,4 +93,35 @@
         }
     }
   }  
+
+  .settings-bar__control {
+    display: flex;
+    visibility: hidden;
+    align-items: center;
+    transition: all 0.5s;
+    opacity: 0;
+
+    .play-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 32px;
+      width: 48px;
+      height: 48px;
+      background: #1ED760;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .playlist-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #FFFFFF
+    }
+  }
+
+  .active-bar {
+    visibility: visible;
+    opacity: 1;
+  }
 }
