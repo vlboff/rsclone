@@ -4,6 +4,7 @@ import { ReactComponent as IconHide } from "./assets/icons/hide-arrow.svg";
 import { ReactComponent as IconShuffle } from "./assets/icons/shuffle.svg";
 import { ReactComponent as IconButtonBack } from "./assets/icons/button-back.svg";
 import { ReactComponent as IconButtonPlay } from "./assets/icons/button-play.svg";
+import { ReactComponent as IconButtonPause } from "./assets/icons/button-pause.svg";
 import { ReactComponent as IconButtonNext } from "./assets/icons/button-next.svg";
 import { ReactComponent as IconRepeat } from "./assets/icons/repeat.svg";
 import { ReactComponent as IconMicrophone } from "./assets/icons/microphone.svg";
@@ -30,16 +31,17 @@ import { ReactComponent as IconPlayTracklistRow } from "./assets/icons/play-trac
 import { ReactComponent as IconPreloader } from "./assets/icons/preloader.svg";
 
 export {
-  IconHeart,
-  IconShow,
-  IconHide,
-  IconShuffle,
-  IconButtonBack,
-  IconButtonPlay,
-  IconButtonNext,
-  IconRepeat,
-  IconMicrophone,
-  IconQueue,
+  IconHeart, 
+  IconShow, 
+  IconHide, 
+  IconShuffle, 
+  IconButtonBack, 
+  IconButtonPlay, 
+  IconButtonPause, 
+  IconButtonNext, 
+  IconRepeat, 
+  IconMicrophone, 
+  IconQueue, 
   IconVolumeOn,
   IconSpotifyLogoWithoutName,
   IconRSSLogo,

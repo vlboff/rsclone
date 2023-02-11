@@ -33,7 +33,6 @@ function App() {
         .split("&")
         .find((el) => el.startsWith("access_token"))
         ?.split("=")[1] as string;
-      console.log(token);
 
       window.location.hash = "";
       window.localStorage.setItem("token", token);
