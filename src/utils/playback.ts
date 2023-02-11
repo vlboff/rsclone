@@ -1,5 +1,5 @@
 import { getTrack } from "../api/getTrack";
-import { searchedTracks } from "../api/searchItems";
+import { searched4Tracks } from "../api/searchItems";
 import { IResponseTrack } from "../components/interfaces/apiInterfaces";
 import { convertTrackTime } from "./utils";
 
@@ -15,6 +15,7 @@ export async function selectAndGetTrack(id: string) {
   const data: IResponseTrack = await getTrack(token, id);
   const audio = document.querySelector('.playback') as HTMLAudioElement;
   const selectedTrack = document.getElementById(id) as HTMLElement;
+  isPlaying = false;
 
   document.querySelectorAll('.track').forEach((track) => track.classList.remove('track_selected'));
   selectedTrack.classList.add('track_selected');
@@ -29,22 +30,24 @@ export async function selectAndGetTrack(id: string) {
 
 export function playPauseTrack(id: string) {
   const audio = document.querySelector('.playback') as HTMLAudioElement;
-  
+
   togglePlayPauseIcon(id);
   showTrackCurrentTimeAndTimeline(audio);
 
-  if (!isPlaying) {
-    setTimeout(() => audio.play(), 200);
-    console.log('Is playing');
-  } else {
-    setTimeout(() => audio.pause(), 200);
-  }
+  setTimeout(() => {
+    if (!isPlaying) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+  }, 200)
 
-  const currentTrackId = searchedTracks.filter((track) => {
+  const currentTrackId = searched4Tracks.filter((track) => {
     return track.id === id;
   })[0];
 
-  trackIndex = searchedTracks.indexOf(currentTrackId);
+  trackIndex = searched4Tracks.indexOf(currentTrackId);
+
 }
 
 function togglePlayPauseIcon(id: string) {
@@ -198,13 +201,9 @@ export function handlePlayingBarControls() {
 
 export function nextTrack() {
   ++trackIndex;
-    trackIndex = trackIndex > searchedTracks.length - 1 ? 0 : trackIndex;
-    if (!isPlaying) {
-      playPauseTrack(searchedTracks[trackIndex].id);
-    } else {
-      isPlaying = false;
-      playPauseTrack(searchedTracks[trackIndex].id);
-    }
+  trackIndex = trackIndex > searched4Tracks.length - 1 ? 0 : trackIndex;
+  selectAndGetTrack(searched4Tracks[trackIndex].id);
+  playPauseTrack(searched4Tracks[trackIndex].id);
 }
 
 export function prevTrack() {
@@ -213,12 +212,8 @@ export function prevTrack() {
     audio.currentTime = 0;
   } else {
     --trackIndex;
-    trackIndex = trackIndex < 0 ? 0 : trackIndex;
-    if (!isPlaying) {
-      playPauseTrack(searchedTracks[trackIndex].id);
-    } else {
-      isPlaying = false;
-      playPauseTrack(searchedTracks[trackIndex].id);
-    }
+    trackIndex = trackIndex < 0 ? searched4Tracks.length - 1 : trackIndex;
+    selectAndGetTrack(searched4Tracks[trackIndex].id);
+    playPauseTrack(searched4Tracks[trackIndex].id);
   }
 }
