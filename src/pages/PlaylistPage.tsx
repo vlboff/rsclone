@@ -4,6 +4,9 @@ import { IPlaylist } from "../components/interfaces/apiInterfaces";
 import extractColors from "extract-colors";
 import { IconHeart, IconPlayCard, IconClock, IconPreloader } from "../icons";
 import TracklistRow from "../components/TracklistRow";
+import { getSeparateByCommas } from "../utils/utils";
+import SongAlbumPlaylistPageHeader from "../components/SongAlbumPlaylistPageHeader";
+import PageControlPanel from "../components/PageControlPanel";
 
 interface IPlaylistPage {
   playlistID: string;
@@ -38,73 +41,26 @@ function PlaylistPage({
   //   .then(console.log)
   //   .catch(console.error);
 
-  const getFollowers = (followers: string) => {
-    const reverse = followers.split("").reverse().join("");
-    let str = "";
-    for (let i = 0; i < followers.length; i++) {
-      if (i % 3 === 0) {
-        str += `,${reverse[i]}`;
-      } else {
-        str += reverse[i];
-      }
-    }
-
-    if (str[0] === ",") {
-      return str.slice(1).split("").reverse().join("");
-    } else {
-      return str.split("").reverse().join("");
-    }
-  };
-
   const followers =
     String(playlist?.followers.total).length > 3
-      ? getFollowers(String(playlist?.followers.total))
+      ? getSeparateByCommas(String(playlist?.followers.total))
       : playlist?.followers.total;
 
   return playlist ? (
     <div className="playlist-page">
-      <div
-        className="playlist-header"
-        style={{
-          backgroundColor: randomColor,
-        }}
-      >
-        <img
-          src={`${playlist?.images[0].url}`}
-          alt="cover"
-          className="playlist-header_cover"
-          crossOrigin="anonymous"
-        />
-        <div className="playlist-header_item">
-          <h2 className="playlist_title">playlist</h2>
-          <h1 className="playlist_name">{`${playlist ? playlist.name : ""
-            }`}</h1>
-          <p className="playlist_dscr">{`${playlist ? playlist.description : ""
-            }`}</p>
-          <div className="playlist_info">
-            <span className="playlist_owner">{`${playlist ? playlist.owner.display_name : ""
-              }`}</span>
-            <span className="playlist_followers">{`${playlist ? followers : 0
-              } likes`}</span>
-            <span className="playlist_tracks">{`${playlist ? playlist.tracks.total : 0
-              } songs`}</span>
-          </div>
-        </div>
-      </div>
+      <SongAlbumPlaylistPageHeader
+        color={randomColor}
+        image={playlist.images[0].url}
+        title={"playlist"}
+        name={playlist.name}
+        description={playlist.description}
+        owner={playlist.owner.display_name}
+        followers={followers}
+        tracks={playlist.tracks.total}
+      />
 
       <div className="tracklist-table">
-        <div
-          className="tracklist-gradient"
-          style={{
-            background: `linear-gradient(0deg, #22222260 0, ${randomColor} 500%)`,
-          }}
-        ></div>
-        <div className="control-panel">
-          <div className="play-btn">
-            <IconPlayCard height={28} width={28} />
-          </div>
-          <IconHeart height={32} width={32} className={"like-btn"} />
-        </div>
+        <PageControlPanel color={randomColor} />
         <div className="tracklist-table_title">
           <div className="title-number">#</div>
           <div className="title-info">title</div>
