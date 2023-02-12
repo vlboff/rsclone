@@ -77,12 +77,7 @@ function App() {
                   />
                 }
               />
-              <Route
-                path="/search/*"
-                element={
-                  <SearchPage />
-                }
-              />
+              <Route path="/search/*" element={<SearchPage />} />
               <Route
                 path={`/playlist/${playlistID}`}
                 element={
