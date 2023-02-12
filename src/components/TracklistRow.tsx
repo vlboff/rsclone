@@ -7,7 +7,7 @@ interface ITracklistRow {
   name: string;
   artist: string;
   album: string;
-  data: string;
+  data?: string;
   duration: number;
 }
 
@@ -72,7 +72,7 @@ function TracklistRow({
         </div>
       </div>
       <div className="track-album">{album}</div>
-      <div className="track-data">{getData(data)}</div>
+      <div className="track-data">{getData(data!)}</div>
       <div className="last-block">
         <div
           className={`like-btn`}

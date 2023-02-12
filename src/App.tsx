@@ -78,12 +78,9 @@ function App() {
                 }
               />
               <Route
-                path="/search"
+                path="/search/*"
                 element={
-                  <SearchPage
-                    setPlaylistsID={setPlaylistsID}
-                    setRandomColor={setRandomColor}
-                  />
+                  <SearchPage />
                 }
               />
               <Route

@@ -77,22 +77,17 @@ function PlaylistPage({
         />
         <div className="playlist-header_item">
           <h2 className="playlist_title">playlist</h2>
-          <h1 className="playlist_name">{`${
-            playlist ? playlist.name : ""
-          }`}</h1>
-          <p className="playlist_dscr">{`${
-            playlist ? playlist.description : ""
-          }`}</p>
+          <h1 className="playlist_name">{`${playlist ? playlist.name : ""
+            }`}</h1>
+          <p className="playlist_dscr">{`${playlist ? playlist.description : ""
+            }`}</p>
           <div className="playlist_info">
-            <span className="playlist_owner">{`${
-              playlist ? playlist.owner.display_name : ""
-            }`}</span>
-            <span className="playlist_followers">{`${
-              playlist ? followers : 0
-            } likes`}</span>
-            <span className="playlist_tracks">{`${
-              playlist ? playlist.tracks.total : 0
-            } songs`}</span>
+            <span className="playlist_owner">{`${playlist ? playlist.owner.display_name : ""
+              }`}</span>
+            <span className="playlist_followers">{`${playlist ? followers : 0
+              } likes`}</span>
+            <span className="playlist_tracks">{`${playlist ? playlist.tracks.total : 0
+              } songs`}</span>
           </div>
         </div>
       </div>
