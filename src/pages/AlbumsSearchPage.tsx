@@ -1,17 +1,31 @@
-import { ISearchResult } from "../components/interfaces/apiInterfaces";
+import { useEffect, useState } from "react";
+import { searchItems } from "../api/searchItems";
+import { IResponseAlbum, IResponseArtist, ISearchResult } from "../components/interfaces/apiInterfaces";
 import Mix from "../components/Mix";
 
 interface ISearchPage {
   setPlaylistsID: React.Dispatch<React.SetStateAction<string>>;
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
-  searchResult: ISearchResult
+  searchKey: string
 }
 
-function AlbumsSearchPage({ setPlaylistsID, setRandomColor, searchResult }: ISearchPage) {
+function AlbumsSearchPage({ setPlaylistsID, setRandomColor, searchKey }: ISearchPage) {
+
+  const token = window.localStorage.getItem("token");
+  const [albums, setAlbums] = useState<IResponseAlbum[] | null>(null);
+
+  useEffect(() => {
+    const foo = async () => {
+      const data = await searchItems(searchKey, token);
+      setAlbums(data.albums.items);
+    };
+    foo();
+  }, []);
+  
   return (
     <div className="mixes">
-      {searchResult.albums.items.map((item) => (
-        <Mix key={item.id} image={item.images[0].url} name={item.artists[0].name} description={`${item.release_date.split('-')[0]} • ${item.name}`} id={item.id}
+      {albums && albums.map((album) => (
+        <Mix key={album.id} image={album.images?.length ? album.images[0].url : 'https://lab.possan.se/thirtify/images/placeholder-playlist.png'} name={album.artists[0].name} description={`${album.release_date.split('-')[0]} • ${album.name}`} id={album.id}
           setPlaylistsID={setPlaylistsID}
           setRandomColor={setRandomColor} />
       ))}

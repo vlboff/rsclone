@@ -50,15 +50,15 @@ function SearchPage() {
                   <Link to={`${searchKey}/albums`} className='search-tag'>Albums</Link>
                 </div>
                 <Routes>
-                <Route path="" element={ <AllSearchPage searchResult={searchResult} setPlaylistsID={setPlaylistsID}
-                    setRandomColor={setRandomColor}/>} />
+                  <Route path="" element={<AllSearchPage searchResult={searchResult} setPlaylistsID={setPlaylistsID}
+                    setRandomColor={setRandomColor} />} />
                   <Route path=":searchKey/artists" element={<ArtistsSearchPage searchKey={searchKey} setPlaylistsID={setPlaylistsID}
-                    setRandomColor={setRandomColor}/>} />
+                    setRandomColor={setRandomColor} />} />
                   <Route path=":searchKey/tracks" element={<TracksSearchPage searchKey={searchKey} />} />
-                  <Route path=":searchKey/albums" element={<AlbumsSearchPage searchResult={searchResult} setPlaylistsID={setPlaylistsID}
-                    setRandomColor={setRandomColor}/>} />
+                  <Route path=":searchKey/albums" element={<AlbumsSearchPage searchKey={searchKey} setPlaylistsID={setPlaylistsID}
+                    setRandomColor={setRandomColor} />} />
                 </Routes>
-                
+
               </>
             }
           </>
