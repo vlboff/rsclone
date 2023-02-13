@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { searchItems } from "../api/searchItems";
-import { IResponseAlbum, IResponseArtist, ISearchResult } from "../components/interfaces/apiInterfaces";
+import { IResponseAlbum } from "../components/interfaces/apiInterfaces";
 import Mix from "../components/Mix";
 
 interface ISearchPage {

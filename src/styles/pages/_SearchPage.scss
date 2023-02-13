@@ -49,6 +49,7 @@
   text-decoration: none;
   font-size: 14px;
   font-weight: 700;
+  margin-bottom: 20px;
 
   &:hover {
     background-color: #393939;
@@ -58,8 +59,11 @@
 .search-tag_active {
   color: #313131;
   background-color: $text-main-color;
-}
 
+  &:hover {
+    background-color: $text-main-color;
+  }
+}
 
 .tracklist-search-page {
   .last-block {

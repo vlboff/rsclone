@@ -13,6 +13,7 @@ import TracksSearchPage from './TracksSearchPage';
 import AllSearchPage from './AllSearchPage';
 import ArtistsSearchPage from './ArtistsSearchPage';
 import AlbumsSearchPage from './AlbumsSearchPage';
+import { link } from 'fs';
 
 
 
@@ -31,6 +32,14 @@ function SearchPage() {
     foo();
   }, []);
 
+  function toggleTagClass(e: React.MouseEvent<Element, MouseEvent>) {
+    const links = Array.from(document.querySelectorAll('.search-tag'));
+    links.forEach(link => {
+      link.classList.remove('search-tag_active');
+    });
+    (e.target as HTMLLinkElement).classList.add('search-tag_active');
+  }
+
   function renderSearchResult() {
 
     return (
@@ -44,10 +53,10 @@ function SearchPage() {
               </div>
               : <>
                 <div className="search-tags">
-                  <Link to="" className='search-tag search-tag_active'>All</Link>
-                  <Link to={`${searchKey}/artists`} className='search-tag'>Artists</Link>
-                  <Link to={`${searchKey}/tracks`} className='search-tag'>Songs</Link>
-                  <Link to={`${searchKey}/albums`} className='search-tag'>Albums</Link>
+                  <Link to="" className='search-tag search-tag_active' onClick={(e) => toggleTagClass(e)}>All</Link>
+                  <Link to={`${searchKey}/artists`} className='search-tag' onClick={(e) => toggleTagClass(e)}>Artists</Link>
+                  <Link to={`${searchKey}/tracks`} className='search-tag' onClick={(e) => toggleTagClass(e)}>Songs</Link>
+                  <Link to={`${searchKey}/albums`} className='search-tag' onClick={(e) => toggleTagClass(e)}>Albums</Link>
                 </div>
                 <Routes>
                   <Route path="" element={<AllSearchPage searchResult={searchResult} setPlaylistsID={setPlaylistsID}
