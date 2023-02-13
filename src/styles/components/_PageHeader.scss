@@ -53,8 +53,9 @@
   align-items: center;
 }
 
-.page-header_owner::after {
-  content: '';
+.drop {
+  display: flex;
+  align-self: center;
   background: #FFFFFF;
   width: 4px;
   height: 4px;
@@ -67,11 +68,6 @@
   align-items: center;
 }
 
-.page-header_followers::after {
-  content: '';
-  background: #FFFFFF;
-  width: 4px;
-  height: 4px;
-  margin: 0 5px;
-  border-radius: 50%;
+.page-header_duration_time {
+  color: #b3b3b3;
 }

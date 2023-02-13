@@ -10,6 +10,7 @@ import SearchPage from "./pages/SearchPage";
 import PlaylistPage from "./pages/PlaylistPage";
 import { useAppDispatch } from "./store/hook";
 import { addScrollHeight } from "./store/scrollHeightSlice";
+import AlbumPage from "./pages/AlbumPage";
 
 function App() {
   const CLIENT_ID = "1f1f06f4b7fc4796921496a5f9a14d20";
@@ -23,7 +24,7 @@ function App() {
   const [artistID, setArtistID] = useState<string>("");
   const [trackID, setTrackID] = useState<string>("");
   const [randomColor, setRandomColor] = useState<string>("");
-  const [playlistName, setPlaylistName] = useState<string>("");
+  const [headerName, setHeaderName] = useState<string>("");
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -62,7 +63,7 @@ function App() {
         </Routes>
       ) : (
         <main>
-          <SettingsBar playlistName={playlistName} />
+          <SettingsBar headerName={headerName} />
           <NavBar />
           <div
             className="main-view"
@@ -98,9 +99,21 @@ function App() {
                   <PlaylistPage
                     playlistID={playlistID}
                     randomColor={randomColor}
-                    setPlaylistName={setPlaylistName}
+                    setHeaderName={setHeaderName}
                     setAlbumID={setAlbumID}
                     setRandomColor={setRandomColor}
+                  />
+                }
+              />
+              <Route
+                path={`/album/${albumID}`}
+                element={
+                  <AlbumPage
+                    albumID={albumID}
+                    randomColor={randomColor}
+                    setHeaderName={setHeaderName}
+                    // setAlbumID={setAlbumID}
+                    // setRandomColor={setRandomColor}
                   />
                 }
               />

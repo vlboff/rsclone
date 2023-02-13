@@ -11,7 +11,7 @@ import PageControlPanel from "../components/PageControlPanel";
 interface IPlaylistPage {
   playlistID: string;
   randomColor: string;
-  setPlaylistName: React.Dispatch<React.SetStateAction<string>>;
+  setHeaderName: React.Dispatch<React.SetStateAction<string>>;
   setAlbumID: React.Dispatch<React.SetStateAction<string>>;
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -19,7 +19,7 @@ interface IPlaylistPage {
 function PlaylistPage({
   playlistID,
   randomColor,
-  setPlaylistName,
+  setHeaderName,
   setAlbumID,
   setRandomColor,
 }: IPlaylistPage) {
@@ -36,7 +36,7 @@ function PlaylistPage({
   }, [setPlaylists]);
 
   useEffect(() => {
-    setPlaylistName(playlist ? playlist.name : "");
+    setHeaderName(playlist ? playlist.name : "");
   }, [playlist]);
 
   // extractColors(
