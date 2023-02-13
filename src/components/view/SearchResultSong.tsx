@@ -1,11 +1,15 @@
 import React from 'react';
-import { IconHeart, IconMoreInfo } from '../../icons';
+import { IconButtonPlay, IconHeart, IconMoreInfo } from '../../icons';
+import { playPauseTrack, selectAndGetTrack } from '../../utils/playback';
 
-function SearchResultSong(props: { image: string; name: string; author: string; duration: string | number }) {
+function SearchResultSong(props: { image: string; name: string; author: string; duration: string | number; id: string }) {
   return (
-    <div className='search-result-song'>
+    <div className='search-result-song track' id={props.id} onClick={() => selectAndGetTrack(props.id)}>
       <div className='search-result-song__image'>
         <img src={props.image} alt="/" />
+        <button className='player-tool-button play-pause-song' onClick={() => {playPauseTrack(props.id)}}>
+          <IconButtonPlay />
+        </button>
       </div>
       <div className="track-info">
         <div className='track-name'>

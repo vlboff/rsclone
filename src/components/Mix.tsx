@@ -1,7 +1,24 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { IconPlayCard } from "../icons";
 
-function Mix(props: { image: string; name: string; description: string }) {
+interface IMix {
+  image: string;
+  name: string;
+  description: string;
+  id: string;
+  setPlaylistsID: React.Dispatch<React.SetStateAction<string>>;
+  setRandomColor: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function Mix({
+  image,
+  name,
+  description,
+  id,
+  setPlaylistsID,
+  setRandomColor,
+}: IMix) {
   const [activeCardMode, setActiveCardMode] = useState("");
 
   const dscrWithoutLinks = (description: string) => {
@@ -18,24 +35,42 @@ function Mix(props: { image: string; name: string; description: string }) {
     }
   };
 
+  const playMusic = () => {
+    // play
+  };
+
   return (
     <div
-      className={`card ${activeCardMode}`}
+      className="card-wrapper"
       onMouseEnter={() => setActiveCardMode("hover")}
       onMouseLeave={() => setActiveCardMode("")}
     >
-      <div className="card-img">
-        <img src={props.image} alt="/" />
-        <div className={`card-play-btn ${activeCardMode}`}>
-          <div className="circle">
-            <IconPlayCard />
-          </div>
+      <div className={`card-play-btn ${activeCardMode}`}>
+        <div className="circle" onClick={playMusic}>
+          <IconPlayCard />
         </div>
       </div>
-      <div className="card-text">
-        <div className="card-name">{props.name}</div>
-        <div className="card-dscr">{dscrWithoutLinks(props.description)}</div>
-      </div>
+
+      <Link
+        to={`/playlist/${id}`}
+        className={"playlist-link"}
+        onClick={() =>
+          setRandomColor(`#${Math.random().toString(16).slice(3, 9)}`)
+        }
+      >
+        <div
+          className={`card ${activeCardMode}`}
+          onClick={() => setPlaylistsID(id)}
+        >
+          <div className="card-img">
+            <img src={image} alt="/" />
+          </div>
+          <div className="card-text">
+            <div className="card-name">{name}</div>
+            <div className="card-dscr">{dscrWithoutLinks(description)}</div>
+          </div>
+        </div>
+      </Link>
     </div>
   );
 }

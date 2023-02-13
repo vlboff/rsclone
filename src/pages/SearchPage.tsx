@@ -7,89 +7,104 @@ import { SearchIcon } from '../icons'
 import { searchItems } from '../api/searchItems';
 import { getCategories } from '../api/getCategories';
 import CategoryCard from '../components/CategoryCard';
+import { convertTrackTime } from '../utils/utils';
 
-function SearchPage() {
-  const token = window.localStorage.getItem('token');
-  const [searchKey, setSearchKey] = useState("")
+interface ISearchPage {
+  setPlaylistsID: React.Dispatch<React.SetStateAction<string>>;
+  setRandomColor: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function SearchPage({ setPlaylistsID, setRandomColor }: ISearchPage) {
+  const token = window.localStorage.getItem("token");
+  const [searchKey, setSearchKey] = useState("");
   const [searchResult, setSearchResult] = useState<ISearchResult | null>(null);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     async function foo() {
       setCategories(await getCategories(token));
-    };
+    }
     foo();
   }, []);
 
   function renderSearchResult() {
 
-    function convertDuration(ms: number) {
-      const minutes = Math.floor(ms / 60000);
-      const seconds = ((ms % 60000) / 1000).toFixed(0);
-      return minutes + ":" + (+seconds < 10 ? '0' : '') + seconds;
-    }
-
     return (
       <>
         {searchResult &&
-          <div className='render-search-results'>
-            <div className='render-search-results__artist-and-track-container'>
-              <div className="search-result-artist__container">
-                <div className="mixes-block-header">
-                  <p className="mixes-block-header-title">Artists</p>
+          <>
+            {searchResult.artists.items.length === 0
+              ? <div className='no-results'>
+                <h2>No results found.</h2>
+                <p>Please make sure your words are spelled correctly or use less or different keywords.</p>
+              </div>
+              : <div className='render-search-results'>
+                <div className='render-search-results__artist-and-track-container'>
+                  <div className="search-result-artist__container">
+                    <div className="mixes-block-header">
+                      <p className="mixes-block-header-title">Artists</p>
+                    </div>
+                    <SearchResultArtist
+                      artistImage={searchResult.artists.items[0].images?.length ? searchResult.artists.items[0].images[0].url : 'https://lab.possan.se/thirtify/images/placeholder-playlist.png'}
+                      artistName={searchResult.artists.items[0].name} />
+                  </div>
+                  <div className='search-result-songs__container'>
+                    <div className="mixes-block-header">
+                      <p className="mixes-block-header-title">Songs</p>
+                    </div>
+                    {searchResult.tracks.items.slice(0, 4).map(item => {
+                      return (
+                        <SearchResultSong
+                          image={item.album.images[0].url}
+                          name={item.name}
+                          author={item.artists[0].name}
+                          duration={convertTrackTime(item.duration_ms)}
+                          id={item.id}
+                          key={item.id + item.album.images[0].url}
+                        />
+                      )
+                    }
+                    )}
+                  </div>
                 </div>
-                <SearchResultArtist
-                  artistImage={searchResult.artists.items[0].images ? searchResult.artists.items[0].images[0].url : ''}
-                  artistName={searchResult.artists.items[0].name} />
-              </div>
-              <div className='search-result-songs__container'>
-                <div className="mixes-block-header">
-                  <p className="mixes-block-header-title">Songs</p>
+                <div className='render-search-results__albums'>
+                  <div className="mixes-block-header">
+                    <p className="mixes-block-header-title">Albums</p>
+                  </div>
+                  <div className="mixes">
+                    {searchResult.albums.items.map((item) => (
+                      <Mix key={item.id} image={item.images[0].url} name={item.artists[0].name} description={`${item.release_date.split('-')[0]} • ${item.name}`} id={item.id}
+                        setPlaylistsID={setPlaylistsID}
+                        setRandomColor={setRandomColor} />
+                    ))}
+                  </div>
                 </div>
-                {searchResult.tracks.items.slice(0, 4).map(item => {
-                  return (
-                    <SearchResultSong
-                      image={item.album.images[0].url}
-                      name={item.name}
-                      author={item.artists[0].name}
-                      duration={convertDuration(item.duration_ms)}
-                    />
-                  )
-                }
-                )}
               </div>
-            </div>
-            <div className='render-search-results__albums'>
-              <div className="mixes-block-header">
-                <p className="mixes-block-header-title">Albums</p>
-              </div>
-              <div className="mixes">
-                {searchResult.albums.items.map((item) => (
-                  <Mix key={item.id} image={item.images[0].url} name={item.artists[0].name} description={`${item.release_date.split('-')[0]} • ${item.name}`} />
-                ))}
-              </div>
-            </div>
-          </div>
+            }
+          </>
         }
       </>
-    )
+    );
   }
 
   return (
-    <div className='search'>
-      <form className='search__form'>
-        <label className='search__label'>
-          <SearchIcon className='search__svg' />
+    <div className="search">
+      <form className="search__form">
+        <label className="search__label">
+          <SearchIcon className="search__svg" />
           <input
-            className='search__input'
+            className="search__input"
             type="text"
-            placeholder='What do you want to listen to?'
-            onChange={e => setSearchKey(e.target.value)}
-            onKeyUp={async () => setSearchResult(await searchItems(searchKey, token))} />
+            placeholder="What do you want to listen to?"
+            onChange={(e) => setSearchKey(e.target.value)}
+            onKeyUp={async () =>
+              setSearchResult(await searchItems(searchKey, token))
+            }
+          />
         </label>
       </form>
       {searchResult
-        ? renderSearchResult()
+        ? (renderSearchResult())
         :
         (document.querySelector('.search__input') as HTMLInputElement) !== null &&
           (document.querySelector('.search__input') as HTMLInputElement).value === ''
@@ -100,14 +115,14 @@ function SearchPage() {
                 ? categories.map((category: ICategory) => {
                   return <CategoryCard image={category.icons[0].url} name={category.name} key={category.name} />
                 })
-                : ''
-              }
+                : ""}
             </div>
-          </>
-          : ''
-      }
+            </>
+       : (
+      ""
+      )}
     </div>
-  )
+  );
 }
 
 export default SearchPage;

@@ -4,6 +4,7 @@ import { ReactComponent as IconHide } from "./assets/icons/hide-arrow.svg";
 import { ReactComponent as IconShuffle } from "./assets/icons/shuffle.svg";
 import { ReactComponent as IconButtonBack } from "./assets/icons/button-back.svg";
 import { ReactComponent as IconButtonPlay } from "./assets/icons/button-play.svg";
+import { ReactComponent as IconButtonPause } from "./assets/icons/button-pause.svg";
 import { ReactComponent as IconButtonNext } from "./assets/icons/button-next.svg";
 import { ReactComponent as IconRepeat } from "./assets/icons/repeat.svg";
 import { ReactComponent as IconMicrophone } from "./assets/icons/microphone.svg";
@@ -17,16 +18,19 @@ import { ReactComponent as IconSearchActive } from "./assets/icons/search-icon-a
 import { ReactComponent as IconAddPlayListIcon } from "./assets/icons/add-playlist-icon.svg";
 import { ReactComponent as IconSettings } from "./assets/icons/settings-icon.svg";
 import { ReactComponent as IconPlayCard } from "./assets/icons/playCard-icon.svg";
-import { ReactComponent as  ArrowDownIcon} from "./assets/icons/arrow-down.svg";
-import { ReactComponent as  ArrowUpIcon} from "./assets/icons/arrow-up.svg";
-import { ReactComponent as  SearchIcon} from "./assets/icons/search.svg";
-import { ReactComponent as  ArrowRightIcon} from "./assets/icons/arrow-right.svg";
-import { ReactComponent as  ArrowLeftIcon} from "./assets/icons/arrow-left.svg";
+import { ReactComponent as ArrowDownIcon } from "./assets/icons/arrow-down.svg";
+import { ReactComponent as ArrowUpIcon } from "./assets/icons/arrow-up.svg";
+import { ReactComponent as SearchIcon } from "./assets/icons/search.svg";
+import { ReactComponent as ArrowRightIcon } from "./assets/icons/arrow-right.svg";
+import { ReactComponent as ArrowLeftIcon } from "./assets/icons/arrow-left.svg";
 import { ReactComponent as IconRSSLogo } from "./assets/icons/rs_school_js.svg";
 import { ReactComponent as IconSpotifyLogoWithoutName } from "./assets/icons/Spotify-Icon-Black-Logo.svg";
 import { ReactComponent as IconMoreInfo } from "./assets/icons/more-info.svg";
 import { ReactComponent as IconLibrary } from './assets/icons/lib-in-active.svg';
 import { ReactComponent as IconLibraryActive } from './assets/icons/lib-active.svg';
+import { ReactComponent as IconClock } from "./assets/icons/clock.svg";
+import { ReactComponent as IconPlayTracklistRow } from "./assets/icons/play-tracklist-row.svg";
+import { ReactComponent as IconPreloader } from "./assets/icons/preloader.svg";
 
 export {
   IconHeart, 
@@ -35,6 +39,7 @@ export {
   IconShuffle, 
   IconButtonBack, 
   IconButtonPlay, 
+  IconButtonPause, 
   IconButtonNext, 
   IconRepeat, 
   IconMicrophone, 
@@ -50,12 +55,15 @@ export {
   IconAddPlayListIcon,
   IconSettings,
   IconPlayCard,
-  ArrowDownIcon, 
-  ArrowUpIcon, 
-  SearchIcon, 
-  ArrowRightIcon, 
+  ArrowDownIcon,
+  ArrowUpIcon,
+  SearchIcon,
+  ArrowRightIcon,
   ArrowLeftIcon,
   IconMoreInfo,
   IconLibrary,
-  IconLibraryActive
+  IconLibraryActive,
+  IconClock,
+  IconPlayTracklistRow,
+  IconPreloader,
 };
