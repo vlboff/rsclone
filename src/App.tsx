@@ -19,6 +19,9 @@ function App() {
 
   const [token, setToken] = useState<string | null>("");
   const [playlistID, setPlaylistsID] = useState<string>("");
+  const [albumID, setAlbumID] = useState<string>("");
+  const [artistID, setArtistID] = useState<string>("");
+  const [trackID, setTrackID] = useState<string>("");
   const [randomColor, setRandomColor] = useState<string>("");
   const [playlistName, setPlaylistName] = useState<string>("");
   const dispatch = useAppDispatch();
@@ -77,7 +80,18 @@ function App() {
                   />
                 }
               />
-              <Route path="/search/*" element={<SearchPage />} />
+              <Route
+                path="/search/*"
+                element={
+                  <SearchPage
+                    setPlaylistsID={setPlaylistsID}
+                    setAlbumID={setAlbumID}
+                    setArtistID={setArtistID}
+                    setTrackID={setTrackID}
+                    setRandomColor={setRandomColor}
+                  />
+                }
+              />
               <Route
                 path={`/playlist/${playlistID}`}
                 element={
@@ -85,6 +99,8 @@ function App() {
                     playlistID={playlistID}
                     randomColor={randomColor}
                     setPlaylistName={setPlaylistName}
+                    setAlbumID={setAlbumID}
+                    setRandomColor={setRandomColor}
                   />
                 }
               />

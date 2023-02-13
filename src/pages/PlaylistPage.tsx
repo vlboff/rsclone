@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getPlaylists } from "../api/getPlaylist";
 import { IPlaylist } from "../components/interfaces/apiInterfaces";
 import extractColors from "extract-colors";
-import { IconHeart, IconPlayCard, IconClock, IconPreloader } from "../icons";
+import { IconClock, IconPreloader } from "../icons";
 import TracklistRow from "../components/TracklistRow";
 import { getSeparateByCommas } from "../utils/utils";
 import SongAlbumPlaylistPageHeader from "../components/SongAlbumPlaylistPageHeader";
@@ -12,12 +12,16 @@ interface IPlaylistPage {
   playlistID: string;
   randomColor: string;
   setPlaylistName: React.Dispatch<React.SetStateAction<string>>;
+  setAlbumID: React.Dispatch<React.SetStateAction<string>>;
+  setRandomColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
 function PlaylistPage({
   playlistID,
   randomColor,
   setPlaylistName,
+  setAlbumID,
+  setRandomColor,
 }: IPlaylistPage) {
   const token = window.localStorage.getItem("token");
   const [playlist, setPlaylists] = useState<IPlaylist | null>(null);
@@ -77,10 +81,15 @@ function PlaylistPage({
             number={index + 1}
             image={item.track.album.images[0].url}
             name={item.track.name}
+            trackID={item.track.id}
             artist={item.track.artists[0].name}
+            artistID={item.track.artists[0].id}
             album={item.track.album.name}
+            albumID={item.track.album.id}
+            setAlbumID={setAlbumID}
             data={item.added_at}
             duration={item.track.duration_ms}
+            setRandomColor={setRandomColor}
           />
         ))}
       </div>

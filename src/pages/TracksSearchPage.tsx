@@ -4,8 +4,17 @@ import { IResponseTrack } from "../components/interfaces/apiInterfaces";
 import TracklistRow from "../components/TracklistRow";
 import { IconClock } from "../icons";
 
-function TracksSearchPage({ searchKey }: { searchKey: string }) {
+interface ITracksSearchPage {
+  searchKey: string;
+  setAlbumID: React.Dispatch<React.SetStateAction<string>>;
+  setRandomColor: React.Dispatch<React.SetStateAction<string>>;
+}
 
+function TracksSearchPage({
+  searchKey,
+  setAlbumID,
+  setRandomColor,
+}: ITracksSearchPage) {
   const token = window.localStorage.getItem("token");
   const [tracks, setTracks] = useState<IResponseTrack[] | null>(null);
 
@@ -35,13 +44,18 @@ function TracksSearchPage({ searchKey }: { searchKey: string }) {
           number={index + 1}
           image={item.album.images[0].url}
           name={item.name}
+          trackID={item.id}
           artist={item.artists[0].name}
+          artistID={item.artists[0].id}
           album={item.album.name}
+          albumID={item.album.id}
+          setAlbumID={setAlbumID}
           duration={item.duration_ms}
+          setRandomColor={setRandomColor}
         />
       ))}
     </>
-  )
+  );
 }
 
 export default TracksSearchPage;

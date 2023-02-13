@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Mix from "./Mix";
 import { IPlaylistsItems } from "./interfaces/apiInterfaces";
 import { getCategoryPlaylists } from "../api/getCategoryPlaylists";
-import { Link } from "react-router-dom";
 
 interface IMixesBlock {
   name: string;

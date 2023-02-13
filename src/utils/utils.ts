@@ -26,3 +26,29 @@ export function getSeparateByCommas(number: string) {
     return str.split("").reverse().join("");
   }
 }
+
+interface Imounths {
+  [key: number]: string;
+}
+
+export function getTracklistRowData(date: string) {
+  let dateAdded = new Date(date);
+  const mounths: Imounths = {
+    0: "Jan",
+    1: "Feb",
+    2: "Mar",
+    3: "Apr",
+    4: "May",
+    5: "Jun",
+    6: "Jul",
+    7: "Aug",
+    8: "Sep",
+    9: "Oct",
+    10: "Nov",
+    11: "Dec",
+  };
+
+  return `${
+    mounths[dateAdded.getMonth()]
+  } ${dateAdded.getDate()}, ${dateAdded.getFullYear()}`;
+}
