@@ -19,6 +19,7 @@ enum Paths {
   playlist = "playlist",
   artist = "artist",
   album = "album",
+  track = "track",
 }
 
 interface ISettingsBar {
@@ -73,7 +74,8 @@ function SettingsBar({ headerName }: ISettingsBar) {
 
     if (
       (scrollHeight > 360 && path === Paths.playlist) ||
-      (scrollHeight > 360 && path === Paths.album)
+      (scrollHeight > 360 && path === Paths.album) ||
+      (scrollHeight > 360 && path === Paths.track)
     ) {
       setActiveMode("active-bar");
     } else {

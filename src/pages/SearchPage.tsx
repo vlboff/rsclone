@@ -88,6 +88,7 @@ function SearchPage({
                     element={
                       <TracksSearchPage
                         searchKey={searchKey}
+                        setTrackID={setTrackID}
                         setAlbumID={setAlbumID}
                         setRandomColor={setRandomColor}
                       />

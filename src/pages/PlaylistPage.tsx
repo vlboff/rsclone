@@ -12,6 +12,7 @@ interface IPlaylistPage {
   playlistID: string;
   randomColor: string;
   setHeaderName: React.Dispatch<React.SetStateAction<string>>;
+  setTrackID: React.Dispatch<React.SetStateAction<string>>;
   setAlbumID: React.Dispatch<React.SetStateAction<string>>;
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -20,6 +21,7 @@ function PlaylistPage({
   playlistID,
   randomColor,
   setHeaderName,
+  setTrackID,
   setAlbumID,
   setRandomColor,
 }: IPlaylistPage) {
@@ -82,6 +84,7 @@ function PlaylistPage({
             image={item.track.album.images[0].url}
             name={item.track.name}
             trackID={item.track.id}
+            setTrackID={setTrackID}
             artist={item.track.artists[0].name}
             artistID={item.track.artists[0].id}
             album={item.track.album.name}

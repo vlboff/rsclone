@@ -10,6 +10,7 @@ import { getCopyrightsDate } from "../utils/utils";
 interface IAlbumPage {
   albumID: string;
   randomColor: string;
+  setTrackID: React.Dispatch<React.SetStateAction<string>>;
   setHeaderName: React.Dispatch<React.SetStateAction<string>>;
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -17,13 +18,12 @@ interface IAlbumPage {
 function AlbumPage({
   albumID,
   randomColor,
+  setTrackID,
   setHeaderName,
   setRandomColor,
 }: IAlbumPage) {
   const token = window.localStorage.getItem("token");
   const [album, setAlbum] = useState<IAlbum | null>(null);
-
-  console.log(album);
 
   useEffect(() => {
     if (albumID.length > 0) {
@@ -48,7 +48,7 @@ function AlbumPage({
         age={album.release_date.slice(0, 4)}
         owner={album.artists[0].name}
         tracks={album.tracks.total}
-        duration={album.tracks.items.reduce(
+        durationTotal={album.tracks.items.reduce(
           (sum, current) => sum + current.duration_ms,
           0
         )}
@@ -71,6 +71,7 @@ function AlbumPage({
             number={item.track_number}
             name={item.name}
             trackID={item.id}
+            setTrackID={setTrackID}
             artist={item.artists[0].name}
             artistID={item.artists[0].id}
             duration={item.duration_ms}

@@ -1,5 +1,5 @@
 import React from "react";
-import { convertTotalTime } from "../utils/utils";
+import { convertTotalTime, convertTrackTime } from "../utils/utils";
 
 interface IPageHeader {
   color: string;
@@ -10,7 +10,8 @@ interface IPageHeader {
   owner: string;
   followers?: string | number;
   age?: string;
-  tracks: number;
+  tracks?: number;
+  durationTotal?: number;
   duration?: number;
 }
 
@@ -24,6 +25,7 @@ function SongAlbumPlaylistPageHeader({
   followers,
   age,
   tracks,
+  durationTotal,
   duration,
 }: IPageHeader) {
   return (
@@ -54,17 +56,20 @@ function SongAlbumPlaylistPageHeader({
           <span className="page-header_tracks">
             {tracks ? `${tracks} songs` : ""}
           </span>
-          <span className="page-header_duration">
-            {duration ? (
+          <span className="page-header_total-duration">
+            {durationTotal ? (
               <span>
                 ,{" "}
-                <span className="page-header_duration_time">{`${convertTotalTime(
-                  duration
+                <span className="page-header__total-duration-time">{`${convertTotalTime(
+                  durationTotal
                 )}`}</span>
               </span>
             ) : (
               ""
             )}
+          </span>
+          <span className="page-header_duration">
+            {duration ? `${convertTrackTime(duration)}` : ""}
           </span>
         </div>
       </div>

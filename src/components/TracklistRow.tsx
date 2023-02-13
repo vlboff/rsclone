@@ -8,8 +8,9 @@ interface ITracklistRow {
   image?: string;
   name: string;
   trackID: string;
-  artist: string;
-  artistID: string;
+  setTrackID: React.Dispatch<React.SetStateAction<string>>;
+  artist?: string;
+  artistID?: string;
   album?: string;
   albumID?: string;
   setAlbumID?: React.Dispatch<React.SetStateAction<string>>;
@@ -23,6 +24,7 @@ function TracklistRow({
   image,
   name,
   trackID,
+  setTrackID,
   artist,
   artistID,
   album,
@@ -46,7 +48,18 @@ function TracklistRow({
       <div className="track-info">
         {image ? <img src={image} alt="album_img" className="track-img" /> : ""}
         <div className="track-dscr">
-          <p className="track-name">{name}</p>
+          <Link
+            to={`/track/${trackID}`}
+            className="track-name"
+            onClick={() => {
+              setRandomColor(`#${Math.random().toString(16).slice(3, 9)}`);
+              if (trackID && setTrackID) {
+                setTrackID(trackID);
+              }
+            }}
+          >
+            <p>{name}</p>
+          </Link>
           <p className="track-artist">{artist}</p>
         </div>
       </div>

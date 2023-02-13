@@ -6,12 +6,14 @@ import { IconClock } from "../icons";
 
 interface ITracksSearchPage {
   searchKey: string;
+  setTrackID: React.Dispatch<React.SetStateAction<string>>;
   setAlbumID: React.Dispatch<React.SetStateAction<string>>;
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
 function TracksSearchPage({
   searchKey,
+  setTrackID,
   setAlbumID,
   setRandomColor,
 }: ITracksSearchPage) {
@@ -45,6 +47,7 @@ function TracksSearchPage({
           image={item.album.images[0].url}
           name={item.name}
           trackID={item.id}
+          setTrackID={setTrackID}
           artist={item.artists[0].name}
           artistID={item.artists[0].id}
           album={item.album.name}
