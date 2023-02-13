@@ -72,7 +72,7 @@ function TracklistRow({
         </div>
       </div>
       <div className="track-album">{album}</div>
-      <div className="track-data">{getData(data!)}</div>
+      {data && <div className="track-data">{getData(data!)}</div>}
       <div className="last-block">
         <div
           className={`like-btn`}

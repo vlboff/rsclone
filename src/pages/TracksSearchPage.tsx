@@ -18,13 +18,12 @@ function TracksSearchPage({ searchKey }: { searchKey: string }) {
   }, []);
 
   return (
-    <>
+    <div className="tracklist-search-page">
       <div className="tracklist-table_title">
         <div className="title-number">#</div>
         <div className="title-info">title</div>
         <div className="title-album">album</div>
-        <div className="title-date">date added</div>
-        <div className="title-time">
+        <div className="title-time track-time_right">
           <IconClock fill="#b3b3b3" />
         </div>
       </div>
@@ -40,7 +39,7 @@ function TracksSearchPage({ searchKey }: { searchKey: string }) {
           duration={item.duration_ms}
         />
       ))}
-    </>
+    </div>
   )
 }
 
