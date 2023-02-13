@@ -71,7 +71,10 @@ function SettingsBar({ headerName }: ISettingsBar) {
       window.location.pathname.slice(1).indexOf("/") + 1
     );
 
-    if (scrollHeight > 360 && path === Paths.playlist) {
+    if (
+      (scrollHeight > 360 && path === Paths.playlist) ||
+      (scrollHeight > 360 && path === Paths.album)
+    ) {
       setActiveMode("active-bar");
     } else {
       setActiveMode("");

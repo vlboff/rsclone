@@ -5,14 +5,14 @@ import { getTracklistRowData, convertTrackTime } from "../utils/utils";
 
 interface ITracklistRow {
   number: number;
-  image: string;
+  image?: string;
   name: string;
   trackID: string;
   artist: string;
   artistID: string;
   album?: string;
-  albumID: string;
-  setAlbumID: React.Dispatch<React.SetStateAction<string>>;
+  albumID?: string;
+  setAlbumID?: React.Dispatch<React.SetStateAction<string>>;
   data?: string;
   duration: number;
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
@@ -44,7 +44,7 @@ function TracklistRow({
         {hover ? <IconPlayTracklistRow fill="#FFFFFF" /> : number}
       </div>
       <div className="track-info">
-        <img src={image} alt="album_img" className="track-img" />
+        {image ? <img src={image} alt="album_img" className="track-img" /> : ""}
         <div className="track-dscr">
           <p className="track-name">{name}</p>
           <p className="track-artist">{artist}</p>
@@ -55,7 +55,9 @@ function TracklistRow({
         className="track-album"
         onClick={() => {
           setRandomColor(`#${Math.random().toString(16).slice(3, 9)}`);
-          setAlbumID(albumID);
+          if (albumID && setAlbumID) {
+            setAlbumID(albumID);
+          }
         }}
       >
         {album ? album : ""}

@@ -12,6 +12,7 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   background: #222222;
+  z-index: 1;
 }
 
 .title-number {
@@ -32,4 +33,17 @@
   height: 1px;
   background-color: #b3b3b3;
   opacity: 0.3;
+}
+
+.copyrights {
+  margin-top: 30px;
+  color: #b3b3b3;
+
+  .copyrights-date {
+    font-size: 0.8125rem;
+  }
+
+  .copyrights-text {
+    font-size: 0.6875rem;
+  }
 }

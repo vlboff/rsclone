@@ -112,8 +112,7 @@ function App() {
                     albumID={albumID}
                     randomColor={randomColor}
                     setHeaderName={setHeaderName}
-                    // setAlbumID={setAlbumID}
-                    // setRandomColor={setRandomColor}
+                    setRandomColor={setRandomColor}
                   />
                 }
               />

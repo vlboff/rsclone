@@ -58,3 +58,25 @@ export function getTracklistRowData(date: string) {
     mounths[dateAdded.getMonth()]
   } ${dateAdded.getDate()}, ${dateAdded.getFullYear()}`;
 }
+
+export function getCopyrightsDate(date: string) {
+  let dateAdded = new Date(date);
+  const mounths: string[] = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  return `${
+    mounths[dateAdded.getMonth()]
+  } ${dateAdded.getDate()}, ${dateAdded.getFullYear()}`;
+}
