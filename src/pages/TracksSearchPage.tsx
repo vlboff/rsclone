@@ -15,7 +15,7 @@ function TracksSearchPage({ searchKey }: { searchKey: string }) {
       setTracks(data.tracks.items);
     };
     foo();
-  }, []);
+  }, [searchKey]);
 
   return (
     <div className="tracklist-search-page">

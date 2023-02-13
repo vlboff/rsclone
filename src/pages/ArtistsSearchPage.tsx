@@ -20,7 +20,7 @@ function ArtistsSearchPage({ setPlaylistsID, setRandomColor, searchKey }: ISearc
       setArtists(data.artists.items);
     };
     foo();
-  }, []);
+  }, [searchKey]);
 
   return (
     <div className="mixes mixes-search">

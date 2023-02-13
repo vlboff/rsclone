@@ -1,21 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { ICategory, ISearchResult } from '../components/interfaces/apiInterfaces';
-import Mix from '../components/Mix';
-import SearchResultArtist from '../components/view/SearchResultArtist';
-import SearchResultSong from '../components/view/SearchResultSong';
 import { SearchIcon } from '../icons'
 import { searchItems } from '../api/searchItems';
 import { getCategories } from '../api/getCategories';
 import CategoryCard from '../components/CategoryCard';
-import { convertTrackTime } from '../utils/utils';
-import { Link, Route, Router, Routes } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import TracksSearchPage from './TracksSearchPage';
 import AllSearchPage from './AllSearchPage';
 import ArtistsSearchPage from './ArtistsSearchPage';
 import AlbumsSearchPage from './AlbumsSearchPage';
-import { link } from 'fs';
-
-
 
 function SearchPage() {
   const token = window.localStorage.getItem("token");
@@ -85,7 +78,8 @@ function SearchPage() {
             className="search__input"
             type="text"
             placeholder="What do you want to listen to?"
-            onChange={(e) => setSearchKey(e.target.value)}
+            onChange={(e) => {setSearchKey(e.target.value)}
+            }
             onKeyUp={async () =>
               setSearchResult(await searchItems(searchKey, token))
             }

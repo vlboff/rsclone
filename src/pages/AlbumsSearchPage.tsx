@@ -20,7 +20,7 @@ function AlbumsSearchPage({ setPlaylistsID, setRandomColor, searchKey }: ISearch
       setAlbums(data.albums.items);
     };
     foo();
-  }, []);
+  }, [searchKey]);
   
   return (
     <div className="mixes">
