@@ -1,4 +1,4 @@
-interface IResponseArtist {
+export interface IResponseArtist {
   external_urls: {
     spotify: string;
   };

@@ -11,6 +11,7 @@ import { convertTrackTime } from '../utils/utils';
 import { Link, Route, Router, Routes } from 'react-router-dom';
 import TracksSearchPage from './TracksSearchPage';
 import AllSearchPage from './AllSearchPage';
+import ArtistsSearchPage from './ArtistsSearchPage';
 
 
 
@@ -50,7 +51,8 @@ function SearchPage() {
                 <Routes>
                 <Route path="" element={ <AllSearchPage searchResult={searchResult} setPlaylistsID={setPlaylistsID}
                     setRandomColor={setRandomColor}/>} />
-                  <Route path=":searchKey/artists" element={<h2>Artists</h2>} />
+                  <Route path=":searchKey/artists" element={<ArtistsSearchPage searchKey={searchKey} setPlaylistsID={setPlaylistsID}
+                    setRandomColor={setRandomColor}/>} />
                   <Route path=":searchKey/tracks" element={<TracksSearchPage searchKey={searchKey} />} />
                   <Route path=":searchKey/albums" element={<h2>Albums</h2>} />
                 </Routes>
