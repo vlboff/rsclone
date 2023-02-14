@@ -129,6 +129,7 @@ function App() {
                     randomColor={randomColor}
                     setTrackID={setTrackID}
                     setArtistID={setArtistID}
+                    setAlbumID={setAlbumID}
                     setHeaderName={setHeaderName}
                     setRandomColor={setRandomColor}
                   />

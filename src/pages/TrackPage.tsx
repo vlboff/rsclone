@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  IArtistsAlbums,
   IArtistsTopTrecks,
   IResponseTrack,
 } from "../components/interfaces/apiInterfaces";
@@ -10,6 +11,8 @@ import { convertTrackTime } from "../utils/utils";
 import PageControlPanel from "../components/PageControlPanel";
 import { getArtistsTopTrack } from "../api/getArtistsTopTrack";
 import TracklistRow from "../components/TracklistRow";
+import ArtistsAlbumsBlock from "../components/ArtistsAlbumsBlock";
+import { getArtistsAlbums } from "../api/getArtistAlbums";
 
 interface ITrackPage {
   trackID: string;
@@ -18,6 +21,7 @@ interface ITrackPage {
   randomColor: string;
   setTrackID: React.Dispatch<React.SetStateAction<string>>;
   setArtistID: React.Dispatch<React.SetStateAction<string>>;
+  setAlbumID: React.Dispatch<React.SetStateAction<string>>;
   setHeaderName: React.Dispatch<React.SetStateAction<string>>;
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -29,29 +33,54 @@ function TrackPage({
   randomColor,
   setTrackID,
   setArtistID,
+  setAlbumID,
   setHeaderName,
   setRandomColor,
 }: ITrackPage) {
   const token = window.localStorage.getItem("token");
   const [track, setTrack] = useState<IResponseTrack | null>(null);
   const [topTracks, setTopTracks] = useState<IArtistsTopTrecks | null>(null);
+  const [albums, setAlbums] = useState<IArtistsAlbums | null>(null);
 
-  console.log(track);
+  useEffect(() => {
+    setHeaderName(track ? track.name : "");
+    setArtistID(track ? track.album.artists[0].id : "");
+
+    if (track) {
+      const foo = async () => {
+        setTopTracks(
+          await getArtistsTopTrack(token, track.album.artists[0].id)
+        );
+      };
+      foo();
+    }
+  }, [track]);
 
   useEffect(() => {
     if (trackID.length > 0) {
       const foo = async () => {
         setTrack(await getTrack(token, trackID));
-        setTopTracks(await getArtistsTopTrack(token, artistID));
       };
       foo();
     }
-  }, [setTrack, setTopTracks]);
+  }, [trackID]);
 
   useEffect(() => {
-    setHeaderName(track ? track.name : "");
-    setArtistID(track ? track.album.artists[0].id : "");
-  }, [track]);
+    if (artistID.length > 0) {
+      const foo = async () => {
+        setAlbums(await getArtistsAlbums(token, artistID));
+      };
+      foo();
+    }
+  }, [artistID]);
+
+  const artistsAlbums = albums?.items.filter(
+    (item) => item.album_type === "album"
+  );
+
+  const artistsSingles = albums?.items.filter(
+    (item) => item.album_type === "single"
+  );
 
   return track ? (
     <div className="track-page">
@@ -84,6 +113,22 @@ function TrackPage({
             setRandomColor={setRandomColor}
           />
         ))}
+        <ArtistsAlbumsBlock
+          albums={artistsAlbums}
+          albumID={albumID}
+          setAlbumID={setAlbumID}
+          artistID={artistID}
+          artistName={track.album.artists[0].name}
+          setRandomColor={setRandomColor}
+        />
+        <ArtistsAlbumsBlock
+          albums={artistsSingles}
+          albumID={albumID}
+          setAlbumID={setAlbumID}
+          artistID={artistID}
+          artistName={track.album.artists[0].name}
+          setRandomColor={setRandomColor}
+        />
       </div>
     </div>
   ) : (

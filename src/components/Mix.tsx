@@ -6,8 +6,12 @@ interface IMix {
   image: string;
   name: string;
   description: string;
-  id: string;
-  setPlaylistsID: React.Dispatch<React.SetStateAction<string>>;
+  playlistID?: string;
+  setPlaylistsID?: React.Dispatch<React.SetStateAction<string>>;
+  artistID?: string;
+  setArtistID?: React.Dispatch<React.SetStateAction<string>>;
+  albumID?: string;
+  setAlbumID?: React.Dispatch<React.SetStateAction<string>>;
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -15,8 +19,12 @@ function Mix({
   image,
   name,
   description,
-  id,
+  playlistID,
   setPlaylistsID,
+  artistID,
+  setArtistID,
+  albumID,
+  setAlbumID,
   setRandomColor,
 }: IMix) {
   const [activeCardMode, setActiveCardMode] = useState("");
@@ -39,6 +47,16 @@ function Mix({
     // play
   };
 
+  const setIdValue = () => {
+    if (setPlaylistsID && playlistID) {
+      setPlaylistsID(playlistID);
+    } else if (setArtistID && artistID) {
+      setArtistID(artistID);
+    } else if (setAlbumID && albumID) {
+      setAlbumID(albumID);
+    }
+  };
+
   return (
     <div
       className="card-wrapper"
@@ -52,16 +70,13 @@ function Mix({
       </div>
 
       <Link
-        to={`/playlist/${id}`}
+        to={`/playlist/${playlistID}`}
         className={"playlist-link"}
         onClick={() =>
           setRandomColor(`#${Math.random().toString(16).slice(3, 9)}`)
         }
       >
-        <div
-          className={`card ${activeCardMode}`}
-          onClick={() => setPlaylistsID(id)}
-        >
+        <div className={`card ${activeCardMode}`} onClick={() => setIdValue()}>
           <div className="card-img">
             <img src={image} alt="/" />
           </div>
