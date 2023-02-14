@@ -33,6 +33,8 @@ export async function selectAndGetTrack(id: string) {
 }
 
 export function playPauseTrack(id: string) {
+  if (id === '') return;
+  console.log(id);
   const audio = document.querySelector('.playback') as HTMLAudioElement;
 
   togglePlayPauseIcon(id);

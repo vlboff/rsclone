@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { IconButtonBack, IconButtonNext, IconButtonPlay, IconHeart, IconHide, IconMicrophone, IconQueue, IconRepeat, IconShow, IconShuffle, IconVolumeOn } from '../../icons';
-import { handlePlayingBarControls, nextTrack, prevTrack, repeatTrack, shuffleTracks } from '../../utils/playback';
+import { nextTrack, playPauseTrack, prevTrack, repeatTrack, shuffleTracks } from '../../utils/playback';
 
 function PlayingBar() {
 
@@ -63,7 +63,10 @@ function PlayingBar() {
                   <IconButtonBack />
                 </button>
               </div>
-              <button className='play-pause-button' onClick={() => handlePlayingBarControls()}>
+              <button className='play-pause-button' onClick={() => {
+                const id = (document.querySelector('.playback') as HTMLAudioElement).dataset.track_id!;
+                playPauseTrack(id)
+                }}>
                 <IconButtonPlay />
               </button>
               <div className="player-controls__buttons-right">
