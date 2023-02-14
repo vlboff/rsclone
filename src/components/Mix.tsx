@@ -57,6 +57,18 @@ function Mix({
     }
   };
 
+  const setPath = () => {
+    if (setPlaylistsID && playlistID) {
+      return `/playlist/${playlistID}`;
+    } else if (setArtistID && artistID) {
+      return `/artist/${artistID}`;
+    } else if (setAlbumID && albumID) {
+      return `/album/${albumID}`;
+    } else {
+      return "/";
+    }
+  };
+
   return (
     <div
       className="card-wrapper"
@@ -70,7 +82,7 @@ function Mix({
       </div>
 
       <Link
-        to={`/playlist/${playlistID}`}
+        to={setPath()}
         className={"playlist-link"}
         onClick={() =>
           setRandomColor(`#${Math.random().toString(16).slice(3, 9)}`)

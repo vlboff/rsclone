@@ -23,7 +23,12 @@ function ArtistsAlbumsBlock({
     <div className="mixes-block">
       <div className="mixes-block-header">
         <p className="mixes-block-header-title">
-          {albums ? albums[0].album_type : ""} by {artistName}
+          {albums
+            ? `${albums[0].album_type[0].toUpperCase()}${albums[0].album_type.slice(
+                1
+              )}s`
+            : ""}{" "}
+          by {artistName}
         </p>
       </div>
       <div className="mixes">
@@ -35,6 +40,8 @@ function ArtistsAlbumsBlock({
             description={`${item.release_date.slice(0, 4)} • ${
               item.album_type
             }`}
+            albumID={item.id}
+            setAlbumID={setAlbumID}
             setRandomColor={setRandomColor}
           />
         ))}
