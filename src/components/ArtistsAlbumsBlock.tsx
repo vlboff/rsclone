@@ -24,11 +24,12 @@ function ArtistsAlbumsBlock({
       <div className="mixes-block-header">
         <p className="mixes-block-header-title">
           {albums
-            ? `${albums[0].album_type[0].toUpperCase()}${albums[0].album_type.slice(
-                1
-              )}s`
+            ? albums.length > 0
+              ? `${albums[0].album_type[0].toUpperCase()}${albums[0].album_type.slice(
+                  1
+                )}s by ${artistName}`
+              : ""
             : ""}{" "}
-          by {artistName}
         </p>
       </div>
       <div className="mixes">

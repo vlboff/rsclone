@@ -79,6 +79,8 @@ function SearchPage({
                         searchResult={searchResult}
                         setPlaylistsID={setPlaylistsID}
                         setRandomColor={setRandomColor}
+                        setAlbumID={setAlbumID}
+                        setTrackID={setTrackID}
                       />
                     }
                   />

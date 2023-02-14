@@ -55,6 +55,7 @@ function TrackPage({
           await getArtistsTopTrack(token, track.album.artists[0].id)
         );
         setAlbum(await getAlbum(token, track.album.id));
+        setAlbums(await getArtistsAlbums(token, track.artists[0].id));
       };
       foo();
     }
@@ -68,15 +69,6 @@ function TrackPage({
       foo();
     }
   }, [trackID]);
-
-  useEffect(() => {
-    if (artistID.length > 0) {
-      const foo = async () => {
-        setAlbums(await getArtistsAlbums(token, artistID));
-      };
-      foo();
-    }
-  }, [artistID]);
 
   const artistsAlbums = albums?.items.filter(
     (item) => item.album_type === "album"

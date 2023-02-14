@@ -7,12 +7,16 @@ import { convertTrackTime } from "../utils/utils";
 interface ISearchPage {
   setPlaylistsID: React.Dispatch<React.SetStateAction<string>>;
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
+  setAlbumID: React.Dispatch<React.SetStateAction<string>>;
+  setTrackID: React.Dispatch<React.SetStateAction<string>>;
   searchResult: ISearchResult;
 }
 
 function AllSearchPage({
   setPlaylistsID,
   setRandomColor,
+  setAlbumID,
+  setTrackID,
   searchResult,
 }: ISearchPage) {
   return (
@@ -44,6 +48,8 @@ function AllSearchPage({
                 duration={convertTrackTime(item.duration_ms)}
                 id={item.id}
                 key={item.id + item.album.images[0].url}
+                setTrackID={setTrackID}
+                setRandomColor={setRandomColor}
               />
             );
           })}
@@ -56,12 +62,12 @@ function AllSearchPage({
         <div className="mixes">
           {searchResult.albums.items.map((item) => (
             <Mix
-              key={item.id}
+              key={`${item.id}${Math.random()}`}
               image={item.images[0].url}
               name={item.artists[0].name}
               description={`${item.release_date.split("-")[0]} • ${item.name}`}
-              playlistID={item.id}
-              setPlaylistsID={setPlaylistsID}
+              albumID={item.id}
+              setAlbumID={setAlbumID}
               setRandomColor={setRandomColor}
             />
           ))}
