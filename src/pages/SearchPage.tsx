@@ -4,7 +4,7 @@ import { SearchIcon } from '../icons'
 import { searchItems } from '../api/searchItems';
 import { getCategories } from '../api/getCategories';
 import CategoryCard from '../components/CategoryCard';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link, redirect, Route, Routes, useNavigate } from 'react-router-dom';
 import TracksSearchPage from './TracksSearchPage';
 import AllSearchPage from './AllSearchPage';
 import ArtistsSearchPage from './ArtistsSearchPage';
@@ -24,6 +24,12 @@ function SearchPage() {
     }
     foo();
   }, []);
+
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    if (searchKey === '') navigate('/search');
+  }, [searchKey])
 
   function toggleTagClass(e: React.MouseEvent<Element, MouseEvent>) {
     const links = Array.from(document.querySelectorAll('.search-tag'));
