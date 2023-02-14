@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IconPlayTracklistRow, IconHeart } from "../icons";
+import { IconPlayTracklistRow, IconHeart, IconButtonPlay } from "../icons";
 import { playPauseTrack, selectAndGetTrack } from "../utils/playback";
 
 interface ITracklistRow {
@@ -60,13 +60,15 @@ function TracklistRow({
 
   return (
     <div
-      className="tracklist-row"
+      className="tracklist-row tracklist-song"
       id={id}
       onClick={() => selectAndGetTrack(id)}
     >
       <div className="track-number">
         <span className="number">{number}</span>
-        <button className='player-tool-button play-pause-song' onClick={() => {playPauseTrack(id)}}><IconPlayTracklistRow fill="#FFFFFF"/></button>
+        <button className='player-tool-button play-pause-song' onClick={() => { playPauseTrack(id) }}>
+          <IconButtonPlay/>
+        </button>
       </div>
       <div className="track-info">
         <img src={image} alt="album_img" className="track-img" />

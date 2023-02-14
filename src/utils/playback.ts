@@ -39,18 +39,18 @@ export function playPauseTrack(id: string) {
   const pauseIcon = '<svg role="img" height="16" width="16" aria-hidden="true" class="Svg-sc-ytk21e-0 uPxdw UIBT7E6ZYMcSDl1KL62g" viewBox="0 0 24 24" data-encore-id="icon"><path d="M5.7 3a.7.7 0 00-.7.7v16.6a.7.7 0 00.7.7h2.6a.7.7 0 00.7-.7V3.7a.7.7 0 00-.7-.7H5.7zm10 0a.7.7 0 00-.7.7v16.6a.7.7 0 00.7.7h2.6a.7.7 0 00.7-.7V3.7a.7.7 0 00-.7-.7h-2.6z"></path></svg>';
   const playingBarIcon = document.querySelector('.playing-bar .play-pause-button') as HTMLButtonElement;
 
-  togglePlayPauseIcon(id);
-
   showTrackCurrentTimeAndTimeline(audio);
-
+  
   setTimeout(() => {
     if (!isPlaying) {
       audio.play();
       isPlaying = true;
+      togglePlayPauseIcon(id);
       playingBarIcon.innerHTML = pauseIcon;
     } else {
       audio.pause();
       isPlaying = false;
+      togglePlayPauseIcon(id);
       playingBarIcon.innerHTML = playIcon;
     }
   }, 400)
@@ -83,11 +83,11 @@ function togglePlayPauseIcon(id: string) {
 
 function switchAllTracksIconsToPlay() {
   const playIcon = '<svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="Svg-sc-ytk21e-0 uPxdw"><path d="M3 1.713a.7.7 0 011.05-.607l10.89 6.288a.7.7 0 010 1.212L4.05 14.894A.7.7 0 013 14.288V1.713z"></path></svg>';
-  const tracks = Array.from(document.querySelectorAll('.search-result-song'));
+  const tracks = Array.from(document.querySelectorAll('.tracklist-song'));
   tracks.forEach((track) => {
     const trackButton = track.querySelector('.player-tool-button') as HTMLElement;
     trackButton.innerHTML = playIcon;
-  })
+  });
 }
 
 function showCoverArts(data: IResponseTrack) {
@@ -207,7 +207,7 @@ export function nextTrack() {
   } else {
     const currentIndex = trackIndex;
     while (currentIndex === trackIndex) {
-      trackIndex = getRandomNumber(0, 4);
+      trackIndex = getRandomNumber(0, searchedTracks.length);
     }
   }
   trackIndex = trackIndex > searchedTracks.length - 1 ? 0 : trackIndex;
