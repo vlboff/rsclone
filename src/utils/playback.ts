@@ -34,43 +34,50 @@ export async function selectAndGetTrack(id: string) {
 
 export function playPauseTrack(id: string) {
   if (id === '') return;
-  console.log(id);
   const audio = document.querySelector('.playback') as HTMLAudioElement;
+  const playIcon = '<svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="Svg-sc-ytk21e-0 uPxdw"><path d="M3 1.713a.7.7 0 011.05-.607l10.89 6.288a.7.7 0 010 1.212L4.05 14.894A.7.7 0 013 14.288V1.713z"></path></svg>';
+  const pauseIcon = '<svg role="img" height="16" width="16" aria-hidden="true" class="Svg-sc-ytk21e-0 uPxdw UIBT7E6ZYMcSDl1KL62g" viewBox="0 0 24 24" data-encore-id="icon"><path d="M5.7 3a.7.7 0 00-.7.7v16.6a.7.7 0 00.7.7h2.6a.7.7 0 00.7-.7V3.7a.7.7 0 00-.7-.7H5.7zm10 0a.7.7 0 00-.7.7v16.6a.7.7 0 00.7.7h2.6a.7.7 0 00.7-.7V3.7a.7.7 0 00-.7-.7h-2.6z"></path></svg>';
+  const playingBarIcon = document.querySelector('.playing-bar .play-pause-button') as HTMLButtonElement;
 
   togglePlayPauseIcon(id);
+
   showTrackCurrentTimeAndTimeline(audio);
 
   setTimeout(() => {
     if (!isPlaying) {
       audio.play();
+      isPlaying = true;
+      playingBarIcon.innerHTML = pauseIcon;
     } else {
       audio.pause();
+      isPlaying = false;
+      playingBarIcon.innerHTML = playIcon;
     }
-  }, 200)
+  }, 400)
 
   const currentTrackId = searchedTracks.filter((track) => {
     return track.id === id;
   })[0];
 
   trackIndex = searchedTracks.indexOf(currentTrackId);
-
 }
 
 function togglePlayPauseIcon(id: string) {
   const trackButton = document.getElementById(id)?.querySelector('.player-tool-button') as HTMLButtonElement;
   const playIcon = '<svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="Svg-sc-ytk21e-0 uPxdw"><path d="M3 1.713a.7.7 0 011.05-.607l10.89 6.288a.7.7 0 010 1.212L4.05 14.894A.7.7 0 013 14.288V1.713z"></path></svg>';
   const pauseIcon = '<svg role="img" height="16" width="16" aria-hidden="true" class="Svg-sc-ytk21e-0 uPxdw UIBT7E6ZYMcSDl1KL62g" viewBox="0 0 24 24" data-encore-id="icon"><path d="M5.7 3a.7.7 0 00-.7.7v16.6a.7.7 0 00.7.7h2.6a.7.7 0 00.7-.7V3.7a.7.7 0 00-.7-.7H5.7zm10 0a.7.7 0 00-.7.7v16.6a.7.7 0 00.7.7h2.6a.7.7 0 00.7-.7V3.7a.7.7 0 00-.7-.7h-2.6z"></path></svg>';
-  const playingBarIcon = document.querySelector('.playing-bar .play-pause-button') as HTMLButtonElement;
-  if (!trackButton) return;
-  if (trackButton.innerHTML === playIcon) {
-    switchAllTracksIconsToPlay();
-    trackButton.innerHTML = pauseIcon;
-    playingBarIcon.innerHTML = pauseIcon;
-    isPlaying = false;
+
+  if (trackButton) {
+    if (trackButton.innerHTML === playIcon) {
+      switchAllTracksIconsToPlay();
+      trackButton.innerHTML = pauseIcon;
+    } else {
+      trackButton.innerHTML = playIcon;
+    }
   } else {
-    trackButton.innerHTML = playIcon;
-    playingBarIcon.innerHTML = playIcon;
-    isPlaying = true;
+    document.querySelectorAll('.search-result-song__image .player-tool-button').forEach(button => {
+      button.innerHTML = playIcon;
+    });
   }
 }
 
@@ -194,18 +201,6 @@ function changeVolumeIcon(volume: string) {
   }
 }
 
-export function handlePlayingBarControls() {
-  const audio = document.querySelector('.playback') as HTMLAudioElement;
-  togglePlayPauseIcon(audio.dataset['track_id'] ? audio.dataset['track_id'] : '');
-  if (!isPlaying) {
-    audio.play();
-    isPlaying = true;
-  } else {
-    audio.pause();
-    isPlaying = false;
-  }
-}
-
 export function nextTrack() {
   if (!isShuffled) {
     ++trackIndex;
@@ -217,6 +212,7 @@ export function nextTrack() {
   }
   trackIndex = trackIndex > searchedTracks.length - 1 ? 0 : trackIndex;
   selectAndGetTrack(searchedTracks[trackIndex].id);
+  isPlaying = !isPlaying;
   playPauseTrack(searchedTracks[trackIndex].id);
 }
 
@@ -228,6 +224,7 @@ export function prevTrack() {
     --trackIndex;
     trackIndex = trackIndex < 0 ? searchedTracks.length - 1 : trackIndex;
     selectAndGetTrack(searchedTracks[trackIndex].id);
+    isPlaying = !isPlaying;
     playPauseTrack(searchedTracks[trackIndex].id);
   }
 }
