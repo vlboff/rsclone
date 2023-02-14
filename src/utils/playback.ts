@@ -1,5 +1,5 @@
 import { getTrack } from "../api/getTrack";
-import { searched4Tracks } from "../api/searchItems";
+import { searchedTracks } from "../api/searchItems";
 import { IResponseTrack } from "../components/interfaces/apiInterfaces";
 import { convertTrackTime, getRandomNumber } from "./utils";
 
@@ -18,7 +18,10 @@ export async function selectAndGetTrack(id: string) {
   const selectedTrack = document.getElementById(id) as HTMLElement;
 
   document.querySelectorAll('.track').forEach((track) => track.classList.remove('track_selected'));
-  selectedTrack.classList.add('track_selected');
+  document.querySelectorAll('.tracklist-row').forEach((track) => track.classList.remove('track_selected'));
+  if (selectedTrack) {
+    selectedTrack.classList.add('track_selected');
+  }
 
   if (audio.dataset.track_id === id) return;
   audio.src = data.preview_url;
@@ -43,11 +46,11 @@ export function playPauseTrack(id: string) {
     }
   }, 200)
 
-  const currentTrackId = searched4Tracks.filter((track) => {
+  const currentTrackId = searchedTracks.filter((track) => {
     return track.id === id;
   })[0];
 
-  trackIndex = searched4Tracks.indexOf(currentTrackId);
+  trackIndex = searchedTracks.indexOf(currentTrackId);
 
 }
 
@@ -210,9 +213,9 @@ export function nextTrack() {
       trackIndex = getRandomNumber(0, 4);
     }
   }
-  trackIndex = trackIndex > searched4Tracks.length - 1 ? 0 : trackIndex;
-  selectAndGetTrack(searched4Tracks[trackIndex].id);
-  playPauseTrack(searched4Tracks[trackIndex].id);
+  trackIndex = trackIndex > searchedTracks.length - 1 ? 0 : trackIndex;
+  selectAndGetTrack(searchedTracks[trackIndex].id);
+  playPauseTrack(searchedTracks[trackIndex].id);
 }
 
 export function prevTrack() {
@@ -221,9 +224,9 @@ export function prevTrack() {
     audio.currentTime = 0;
   } else {
     --trackIndex;
-    trackIndex = trackIndex < 0 ? searched4Tracks.length - 1 : trackIndex;
-    selectAndGetTrack(searched4Tracks[trackIndex].id);
-    playPauseTrack(searched4Tracks[trackIndex].id);
+    trackIndex = trackIndex < 0 ? searchedTracks.length - 1 : trackIndex;
+    selectAndGetTrack(searchedTracks[trackIndex].id);
+    playPauseTrack(searchedTracks[trackIndex].id);
   }
 }
 

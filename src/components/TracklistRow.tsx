@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { IconPlayTracklistRow, IconHeart } from "../icons";
+import { playPauseTrack, selectAndGetTrack } from "../utils/playback";
 
 interface ITracklistRow {
   number: number;
@@ -9,6 +10,7 @@ interface ITracklistRow {
   album: string;
   data?: string;
   duration: number;
+  id: string;
 }
 
 interface Imounths {
@@ -23,8 +25,9 @@ function TracklistRow({
   album,
   data,
   duration,
+  id
 }: ITracklistRow) {
-  const [hover, setHover] = useState("");
+  // const [hover, setHover] = useState("");
 
   const getData = (date: string) => {
     let dateAdded = new Date(date);
@@ -57,12 +60,13 @@ function TracklistRow({
 
   return (
     <div
-      className={`tracklist-row ${hover}`}
-      onMouseEnter={() => setHover("tracklist-hover")}
-      onMouseLeave={() => setHover("")}
+      className="tracklist-row"
+      id={id}
+      onClick={() => selectAndGetTrack(id)}
     >
       <div className="track-number">
-        {hover ? <IconPlayTracklistRow fill="#FFFFFF" /> : number}
+        <span className="number">{number}</span>
+        <button className='player-tool-button play-pause-song' onClick={() => {playPauseTrack(id)}}><IconPlayTracklistRow fill="#FFFFFF"/></button>
       </div>
       <div className="track-info">
         <img src={image} alt="album_img" className="track-img" />
@@ -74,10 +78,7 @@ function TracklistRow({
       <div className="track-album">{album}</div>
       {data && <div className="track-data">{getData(data!)}</div>}
       <div className="last-block">
-        <div
-          className={`like-btn`}
-          style={hover ? { visibility: "visible" } : { visibility: "hidden" }}
-        >
+        <div className="like-btn">
           <IconHeart />
         </div>
         <div className="track-time">{getTime(duration)}</div>

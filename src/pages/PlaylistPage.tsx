@@ -125,6 +125,7 @@ function PlaylistPage({
             album={item.track.album.name}
             data={item.added_at}
             duration={item.track.duration_ms}
+            id={item.track.id}
           />
         ))}
       </div>

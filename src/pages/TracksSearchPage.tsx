@@ -37,6 +37,7 @@ function TracksSearchPage({ searchKey }: { searchKey: string }) {
           artist={item.artists[0].name}
           album={item.album.name}
           duration={item.duration_ms}
+          id={item.id}
         />
       ))}
     </div>
