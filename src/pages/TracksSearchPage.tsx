@@ -8,6 +8,7 @@ function TracksSearchPage({ searchKey }: { searchKey: string }) {
 
   const token = window.localStorage.getItem("token");
   const [tracks, setTracks] = useState<IResponseTrack[] | null>(null);
+  const audio = document.querySelector('.playback') as HTMLAudioElement;
 
   useEffect(() => {
     const foo = async () => {
@@ -38,6 +39,7 @@ function TracksSearchPage({ searchKey }: { searchKey: string }) {
           album={item.album.name}
           duration={item.duration_ms}
           id={item.id}
+          isPlaying={(item.id === audio.dataset.track_id) ? true : false}
         />
       ))}
     </div>

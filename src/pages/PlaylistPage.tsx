@@ -18,6 +18,7 @@ function PlaylistPage({
 }: IPlaylistPage) {
   const token = window.localStorage.getItem("token");
   const [playlist, setPlaylists] = useState<IPlaylist | null>(null);
+  const audio = document.querySelector('.playback') as HTMLAudioElement;
 
   useEffect(() => {
     if (playlistID.length > 0) {
@@ -126,6 +127,7 @@ function PlaylistPage({
             data={item.added_at}
             duration={item.track.duration_ms}
             id={item.track.id}
+            isPlaying={(item.track.id === audio.dataset.track_id) ? true : false}
           />
         ))}
       </div>

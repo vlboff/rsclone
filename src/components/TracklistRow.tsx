@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IconPlayTracklistRow, IconHeart, IconButtonPlay } from "../icons";
+import { IconHeart, IconButtonPlay, IconButtonPause } from "../icons";
 import { playPauseTrack, selectAndGetTrack } from "../utils/playback";
 
 interface ITracklistRow {
@@ -11,6 +11,7 @@ interface ITracklistRow {
   data?: string;
   duration: number;
   id: string;
+  isPlaying: boolean
 }
 
 interface Imounths {
@@ -25,9 +26,9 @@ function TracklistRow({
   album,
   data,
   duration,
-  id
+  id,
+  isPlaying
 }: ITracklistRow) {
-  // const [hover, setHover] = useState("");
 
   const getData = (date: string) => {
     let dateAdded = new Date(date);
@@ -58,6 +59,8 @@ function TracklistRow({
     return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
   };
 
+  const audio = document.querySelector('.playback') as HTMLAudioElement;
+
   return (
     <div
       className="tracklist-row tracklist-song"
@@ -67,7 +70,7 @@ function TracklistRow({
       <div className="track-number">
         <span className="number">{number}</span>
         <button className='player-tool-button play-pause-song' onClick={() => { playPauseTrack(id) }}>
-          <IconButtonPlay/>
+          {!isPlaying ? <IconButtonPlay/> : <IconButtonPause/>}
         </button>
       </div>
       <div className="track-info">
