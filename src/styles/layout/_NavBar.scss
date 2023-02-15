@@ -37,6 +37,9 @@ li {
   cursor: pointer;
 
   a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
     color: #fff;
     text-decoration: none;
   }
@@ -55,5 +58,3 @@ li:active {
 .active {
   opacity: 1;
 }
-
-
