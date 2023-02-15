@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { IconHeart, IconButtonPlay, IconButtonPause } from "../icons";
 import { playPauseTrack, selectAndGetTrack } from "../utils/playback";
 

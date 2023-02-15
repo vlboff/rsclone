@@ -1,6 +1,7 @@
 import { getTrack } from "../api/getTrack";
 import { searchedTracks } from "../api/searchItems";
 import { IResponseTrack } from "../components/interfaces/apiInterfaces";
+import { currentPlaylist } from "../pages/PlaylistPage";
 import { convertTrackTime, getRandomNumber } from "./utils";
 
 export let isPlaying = false;
@@ -9,6 +10,7 @@ let isShuffled = false;
 const token = window.localStorage.getItem('token');
 let currentVolume = 1;
 let trackIndex: number;
+let playlist: IResponseTrack[] | undefined;
 
 setTimeout(handleVolume, 100);
 
@@ -40,7 +42,7 @@ export function playPauseTrack(id: string) {
   const playingBarIcon = document.querySelector('.playing-bar .play-pause-button') as HTMLButtonElement;
 
   showTrackCurrentTimeAndTimeline(audio);
-  
+
   setTimeout(() => {
     if (!isPlaying) {
       audio.play();
@@ -55,11 +57,13 @@ export function playPauseTrack(id: string) {
     }
   }, 400)
 
-  const currentTrackId = searchedTracks.filter((track) => {
+  playlist = definePlaylistOrSearchResults();
+  console.log(playlist);
+  const currentTrackId = playlist!.filter((track) => {
     return track.id === id;
   })[0];
-
-  trackIndex = searchedTracks.indexOf(currentTrackId);
+  
+  trackIndex = playlist!.indexOf(currentTrackId);
 }
 
 function togglePlayPauseIcon(id: string) {
@@ -201,19 +205,29 @@ function changeVolumeIcon(volume: string) {
   }
 }
 
+function definePlaylistOrSearchResults() {
+  if (window.location.href.includes('/playlist')) {
+    return currentPlaylist?.tracks.items.map(item => item.track);
+  };
+  if (window.location.href.includes('/search')) {
+    return searchedTracks;
+  }
+}
+
 export function nextTrack() {
   if (!isShuffled) {
     ++trackIndex;
   } else {
     const currentIndex = trackIndex;
     while (currentIndex === trackIndex) {
-      trackIndex = getRandomNumber(0, searchedTracks.length);
+      trackIndex = getRandomNumber(0, playlist!.length);
     }
   }
-  trackIndex = trackIndex > searchedTracks.length - 1 ? 0 : trackIndex;
-  selectAndGetTrack(searchedTracks[trackIndex].id);
+  trackIndex = trackIndex > playlist!.length - 1 ? 0 : trackIndex;
+
+  selectAndGetTrack(playlist![trackIndex].id);
   isPlaying = !isPlaying;
-  playPauseTrack(searchedTracks[trackIndex].id);
+  playPauseTrack(playlist![trackIndex].id);
 }
 
 export function prevTrack() {
@@ -222,10 +236,10 @@ export function prevTrack() {
     audio.currentTime = 0;
   } else {
     --trackIndex;
-    trackIndex = trackIndex < 0 ? searchedTracks.length - 1 : trackIndex;
-    selectAndGetTrack(searchedTracks[trackIndex].id);
+    trackIndex = trackIndex < 0 ? playlist!.length - 1 : trackIndex;
+    selectAndGetTrack(playlist![trackIndex].id);
     isPlaying = !isPlaying;
-    playPauseTrack(searchedTracks[trackIndex].id);
+    playPauseTrack(playlist![trackIndex].id);
   }
 }
 
