@@ -6,6 +6,8 @@ import { convertTrackTime, getRandomNumber } from "./utils";
 import { handleVolume } from "./volume";
 
 const token = window.localStorage.getItem('token');
+const playIcon = '<svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="Svg-sc-ytk21e-0 uPxdw"><path d="M3 1.713a.7.7 0 011.05-.607l10.89 6.288a.7.7 0 010 1.212L4.05 14.894A.7.7 0 013 14.288V1.713z"></path></svg>';
+const pauseIcon = '<svg role="img" height="16" width="16" aria-hidden="true" class="Svg-sc-ytk21e-0 uPxdw UIBT7E6ZYMcSDl1KL62g" viewBox="0 0 24 24" data-encore-id="icon"><path d="M5.7 3a.7.7 0 00-.7.7v16.6a.7.7 0 00.7.7h2.6a.7.7 0 00.7-.7V3.7a.7.7 0 00-.7-.7H5.7zm10 0a.7.7 0 00-.7.7v16.6a.7.7 0 00.7.7h2.6a.7.7 0 00.7-.7V3.7a.7.7 0 00-.7-.7h-2.6z"></path></svg>';
 let isPlaying = false;
 let isShuffled = false;
 let trackIndex: number;
@@ -36,8 +38,6 @@ export async function selectAndGetTrack(id: string) {
 export function playPauseTrack(id: string) {
   if (id === '') return;
   const audio = document.querySelector('.playback') as HTMLAudioElement;
-  const playIcon = '<svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="Svg-sc-ytk21e-0 uPxdw"><path d="M3 1.713a.7.7 0 011.05-.607l10.89 6.288a.7.7 0 010 1.212L4.05 14.894A.7.7 0 013 14.288V1.713z"></path></svg>';
-  const pauseIcon = '<svg role="img" height="16" width="16" aria-hidden="true" class="Svg-sc-ytk21e-0 uPxdw UIBT7E6ZYMcSDl1KL62g" viewBox="0 0 24 24" data-encore-id="icon"><path d="M5.7 3a.7.7 0 00-.7.7v16.6a.7.7 0 00.7.7h2.6a.7.7 0 00.7-.7V3.7a.7.7 0 00-.7-.7H5.7zm10 0a.7.7 0 00-.7.7v16.6a.7.7 0 00.7.7h2.6a.7.7 0 00.7-.7V3.7a.7.7 0 00-.7-.7h-2.6z"></path></svg>';
   const playingBarIcon = document.querySelector('.playing-bar .play-pause-button') as HTMLButtonElement;
 
   showTrackCurrentTimeAndTimeline(audio);
@@ -67,9 +67,6 @@ export function playPauseTrack(id: string) {
 
 function togglePlayPauseIcon(id: string) {
   const trackButton = document.getElementById(id)?.querySelector('.player-tool-button') as HTMLButtonElement;
-  const playIcon = '<svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="Svg-sc-ytk21e-0 uPxdw"><path d="M3 1.713a.7.7 0 011.05-.607l10.89 6.288a.7.7 0 010 1.212L4.05 14.894A.7.7 0 013 14.288V1.713z"></path></svg>';
-  const pauseIcon = '<svg role="img" height="16" width="16" aria-hidden="true" class="Svg-sc-ytk21e-0 uPxdw UIBT7E6ZYMcSDl1KL62g" viewBox="0 0 24 24" data-encore-id="icon"><path d="M5.7 3a.7.7 0 00-.7.7v16.6a.7.7 0 00.7.7h2.6a.7.7 0 00.7-.7V3.7a.7.7 0 00-.7-.7H5.7zm10 0a.7.7 0 00-.7.7v16.6a.7.7 0 00.7.7h2.6a.7.7 0 00.7-.7V3.7a.7.7 0 00-.7-.7h-2.6z"></path></svg>';
-
   if (trackButton) {
     if (trackButton.innerHTML === playIcon) {
       switchAllTracksIconsToPlay();
@@ -85,7 +82,6 @@ function togglePlayPauseIcon(id: string) {
 }
 
 function switchAllTracksIconsToPlay() {
-  const playIcon = '<svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16" data-encore-id="icon" class="Svg-sc-ytk21e-0 uPxdw"><path d="M3 1.713a.7.7 0 011.05-.607l10.89 6.288a.7.7 0 010 1.212L4.05 14.894A.7.7 0 013 14.288V1.713z"></path></svg>';
   const tracks = Array.from(document.querySelectorAll('.tracklist-song'));
   tracks.forEach((track) => {
     const trackButton = track.querySelector('.player-tool-button') as HTMLElement;
@@ -101,8 +97,8 @@ function showCoverArts(data: IResponseTrack) {
 }
 
 function showTrackInfo(data: IResponseTrack) {
-  const trackName = <HTMLElement>document.querySelector('.playing-bar .track-name')?.querySelector('a') as HTMLLinkElement;
-  const trackAuthor = <HTMLElement>document.querySelector('.playing-bar .track-author')?.querySelector('a') as HTMLLinkElement;
+  const trackName = (document.querySelector('.playing-bar .track-name') as HTMLElement).querySelector('a') as unknown as HTMLLinkElement;
+  const trackAuthor = (document.querySelector('.playing-bar .track-author') as HTMLElement).querySelector('a') as unknown as HTMLLinkElement;
   trackName.innerText = data.name;
   trackAuthor.innerText = data.artists[0].name;
 }
@@ -164,7 +160,6 @@ export function nextTrack() {
     }
   }
   trackIndex = trackIndex > playlist!.length - 1 ? 0 : trackIndex;
-
   selectAndGetTrack(playlist![trackIndex].id);
   isPlaying = !isPlaying;
   playPauseTrack(playlist![trackIndex].id);
