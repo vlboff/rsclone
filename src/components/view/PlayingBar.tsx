@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { IconButtonBack, IconButtonNext, IconButtonPlay, IconHeart, IconHide, IconMicrophone, IconQueue, IconRepeat, IconShow, IconShuffle, IconVolumeOn } from '../../icons';
 import { nextTrack, playPauseTrack, prevTrack, repeatTrack, shuffleTracks } from '../../utils/playback';
 
@@ -43,10 +43,10 @@ function PlayingBar() {
             </div>
             <div className="track-info">
               <div className='track-name'>
-                <a href="/"></a>
+                <a href="/">  </a>
               </div>
               <div className='track-author'>
-                <a href="/"></a>
+                <a href="/"> </a>
               </div>
             </div>
             <button className='add-button player-tool-button'>
