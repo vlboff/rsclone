@@ -81,6 +81,7 @@ function SearchPage({
                         setRandomColor={setRandomColor}
                         setAlbumID={setAlbumID}
                         setTrackID={setTrackID}
+                        setArtistID={setArtistID}
                       />
                     }
                   />

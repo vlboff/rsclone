@@ -9,6 +9,7 @@ interface ISearchPage {
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
   setAlbumID: React.Dispatch<React.SetStateAction<string>>;
   setTrackID: React.Dispatch<React.SetStateAction<string>>;
+  setArtistID: React.Dispatch<React.SetStateAction<string>>;
   searchResult: ISearchResult;
 }
 
@@ -17,6 +18,7 @@ function AllSearchPage({
   setRandomColor,
   setAlbumID,
   setTrackID,
+  setArtistID,
   searchResult,
 }: ISearchPage) {
   return (
@@ -33,6 +35,9 @@ function AllSearchPage({
                 : "https://lab.possan.se/thirtify/images/placeholder-playlist.png"
             }
             artistName={searchResult.artists.items[0].name}
+            artistID={searchResult.artists.items[0].id}
+            setArtistID={setArtistID}
+            setRandomColor={setRandomColor}
           />
         </div>
         <div className="search-result-songs__container">
@@ -45,11 +50,13 @@ function AllSearchPage({
                 image={item.album.images[0].url}
                 name={item.name}
                 author={item.artists[0].name}
+                artistID={item.artists[0].id}
                 duration={convertTrackTime(item.duration_ms)}
                 id={item.id}
                 key={item.id + item.album.images[0].url}
                 setTrackID={setTrackID}
                 setRandomColor={setRandomColor}
+                setArtistID={setArtistID}
               />
             );
           })}

@@ -19,6 +19,7 @@ function ArtistBlock({
   setRandomColor,
   circle,
 }: IArtistBlock) {
+  console.log(albums);
   return (
     <div className="mixes-block">
       <div className="mixes-block-header">
@@ -28,7 +29,11 @@ function ArtistBlock({
         {albums?.map((item) => (
           <Mix
             key={`${item.name}${Math.random()}`}
-            image={item.images ? item.images[0].url : ""}
+            image={
+              item.images && item.images.length > 0
+                ? item.images[0].url
+                : "https://lab.possan.se/thirtify/images/placeholder-playlist.png"
+            }
             name={item.name}
             description={item.type}
             artistID={item.id}

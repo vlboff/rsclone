@@ -7,10 +7,12 @@ function SearchResultSong(props: {
   image: string;
   name: string;
   author: string;
+  artistID: string;
   duration: string | number;
   id: string;
   setTrackID: React.Dispatch<React.SetStateAction<string>>;
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
+  setArtistID: React.Dispatch<React.SetStateAction<string>>;
 }) {
   return (
     <div
@@ -48,7 +50,21 @@ function SearchResultSong(props: {
           {/* <a href="/">{props.name}</a> */}
         </div>
         <div className="track-author">
-          <a href="/">{props.author}</a>
+          <Link
+            to={`/artist/${props.artistID}`}
+            className="track-artist"
+            onClick={() => {
+              props.setRandomColor(
+                `#${Math.random().toString(16).slice(3, 9)}`
+              );
+              if (props.artistID && props.setArtistID) {
+                props.setArtistID(props.artistID);
+              }
+            }}
+          >
+            <p>{props.author}</p>
+          </Link>
+          {/* <a href="/">{props.author}</a> */}
         </div>
       </div>
       <button className="player-tool-button">
