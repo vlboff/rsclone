@@ -13,6 +13,7 @@ interface IPageHeader {
   tracks?: number;
   durationTotal?: number;
   duration?: number;
+  circle?: boolean;
 }
 
 function SongAlbumPlaylistPageHeader({
@@ -27,6 +28,7 @@ function SongAlbumPlaylistPageHeader({
   tracks,
   durationTotal,
   duration,
+  circle,
 }: IPageHeader) {
   return (
     <div
@@ -40,6 +42,7 @@ function SongAlbumPlaylistPageHeader({
         alt="cover"
         className="page-header_cover"
         crossOrigin="anonymous"
+        style={circle ? { borderRadius: "50%" } : { borderRadius: "none" }}
       />
       <div className="page-header_item">
         <h2 className="page-header_title">{title}</h2>

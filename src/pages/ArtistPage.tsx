@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getArtist } from "../api/getArtist";
+import { getArtistsAlbums } from "../api/getArtistAlbums";
 import { getArtistsTopTrack } from "../api/getArtistsTopTrack";
+import { getRelatedArtists } from "../api/getRelatedArtists";
+import ArtistsAlbumsBlock from "../components/ArtistsAlbumsBlock";
 import {
+  IArtistsAlbums,
   IArtistsTopTrecks,
   IResponseArtist,
 } from "../components/interfaces/apiInterfaces";
@@ -37,6 +41,12 @@ function ArtistPage({
   const token = window.localStorage.getItem("token");
   const [artist, setArtist] = useState<IResponseArtist | null>(null);
   const [topTracks, setTopTracks] = useState<IArtistsTopTrecks | null>(null);
+  const [albums, setAlbums] = useState<IArtistsAlbums | null>(null);
+  const [relatedArtists, setRelatedArtist] = useState<IResponseArtist[] | null>(
+    null
+  );
+
+  console.log(relatedArtists);
 
   useEffect(() => {
     if (artistID.length > 0) {
@@ -49,13 +59,14 @@ function ArtistPage({
 
   useEffect(() => {
     setHeaderName(artist ? artist.name : "");
-    setArtistID(artist ? artist.id : "");
+    // setArtistID(artist ? artist.id : "");
 
     if (artist) {
       const foo = async () => {
         setTopTracks(await getArtistsTopTrack(token, artist.id));
         // setAlbum(await getAlbum(token, track.album.id));
-        // setAlbums(await getArtistsAlbums(token, track.artists[0].id));
+        setAlbums(await getArtistsAlbums(token, artist.id));
+        setRelatedArtist(await getRelatedArtists(token, artist.id));
       };
       foo();
     }
@@ -78,6 +89,7 @@ function ArtistPage({
         title={"artist"}
         name={artist.name}
         followers={`${followers} followers`}
+        circle={true}
       />
 
       <div className="tracklist-table">
@@ -99,6 +111,16 @@ function ArtistPage({
           />
         ))}
       </div>
+
+      <ArtistsAlbumsBlock
+        albums={albums?.items}
+        all={true}
+        albumID={albumID}
+        setAlbumID={setAlbumID}
+        artistID={artistID}
+        artistName={artist.name}
+        setRandomColor={setRandomColor}
+      />
     </div>
   ) : (
     <div>

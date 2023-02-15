@@ -4,6 +4,7 @@ import Mix from "./Mix";
 
 interface AlbumsBlock {
   albums?: IResponseAlbum[];
+  all?: boolean;
   albumID: string;
   setAlbumID: React.Dispatch<React.SetStateAction<string>>;
   artistID: string;
@@ -13,6 +14,7 @@ interface AlbumsBlock {
 
 function ArtistsAlbumsBlock({
   albums,
+  all,
   albumID,
   setAlbumID,
   artistID,
@@ -23,13 +25,19 @@ function ArtistsAlbumsBlock({
     <div className="mixes-block">
       <div className="mixes-block-header">
         <p className="mixes-block-header-title">
-          {albums
-            ? albums.length > 0
-              ? `${albums[0].album_type[0].toUpperCase()}${albums[0].album_type.slice(
-                  1
-                )}s by ${artistName}`
+          {!all
+            ? albums
+              ? albums.length > 0
+                ? `${albums[0].album_type[0].toUpperCase()}${albums[0].album_type.slice(
+                    1
+                  )}s by ${artistName}`
+                : ""
               : ""
-            : ""}{" "}
+            : albums
+            ? albums.length > 0
+              ? `Discography`
+              : ""
+            : ""}
         </p>
       </div>
       <div className="mixes">
