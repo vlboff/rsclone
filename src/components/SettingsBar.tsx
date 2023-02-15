@@ -75,7 +75,8 @@ function SettingsBar({ headerName }: ISettingsBar) {
     if (
       (scrollHeight > 360 && path === Paths.playlist) ||
       (scrollHeight > 360 && path === Paths.album) ||
-      (scrollHeight > 360 && path === Paths.track)
+      (scrollHeight > 360 && path === Paths.track) ||
+      (scrollHeight > 360 && path === Paths.artist)
     ) {
       setActiveMode("active-bar");
     } else {

@@ -14,6 +14,7 @@ interface IPlaylistPage {
   setHeaderName: React.Dispatch<React.SetStateAction<string>>;
   setTrackID: React.Dispatch<React.SetStateAction<string>>;
   setAlbumID: React.Dispatch<React.SetStateAction<string>>;
+  setArtistID: React.Dispatch<React.SetStateAction<string>>;
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -23,6 +24,7 @@ function PlaylistPage({
   setHeaderName,
   setTrackID,
   setAlbumID,
+  setArtistID,
   setRandomColor,
 }: IPlaylistPage) {
   const token = window.localStorage.getItem("token");
@@ -66,7 +68,7 @@ function PlaylistPage({
       />
 
       <div className="tracklist-table">
-        <PageControlPanel color={randomColor} />
+        <PageControlPanel color={randomColor} setIconHeart={false} />
         <div className="tracklist-table_title">
           <div className="title-number">#</div>
           <div className="title-info">title</div>
@@ -87,6 +89,7 @@ function PlaylistPage({
             setTrackID={setTrackID}
             artist={item.track.artists[0].name}
             artistID={item.track.artists[0].id}
+            setArtistID={setArtistID}
             album={item.track.album.name}
             albumID={item.track.album.id}
             setAlbumID={setAlbumID}

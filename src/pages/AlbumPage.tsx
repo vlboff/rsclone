@@ -54,7 +54,7 @@ function AlbumPage({
         )}
       />
       <div className="tracklist-table">
-        <PageControlPanel color={randomColor} />
+        <PageControlPanel color={randomColor} setIconHeart={false} />
         <div className="tracklist-table_title">
           <div className="title-number">#</div>
           <div className="title-info">title</div>

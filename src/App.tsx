@@ -12,6 +12,7 @@ import { useAppDispatch } from "./store/hook";
 import { addScrollHeight } from "./store/scrollHeightSlice";
 import AlbumPage from "./pages/AlbumPage";
 import TrackPage from "./pages/TrackPage";
+import ArtistPage from "./pages/ArtistPage";
 
 function App() {
   const CLIENT_ID = "1f1f06f4b7fc4796921496a5f9a14d20";
@@ -103,6 +104,7 @@ function App() {
                     setHeaderName={setHeaderName}
                     setTrackID={setTrackID}
                     setAlbumID={setAlbumID}
+                    setArtistID={setArtistID}
                     setRandomColor={setRandomColor}
                   />
                 }
@@ -123,6 +125,22 @@ function App() {
                 path={`/track/${trackID}`}
                 element={
                   <TrackPage
+                    trackID={trackID}
+                    albumID={albumID}
+                    artistID={artistID}
+                    randomColor={randomColor}
+                    setTrackID={setTrackID}
+                    setArtistID={setArtistID}
+                    setAlbumID={setAlbumID}
+                    setHeaderName={setHeaderName}
+                    setRandomColor={setRandomColor}
+                  />
+                }
+              />
+              <Route
+                path={`/artist/${artistID}`}
+                element={
+                  <ArtistPage
                     trackID={trackID}
                     albumID={albumID}
                     artistID={artistID}

@@ -3,9 +3,10 @@ import { IconPlayCard, IconHeart } from "../icons";
 
 interface IPageControlPanel {
   color: string;
+  setIconHeart: boolean;
 }
 
-function PageControlPanel({ color }: IPageControlPanel) {
+function PageControlPanel({ color, setIconHeart }: IPageControlPanel) {
   return (
     <div>
       <div
@@ -18,7 +19,9 @@ function PageControlPanel({ color }: IPageControlPanel) {
         <div className="play-btn">
           <IconPlayCard height={28} width={28} />
         </div>
-        <IconHeart height={32} width={32} className={"like-btn"} />
+        {setIconHeart ? (
+          <IconHeart height={32} width={32} className={"like-btn"} />
+        ) : null}
       </div>
     </div>
   );

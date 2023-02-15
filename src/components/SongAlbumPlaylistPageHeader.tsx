@@ -7,7 +7,7 @@ interface IPageHeader {
   title: string;
   name: string;
   description?: string;
-  owner: string;
+  owner?: string;
   followers?: string | number;
   age?: string;
   tracks?: number;
@@ -46,15 +46,15 @@ function SongAlbumPlaylistPageHeader({
         <h1 className="page-header_name">{name}</h1>
         <p className="page-header_dscr">{description}</p>
         <div className="page-header_info">
-          <span className="page-header_owner">{owner}</span>
-          <span className="drop"></span>
+          <span className="page-header_owner">
+            {owner ? `${owner} • ` : ""}
+          </span>
           <span className="page-header_followers">
             {followers ? followers : ""}
           </span>
           <span className="page-header_age">{age ? age : ""}</span>
-          <span className="drop"></span>
           <span className="page-header_tracks">
-            {tracks ? `${tracks} songs` : ""}
+            {tracks ? ` • ${tracks} songs` : ""}
           </span>
           <span className="page-header_total-duration">
             {durationTotal ? (
