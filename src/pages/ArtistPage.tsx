@@ -3,10 +3,12 @@ import { getArtist } from "../api/getArtist";
 import { getArtistsAlbums } from "../api/getArtistAlbums";
 import { getArtistsTopTrack } from "../api/getArtistsTopTrack";
 import { getRelatedArtists } from "../api/getRelatedArtists";
+import ArtistBlock from "../components/ArtistBlock";
 import ArtistsAlbumsBlock from "../components/ArtistsAlbumsBlock";
 import {
   IArtistsAlbums,
   IArtistsTopTrecks,
+  IRelativeArtists,
   IResponseArtist,
 } from "../components/interfaces/apiInterfaces";
 import PageControlPanel from "../components/PageControlPanel";
@@ -42,11 +44,9 @@ function ArtistPage({
   const [artist, setArtist] = useState<IResponseArtist | null>(null);
   const [topTracks, setTopTracks] = useState<IArtistsTopTrecks | null>(null);
   const [albums, setAlbums] = useState<IArtistsAlbums | null>(null);
-  const [relatedArtists, setRelatedArtist] = useState<IResponseArtist[] | null>(
+  const [relatedArtists, setRelatedArtist] = useState<IRelativeArtists | null>(
     null
   );
-
-  console.log(relatedArtists);
 
   useEffect(() => {
     if (artistID.length > 0) {
@@ -120,6 +120,15 @@ function ArtistPage({
         artistID={artistID}
         artistName={artist.name}
         setRandomColor={setRandomColor}
+      />
+
+      <ArtistBlock
+        albums={relatedArtists?.artists.slice(0, 7)}
+        artistID={artistID}
+        setArtistID={setArtistID}
+        artistName={artist.name}
+        setRandomColor={setRandomColor}
+        circle={true}
       />
     </div>
   ) : (

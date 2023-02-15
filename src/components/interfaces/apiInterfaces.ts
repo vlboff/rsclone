@@ -551,3 +551,7 @@ export interface IArtistsAlbums {
 export interface IArtistsTopTrecks {
   tracks: IResponseTrack[];
 }
+
+export interface IRelativeArtists {
+  artists: IResponseArtist[];
+}

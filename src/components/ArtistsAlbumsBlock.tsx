@@ -27,7 +27,7 @@ function ArtistsAlbumsBlock({
         <p className="mixes-block-header-title">
           {!all
             ? albums
-              ? albums.length > 0
+              ? albums.length > 0 && albums[0].album_type
                 ? `${albums[0].album_type[0].toUpperCase()}${albums[0].album_type.slice(
                     1
                   )}s by ${artistName}`

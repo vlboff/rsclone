@@ -13,6 +13,7 @@ interface IMix {
   albumID?: string;
   setAlbumID?: React.Dispatch<React.SetStateAction<string>>;
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
+  circle?: boolean;
 }
 
 function Mix({
@@ -26,6 +27,7 @@ function Mix({
   albumID,
   setAlbumID,
   setRandomColor,
+  circle,
 }: IMix) {
   const [activeCardMode, setActiveCardMode] = useState("");
 
@@ -89,8 +91,17 @@ function Mix({
         }
       >
         <div className={`card ${activeCardMode}`} onClick={() => setIdValue()}>
-          <div className="card-img">
-            <img src={image} alt="/" />
+          <div
+            className="card-img"
+            style={circle ? { borderRadius: "50%" } : { borderRadius: "none" }}
+          >
+            <img
+              src={image}
+              alt="/"
+              style={
+                circle ? { borderRadius: "50%" } : { borderRadius: "none" }
+              }
+            />
           </div>
           <div className="card-text">
             <div className="card-name">{name}</div>
