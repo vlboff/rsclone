@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { IconPlayTracklistRow, IconHeart } from "../icons";
+import { IconHeart, IconButtonPlay, IconButtonPause } from "../icons";
+import { playPauseTrack, selectAndGetTrack } from "../utils/playback";
 import { getTracklistRowData, convertTrackTime } from "../utils/utils";
+
 
 interface ITracklistRow {
   number: number;
@@ -18,6 +21,12 @@ interface ITracklistRow {
   data?: string;
   duration: number;
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
+  id: string;
+  isPlaying: boolean
+}
+
+interface Imounths {
+  [key: number]: string;
 }
 
 function TracklistRow({
@@ -35,17 +44,53 @@ function TracklistRow({
   data,
   duration,
   setRandomColor,
+  id,
+  isPlaying
 }: ITracklistRow) {
-  const [hover, setHover] = useState("");
+
+  const getData = (date: string) => {
+    let dateAdded = new Date(date);
+    const mounths: Imounths = {
+      0: "Jan",
+      1: "Feb",
+      2: "Mar",
+      3: "Apr",
+      4: "May",
+      5: "Jun",
+      6: "Jul",
+      7: "Aug",
+      8: "Sep",
+      9: "Oct",
+      10: "Nov",
+      11: "Dec",
+    };
+
+    return `${
+      mounths[dateAdded.getMonth()]
+    } ${dateAdded.getDate()}, ${dateAdded.getFullYear()}`;
+  };
+
+  const getTime = (duration: number) => {
+    const seconds = Math.round((duration / 1000) % 60);
+    const minutes = Math.round((duration / (1000 * 60)) % 60);
+
+    return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+  };
+
+  const audio = document.querySelector('.playback') as HTMLAudioElement;
+
 
   return (
     <div
-      className={`tracklist-row ${hover}`}
-      onMouseEnter={() => setHover("tracklist-hover")}
-      onMouseLeave={() => setHover("")}
+      className="tracklist-row tracklist-song"
+      id={id}
+      onClick={() => selectAndGetTrack(id)}
     >
       <div className="track-number">
-        {hover ? <IconPlayTracklistRow fill="#FFFFFF" /> : number}
+        <span className="number">{number}</span>
+        <button className='player-tool-button play-pause-song' onClick={() => { playPauseTrack(id) }}>
+          {!isPlaying ? <IconButtonPlay/> : <IconButtonPause/>}
+        </button>
       </div>
       <div className="track-info">
         {image ? <img src={image} alt="album_img" className="track-img" /> : ""}
@@ -89,11 +134,9 @@ function TracklistRow({
         {album ? album : ""}
       </Link>
       <div className="track-data">{data ? getTracklistRowData(data) : ""}</div>
+
       <div className="last-block">
-        <div
-          className={`like-btn`}
-          style={hover ? { visibility: "visible" } : { visibility: "hidden" }}
-        >
+        <div className="like-btn">
           <IconHeart />
         </div>
         <div className="track-time">{convertTrackTime(duration)}</div>

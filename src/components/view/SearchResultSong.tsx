@@ -15,12 +15,8 @@ function SearchResultSong(props: {
   setArtistID: React.Dispatch<React.SetStateAction<string>>;
 }) {
   return (
-    <div
-      className="search-result-song track"
-      id={props.id}
-      onClick={() => selectAndGetTrack(props.id)}
-    >
-      <div className="search-result-song__image">
+    <div className='search-result-song track tracklist-song' id={props.id} onClick={() => selectAndGetTrack(props.id)}>
+      <div className='search-result-song__image'>
         <img src={props.image} alt="/" />
         <button
           className="player-tool-button play-pause-song"

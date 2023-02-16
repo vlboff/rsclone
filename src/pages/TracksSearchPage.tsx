@@ -19,6 +19,7 @@ function TracksSearchPage({
 }: ITracksSearchPage) {
   const token = window.localStorage.getItem("token");
   const [tracks, setTracks] = useState<IResponseTrack[] | null>(null);
+  const audio = document.querySelector('.playback') as HTMLAudioElement;
 
   useEffect(() => {
     const foo = async () => {
@@ -26,16 +27,15 @@ function TracksSearchPage({
       setTracks(data.tracks.items);
     };
     foo();
-  }, []);
+  }, [searchKey]);
 
   return (
-    <>
+    <div className="tracklist-search-page">
       <div className="tracklist-table_title">
         <div className="title-number">#</div>
         <div className="title-info">title</div>
         <div className="title-album">album</div>
-        <div className="title-date">date added</div>
-        <div className="title-time">
+        <div className="title-time track-time_right">
           <IconClock fill="#b3b3b3" />
         </div>
       </div>
@@ -55,10 +55,12 @@ function TracksSearchPage({
           setAlbumID={setAlbumID}
           duration={item.duration_ms}
           setRandomColor={setRandomColor}
+          id={item.id}
+          isPlaying={(item.id === audio.dataset.track_id) ? true : false}
         />
       ))}
-    </>
-  );
+    </div>
+  )
 }
 
 export default TracksSearchPage;
