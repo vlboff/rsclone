@@ -28,6 +28,7 @@
         position: relative;
         font-size: 1rem;
         color: #FFFFFF;
+        text-decoration: none;
         cursor: pointer;
       }
 
@@ -36,6 +37,8 @@
       }
 
       .track-artist {
+        color: #b3b3b3;
+        text-decoration: none;
         cursor: pointer;
       }
 
@@ -48,6 +51,8 @@
   }
 
   .track-album {
+    color: #FFFFFF;
+    text-decoration: none;
     cursor: pointer;
   }
 

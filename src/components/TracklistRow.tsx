@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { IconPlayTracklistRow, IconHeart } from "../icons";
 import { IconHeart, IconButtonPlay, IconButtonPause } from "../icons";
 import { playPauseTrack, selectAndGetTrack } from "../utils/playback";
+import { getTracklistRowData, convertTrackTime } from "../utils/utils";
+
 
 interface ITracklistRow {
   number: number;
-  image: string;
+  image?: string;
   name: string;
-  artist: string;
-  album: string;
+  trackID: string;
+  setTrackID: React.Dispatch<React.SetStateAction<string>>;
+  artist?: string;
+  artistID?: string;
+  setArtistID?: React.Dispatch<React.SetStateAction<string>>;
+  album?: string;
+  albumID?: string;
+  setAlbumID?: React.Dispatch<React.SetStateAction<string>>;
   data?: string;
   duration: number;
+  setRandomColor: React.Dispatch<React.SetStateAction<string>>;
   id: string;
   isPlaying: boolean
 }
@@ -22,10 +33,17 @@ function TracklistRow({
   number,
   image,
   name,
+  trackID,
+  setTrackID,
   artist,
+  artistID,
+  setArtistID,
   album,
+  albumID,
+  setAlbumID,
   data,
   duration,
+  setRandomColor,
   id,
   isPlaying
 }: ITracklistRow) {
@@ -61,6 +79,7 @@ function TracklistRow({
 
   const audio = document.querySelector('.playback') as HTMLAudioElement;
 
+
   return (
     <div
       className="tracklist-row tracklist-song"
@@ -74,19 +93,53 @@ function TracklistRow({
         </button>
       </div>
       <div className="track-info">
-        <img src={image} alt="album_img" className="track-img" />
+        {image ? <img src={image} alt="album_img" className="track-img" /> : ""}
         <div className="track-dscr">
-          <p className="track-name">{name}</p>
-          <p className="track-artist">{artist}</p>
+          <Link
+            to={`/track/${trackID}`}
+            className="track-name"
+            onClick={() => {
+              setRandomColor(`#${Math.random().toString(16).slice(3, 9)}`);
+              if (trackID && setTrackID) {
+                setTrackID(trackID);
+              }
+            }}
+          >
+            <p>{name}</p>
+          </Link>
+          <Link
+            to={`/artist/${artistID}`}
+            className="track-artist"
+            onClick={() => {
+              setRandomColor(`#${Math.random().toString(16).slice(3, 9)}`);
+              if (artistID && setArtistID) {
+                setArtistID(artistID);
+              }
+            }}
+          >
+            <p>{artist}</p>
+          </Link>
         </div>
       </div>
-      <div className="track-album">{album}</div>
-      {data && <div className="track-data">{getData(data!)}</div>}
+      <Link
+        to={`/album/${albumID}`}
+        className="track-album"
+        onClick={() => {
+          setRandomColor(`#${Math.random().toString(16).slice(3, 9)}`);
+          if (albumID && setAlbumID) {
+            setAlbumID(albumID);
+          }
+        }}
+      >
+        {album ? album : ""}
+      </Link>
+      <div className="track-data">{data ? getTracklistRowData(data) : ""}</div>
+
       <div className="last-block">
         <div className="like-btn">
           <IconHeart />
         </div>
-        <div className="track-time">{getTime(duration)}</div>
+        <div className="track-time">{convertTrackTime(duration)}</div>
       </div>
     </div>
   );

@@ -68,10 +68,10 @@ function NavBar() {
             onClick={() => setActiveMode(item.name)}
             className={item.name === activeMode ? "active" : ""}
           >
-            <>
-              {isActive(item)}
-              <NavLink to={item.name === 'Search' ? 'search' : ''}>{item.name}</NavLink>
-            </>
+            <NavLink to={item.name === 'Search' ? 'search' : ''}>
+              <>{isActive(item)}</>
+              <p>{item.name}</p>
+            </NavLink>
           </li>
         ))}
       </ul>

@@ -4,8 +4,19 @@ import { IResponseTrack } from "../components/interfaces/apiInterfaces";
 import TracklistRow from "../components/TracklistRow";
 import { IconClock } from "../icons";
 
-function TracksSearchPage({ searchKey }: { searchKey: string }) {
+interface ITracksSearchPage {
+  searchKey: string;
+  setTrackID: React.Dispatch<React.SetStateAction<string>>;
+  setAlbumID: React.Dispatch<React.SetStateAction<string>>;
+  setRandomColor: React.Dispatch<React.SetStateAction<string>>;
+}
 
+function TracksSearchPage({
+  searchKey,
+  setTrackID,
+  setAlbumID,
+  setRandomColor,
+}: ITracksSearchPage) {
   const token = window.localStorage.getItem("token");
   const [tracks, setTracks] = useState<IResponseTrack[] | null>(null);
   const audio = document.querySelector('.playback') as HTMLAudioElement;
@@ -35,9 +46,15 @@ function TracksSearchPage({ searchKey }: { searchKey: string }) {
           number={index + 1}
           image={item.album.images[0].url}
           name={item.name}
+          trackID={item.id}
+          setTrackID={setTrackID}
           artist={item.artists[0].name}
+          artistID={item.artists[0].id}
           album={item.album.name}
+          albumID={item.album.id}
+          setAlbumID={setAlbumID}
           duration={item.duration_ms}
+          setRandomColor={setRandomColor}
           id={item.id}
           isPlaying={(item.id === audio.dataset.track_id) ? true : false}
         />

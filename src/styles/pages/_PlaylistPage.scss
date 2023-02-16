@@ -1,128 +1,3 @@
-.playlist-header {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-  height: 280px;
-  background: linear-gradient(transparent 0,rgba(0,0,0,.5) 100%);
-  padding: 0 32px 24px 32px;
-}
-
-.playlist-header_cover {
-  width: 232px;
-  height: 232px;
-}
-
-.playlist-header_item {
-  display: flex;
-  flex-direction: column;
-  padding-left: 24px;
-}
-
-.playlist_title {
-  font-size: .75rem;
-  margin-top: 4px;
-  padding-left: 5px;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: #FFFFFF;
-}
-
-.playlist_name {
-  font-size: 6rem;
-  color: #FFFFFF;
-  margin: 0.08em 0px 0.12em;
-  font-weight: 700;
-}
-
-.playlist_dscr {
-  font-size: .75rem;
-  padding-left: 5px;
-  color: hsla(0,0%,100%,.7);
-}
-
-.playlist_info {
-  display: flex;
-  margin-top: 10px;
-  color: #FFFFFF;
-  font-size: 0.875rem;
-}
-
-.playlist_owner {
-  padding-left: 5px;
-  display: flex;
-  align-items: center;
-}
-
-.playlist_owner::after {
-  content: '';
-  background: #FFFFFF;
-  width: 4px;
-  height: 4px;
-  margin: 0 5px;
-  border-radius: 50%;
-}
-
-.playlist_followers {
-  display: flex;
-  align-items: center;
-}
-
-.playlist_followers::after {
-  content: '';
-  background: #FFFFFF;
-  width: 4px;
-  height: 4px;
-  margin: 0 5px;
-  border-radius: 50%;
-}
-
-.tracklist-table {
-  position: relative;
-  padding: 24px 32px;
-  background: #222222;
-}
-
-.tracklist-gradient {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 128px;
-}
-
-.control-panel{
-  display: flex;
-  align-items: center;
-  height: 104px;
-  padding-bottom: 24px;
-}
-
-.play-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 32px;
-  width: 56px;
-  height: 56px;
-  background: #1ED760;
-  border-radius: 50%;
-  z-index: 1;
-}
-
-.play-btn:hover {
-  transform: scale(1.1);
-  transition: all 0.5s;
-}
-
-.like-btn {
-  fill: #FFFFFF70;
-  z-index: 1;
-}
-
-.like-btn:hover {
-  fill: #FFFFFF;
-}
-
 .tracklist-table_title {
   position: sticky;
   top: 0;
@@ -137,6 +12,7 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   background: #222222;
+  z-index: 1;
 }
 
 .title-number {
@@ -161,4 +37,17 @@
   height: 1px;
   background-color: #b3b3b3;
   opacity: 0.3;
+}
+
+.copyrights {
+  margin-top: 30px;
+  color: #b3b3b3;
+
+  .copyrights-date {
+    font-size: 0.8125rem;
+  }
+
+  .copyrights-text {
+    font-size: 0.6875rem;
+  }
 }

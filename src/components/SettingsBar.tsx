@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { IconSettings, ArrowRightIcon, ArrowLeftIcon, IconPlayCard } from "../icons";
-import SearchBar from './SearchBar';
-import ButtonMenu from './ButtonMenu';
+import {
+  IconSettings,
+  ArrowRightIcon,
+  ArrowLeftIcon,
+  IconPlayCard,
+} from "../icons";
+import SearchBar from "./SearchBar";
+import ButtonMenu from "./ButtonMenu";
 import { useAppSelector } from "../store/hook";
 import { useNavigate } from "react-router-dom";
 
@@ -14,52 +19,48 @@ enum Paths {
   playlist = "playlist",
   artist = "artist",
   album = "album",
+  track = "track",
 }
 
 interface ISettingsBar {
-  playlistName: string;
+  headerName: string;
 }
 
-function SettingsBar({ playlistName }: ISettingsBar) {
-
+function SettingsBar({ headerName }: ISettingsBar) {
   const currentIconColor = iconColor.white;
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [disableLeft, setDisableLeft] = useState(true);
   const [disableRight, setDisableRight] = useState(true);
-  const [counterR, setCounterR] = useState(0)
-  const [counterL, setCounterL] = useState(0)
+  const [counterR, setCounterR] = useState(0);
+  const [counterL, setCounterL] = useState(0);
 
   const goBack = () => {
-    navigate(-1)
-    setCounterL(counterL - 2)
-    setCounterR(counterR + 1)
-  }
+    navigate(-1);
+    setCounterL(counterL - 2);
+    setCounterR(counterR + 1);
+  };
   const goForward = () => {
-    navigate(1)
-    setCounterR(counterR - 1)
-  }
+    navigate(1);
+    setCounterR(counterR - 1);
+  };
 
   useEffect(() => {
-    setCounterL(counterL + 1)
-  }, [window.location.href])
+    setCounterL(counterL + 1);
+  }, [window.location.href]);
 
   useEffect(() => {
-
-    if(counterL > 1) {
-      setDisableLeft(false)
-    } else if(counterL <= 1) {
-      setDisableLeft(true)
-    } 
-    
-    if(counterR > 0) {
-      setDisableRight(false)
-    } else if(counterR <= 0) {
-      setDisableRight(true)
+    if (counterL > 1) {
+      setDisableLeft(false);
+    } else if (counterL <= 1) {
+      setDisableLeft(true);
     }
 
-  }, [counterL, counterR])
-
-
+    if (counterR > 0) {
+      setDisableRight(false);
+    } else if (counterR <= 0) {
+      setDisableRight(true);
+    }
+  }, [counterL, counterR]);
 
   const [activeMode, setActiveMode] = useState<string>("");
 
@@ -71,7 +72,12 @@ function SettingsBar({ playlistName }: ISettingsBar) {
       window.location.pathname.slice(1).indexOf("/") + 1
     );
 
-    if (scrollHeight > 360 && path === Paths.playlist) {
+    if (
+      (scrollHeight > 360 && path === Paths.playlist) ||
+      (scrollHeight > 360 && path === Paths.album) ||
+      (scrollHeight > 360 && path === Paths.track) ||
+      (scrollHeight > 360 && path === Paths.artist)
+    ) {
       setActiveMode("active-bar");
     } else {
       setActiveMode("");
@@ -82,15 +88,26 @@ function SettingsBar({ playlistName }: ISettingsBar) {
     <div className="settings-bar">
       <div className="settings-bar__block-left">
         <div className="settings-bar__arrows">
-
-          <button className='arrow btn-reset' disabled={disableLeft} onClick={() => goBack()}><ArrowLeftIcon className='arrow--left'/></button>
-          <button className='arrow btn-reset' disabled={disableRight} onClick={() => goForward()}><ArrowRightIcon className='arrow--right'/></button>
+          <button
+            className="arrow btn-reset"
+            disabled={disableLeft}
+            onClick={() => goBack()}
+          >
+            <ArrowLeftIcon className="arrow--left" />
+          </button>
+          <button
+            className="arrow btn-reset"
+            disabled={disableRight}
+            onClick={() => goForward()}
+          >
+            <ArrowRightIcon className="arrow--right" />
+          </button>
         </div>
         <div className={`settings-bar__control  ${activeMode}`}>
           <div className="play-btn">
             <IconPlayCard height={24} width={24} />
           </div>
-          <p className="playlist-name">{playlistName}</p>
+          <p className="playlist-name">{headerName}</p>
         </div>
       </div>
       <ButtonMenu />

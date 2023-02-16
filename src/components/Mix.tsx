@@ -6,18 +6,28 @@ interface IMix {
   image: string;
   name: string;
   description: string;
-  id: string;
-  setPlaylistsID: React.Dispatch<React.SetStateAction<string>>;
+  playlistID?: string;
+  setPlaylistsID?: React.Dispatch<React.SetStateAction<string>>;
+  artistID?: string;
+  setArtistID?: React.Dispatch<React.SetStateAction<string>>;
+  albumID?: string;
+  setAlbumID?: React.Dispatch<React.SetStateAction<string>>;
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
+  circle?: boolean;
 }
 
 function Mix({
   image,
   name,
   description,
-  id,
+  playlistID,
   setPlaylistsID,
+  artistID,
+  setArtistID,
+  albumID,
+  setAlbumID,
   setRandomColor,
+  circle,
 }: IMix) {
   const [activeCardMode, setActiveCardMode] = useState("");
 
@@ -39,6 +49,28 @@ function Mix({
     // play
   };
 
+  const setIdValue = () => {
+    if (setPlaylistsID && playlistID) {
+      setPlaylistsID(playlistID);
+    } else if (setArtistID && artistID) {
+      setArtistID(artistID);
+    } else if (setAlbumID && albumID) {
+      setAlbumID(albumID);
+    }
+  };
+
+  const setPath = () => {
+    if (setPlaylistsID && playlistID) {
+      return `/playlist/${playlistID}`;
+    } else if (setArtistID && artistID) {
+      return `/artist/${artistID}`;
+    } else if (setAlbumID && albumID) {
+      return `/album/${albumID}`;
+    } else {
+      return "/";
+    }
+  };
+
   return (
     <div
       className="card-wrapper"
@@ -52,18 +84,24 @@ function Mix({
       </div>
 
       <Link
-        to={`/playlist/${id}`}
+        to={setPath()}
         className={"playlist-link"}
         onClick={() =>
           setRandomColor(`#${Math.random().toString(16).slice(3, 9)}`)
         }
       >
-        <div
-          className={`card ${activeCardMode}`}
-          onClick={() => setPlaylistsID(id)}
-        >
-          <div className="card-img">
-            <img src={image} alt="/" />
+        <div className={`card ${activeCardMode}`} onClick={() => setIdValue()}>
+          <div
+            className="card-img"
+            style={circle ? { borderRadius: "50%" } : { borderRadius: "none" }}
+          >
+            <img
+              src={image}
+              alt="/"
+              style={
+                circle ? { borderRadius: "50%" } : { borderRadius: "none" }
+              }
+            />
           </div>
           <div className="card-text">
             <div className="card-name">{name}</div>
