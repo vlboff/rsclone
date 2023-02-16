@@ -11,6 +11,8 @@ interface IPlaylistPage {
   setPlaylistName: React.Dispatch<React.SetStateAction<string>>;
 }
 
+export let currentPlaylist: IPlaylist;
+
 function PlaylistPage({
   playlistID,
   randomColor,
@@ -18,6 +20,10 @@ function PlaylistPage({
 }: IPlaylistPage) {
   const token = window.localStorage.getItem("token");
   const [playlist, setPlaylists] = useState<IPlaylist | null>(null);
+  const audio = document.querySelector('.playback') as HTMLAudioElement;
+  if (playlist) {
+    currentPlaylist = playlist;
+  }
 
   useEffect(() => {
     if (playlistID.length > 0) {
@@ -125,6 +131,8 @@ function PlaylistPage({
             album={item.track.album.name}
             data={item.added_at}
             duration={item.track.duration_ms}
+            id={item.track.id}
+            isPlaying={(item.track.id === audio.dataset.track_id) ? true : false}
           />
         ))}
       </div>

@@ -1,4 +1,4 @@
-interface IResponseArtist {
+export interface IResponseArtist {
   external_urls: {
     spotify: string;
   };
@@ -22,7 +22,7 @@ interface IResponseArtist {
   uri: string;
 }
 
-interface IResponseAlbum {
+export interface IResponseAlbum {
   album_type: string;
   artists: IResponseArtist[];
   available_markets: string[];

@@ -61,11 +61,45 @@
     display: flex;
     gap: 40px;
   }
-
 }
 
-.tracklist-hover {
-  background: hsla(0,0%,100%,.1);
+.tracklist-row:hover .last-block {
+  .like-btn {
+    display: block;
+  }
+}
+
+.tracklist-row .last-block {
+  .like-btn {
+    display: none;
+  }
+}
+
+.tracklist-row .track-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .number {
+    display: inline;
+  }
+  button {
+    display: none;
+  }
+}
+
+.tracklist-row:hover .track-number {
+  .number {
+    display: none;
+  }
+  button {
+    display: block;
+    padding-left: 20px;
+  }
+}
+
+.tracklist-row:hover {
+  background: #282828;
   border-radius: 4px;
 }
 
@@ -73,7 +107,6 @@
   background: hsla(0,0%,100%,.3);
   border-radius: 4px;
 }
-
 
 
 

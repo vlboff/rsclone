@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { IconPlayTracklistRow, IconHeart } from "../icons";
+import React from "react";
+import { IconHeart, IconButtonPlay, IconButtonPause } from "../icons";
+import { playPauseTrack, selectAndGetTrack } from "../utils/playback";
 
 interface ITracklistRow {
   number: number;
@@ -9,6 +10,8 @@ interface ITracklistRow {
   album: string;
   data?: string;
   duration: number;
+  id: string;
+  isPlaying: boolean
 }
 
 interface Imounths {
@@ -23,8 +26,9 @@ function TracklistRow({
   album,
   data,
   duration,
+  id,
+  isPlaying
 }: ITracklistRow) {
-  const [hover, setHover] = useState("");
 
   const getData = (date: string) => {
     let dateAdded = new Date(date);
@@ -55,14 +59,19 @@ function TracklistRow({
     return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
   };
 
+  const audio = document.querySelector('.playback') as HTMLAudioElement;
+
   return (
     <div
-      className={`tracklist-row ${hover}`}
-      onMouseEnter={() => setHover("tracklist-hover")}
-      onMouseLeave={() => setHover("")}
+      className="tracklist-row tracklist-song"
+      id={id}
+      onClick={() => selectAndGetTrack(id)}
     >
       <div className="track-number">
-        {hover ? <IconPlayTracklistRow fill="#FFFFFF" /> : number}
+        <span className="number">{number}</span>
+        <button className='player-tool-button play-pause-song' onClick={() => { playPauseTrack(id) }}>
+          {!isPlaying ? <IconButtonPlay/> : <IconButtonPause/>}
+        </button>
       </div>
       <div className="track-info">
         <img src={image} alt="album_img" className="track-img" />
@@ -72,12 +81,9 @@ function TracklistRow({
         </div>
       </div>
       <div className="track-album">{album}</div>
-      <div className="track-data">{getData(data!)}</div>
+      {data && <div className="track-data">{getData(data!)}</div>}
       <div className="last-block">
-        <div
-          className={`like-btn`}
-          style={hover ? { visibility: "visible" } : { visibility: "hidden" }}
-        >
+        <div className="like-btn">
           <IconHeart />
         </div>
         <div className="track-time">{getTime(duration)}</div>

@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { ICategory, ISearchResult } from '../components/interfaces/apiInterfaces';
-import Mix from '../components/Mix';
-import SearchResultArtist from '../components/view/SearchResultArtist';
-import SearchResultSong from '../components/view/SearchResultSong';
 import { SearchIcon } from '../icons'
 import { searchItems } from '../api/searchItems';
 import { getCategories } from '../api/getCategories';
 import CategoryCard from '../components/CategoryCard';
-import { convertTrackTime } from '../utils/utils';
-import { Link, Route, Router, Routes } from 'react-router-dom';
+import { Link, redirect, Route, Routes, useNavigate } from 'react-router-dom';
 import TracksSearchPage from './TracksSearchPage';
 import AllSearchPage from './AllSearchPage';
-
-
+import ArtistsSearchPage from './ArtistsSearchPage';
+import AlbumsSearchPage from './AlbumsSearchPage';
 
 function SearchPage() {
   const token = window.localStorage.getItem("token");
@@ -29,6 +25,20 @@ function SearchPage() {
     foo();
   }, []);
 
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    if (searchKey === '') navigate('/search');
+  }, [searchKey])
+
+  function toggleTagClass(e: React.MouseEvent<Element, MouseEvent>) {
+    const links = Array.from(document.querySelectorAll('.search-tag'));
+    links.forEach(link => {
+      link.classList.remove('search-tag_active');
+    });
+    (e.target as HTMLLinkElement).classList.add('search-tag_active');
+  }
+
   function renderSearchResult() {
 
     return (
@@ -42,19 +52,21 @@ function SearchPage() {
               </div>
               : <>
                 <div className="search-tags">
-                  <Link to="" className='search-tag search-tag_active'>All</Link>
-                  <Link to={`${searchKey}/artists`} className='search-tag'>Artists</Link>
-                  <Link to={`${searchKey}/tracks`} className='search-tag'>Songs</Link>
-                  <Link to={`${searchKey}/albums`} className='search-tag'>Albums</Link>
+                  <Link to="" className='search-tag search-tag_active' onClick={(e) => toggleTagClass(e)}>All</Link>
+                  <Link to={`${searchKey}/artists`} className='search-tag' onClick={(e) => toggleTagClass(e)}>Artists</Link>
+                  <Link to={`${searchKey}/tracks`} className='search-tag' onClick={(e) => toggleTagClass(e)}>Songs</Link>
+                  <Link to={`${searchKey}/albums`} className='search-tag' onClick={(e) => toggleTagClass(e)}>Albums</Link>
                 </div>
                 <Routes>
-                <Route path="" element={ <AllSearchPage searchResult={searchResult} setPlaylistsID={setPlaylistsID}
-                    setRandomColor={setRandomColor}/>} />
-                  <Route path=":searchKey/artists" element={<h2>Artists</h2>} />
+                  <Route path="" element={<AllSearchPage searchResult={searchResult} setPlaylistsID={setPlaylistsID}
+                    setRandomColor={setRandomColor} />} />
+                  <Route path=":searchKey/artists" element={<ArtistsSearchPage searchKey={searchKey} setPlaylistsID={setPlaylistsID}
+                    setRandomColor={setRandomColor} />} />
                   <Route path=":searchKey/tracks" element={<TracksSearchPage searchKey={searchKey} />} />
-                  <Route path=":searchKey/albums" element={<h2>Albums</h2>} />
+                  <Route path=":searchKey/albums" element={<AlbumsSearchPage searchKey={searchKey} setPlaylistsID={setPlaylistsID}
+                    setRandomColor={setRandomColor} />} />
                 </Routes>
-                
+
               </>
             }
           </>
@@ -72,7 +84,8 @@ function SearchPage() {
             className="search__input"
             type="text"
             placeholder="What do you want to listen to?"
-            onChange={(e) => setSearchKey(e.target.value)}
+            onChange={(e) => {setSearchKey(e.target.value)}
+            }
             onKeyUp={async () =>
               setSearchResult(await searchItems(searchKey, token))
             }

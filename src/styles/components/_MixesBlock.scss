@@ -12,12 +12,7 @@
 .mixes-block-header-title {
   font-size: 24px;
   color: #FFFFFF;
-  cursor: pointer;
-}
-
-.mixes-block-header-title:hover {
-  text-decoration: underline;
-  transition: all 0.5s;
+  user-select: none;
 }
 
 .mixes-block-header-show {

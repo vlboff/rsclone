@@ -4,7 +4,7 @@ import { playPauseTrack, selectAndGetTrack } from '../../utils/playback';
 
 function SearchResultSong(props: { image: string; name: string; author: string; duration: string | number; id: string }) {
   return (
-    <div className='search-result-song track' id={props.id} onClick={() => selectAndGetTrack(props.id)}>
+    <div className='search-result-song track tracklist-song' id={props.id} onClick={() => selectAndGetTrack(props.id)}>
       <div className='search-result-song__image'>
         <img src={props.image} alt="/" />
         <button className='player-tool-button play-pause-song' onClick={() => {playPauseTrack(props.id)}}>
