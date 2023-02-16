@@ -17,7 +17,7 @@ function HomePage({ setPlaylistsID, setRandomColor }: IHomePage) {
       setCategories(await getCategories(token));
     }
     foo();
-  }, []);
+  }, [token]);
 
   const getTenRandomCategories = () => {
     let arr = [...categories];

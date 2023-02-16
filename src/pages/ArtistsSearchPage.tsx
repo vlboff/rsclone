@@ -20,16 +20,21 @@ function ArtistsSearchPage({ setPlaylistsID, setRandomColor, searchKey }: ISearc
       setArtists(data.artists.items);
     };
     foo();
-  }, [searchKey]);
+  }, [searchKey, token]);
 
   return (
     <div className="mixes mixes-search">
-          {artists && artists.map((artist) => (
-            <Mix key={artist.id} image={artist.images?.length ? artist.images[0].url : 'https://lab.possan.se/thirtify/images/placeholder-playlist.png'} name={artist.name} description='Artist' id={artist.id}
-              setPlaylistsID={setPlaylistsID}
-              setRandomColor={setRandomColor} />
-          ))}
-        </div>
+      {artists && artists.map((artist) => (
+        <Mix
+          key={artist.id}
+          image={artist.images?.length ? artist.images[0].url : 'https://lab.possan.se/thirtify/images/placeholder-playlist.png'}
+          name={artist.name}
+          description='Artist'
+          setPlaylistsID={setPlaylistsID}
+          setRandomColor={setRandomColor}
+        />
+      ))}
+    </div>
   )
 }
 

@@ -24,6 +24,7 @@ function AlbumPage({
 }: IAlbumPage) {
   const token = window.localStorage.getItem("token");
   const [album, setAlbum] = useState<IAlbum | null>(null);
+  const audio = document.querySelector('.playback') as HTMLAudioElement;
 
   useEffect(() => {
     if (albumID.length > 0) {
@@ -76,6 +77,7 @@ function AlbumPage({
             artistID={item.artists[0].id}
             duration={item.duration_ms}
             setRandomColor={setRandomColor}
+            isPlaying={(item.id === audio.dataset.track_id) ? true : false}
           />
         ))}
         <div className="copyrights">

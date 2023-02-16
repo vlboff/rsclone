@@ -20,13 +20,12 @@ function AlbumsSearchPage({ setPlaylistsID, setRandomColor, searchKey }: ISearch
       setAlbums(data.albums.items);
     };
     foo();
-  }, [searchKey]);
+  }, [searchKey, token]);
   
   return (
     <div className="mixes">
       {albums && albums.map((album) => (
-        <Mix key={album.id} image={album.images?.length ? album.images[0].url : 'https://lab.possan.se/thirtify/images/placeholder-playlist.png'} name={album.artists[0].name} description={`${album.release_date.split('-')[0]} • ${album.name}`} id={album.id}
-          setPlaylistsID={setPlaylistsID}
+        <Mix key={album.id} image={album.images?.length ? album.images[0].url : 'https://lab.possan.se/thirtify/images/placeholder-playlist.png'} name={album.artists[0].name} description={`${album.release_date.split('-')[0]} • ${album.name}`} setPlaylistsID={setPlaylistsID}
           setRandomColor={setRandomColor} />
       ))}
     </div>

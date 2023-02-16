@@ -1,19 +1,12 @@
 import React, { useEffect, useState } from "react";
 import {
-  IconSettings,
   ArrowRightIcon,
   ArrowLeftIcon,
   IconPlayCard,
 } from "../icons";
-import SearchBar from "./SearchBar";
 import ButtonMenu from "./ButtonMenu";
 import { useAppSelector } from "../store/hook";
 import { useNavigate } from "react-router-dom";
-
-enum iconColor {
-  white = "white",
-  black = "black",
-}
 
 enum Paths {
   playlist = "playlist",
@@ -27,7 +20,6 @@ interface ISettingsBar {
 }
 
 function SettingsBar({ headerName }: ISettingsBar) {
-  const currentIconColor = iconColor.white;
   const navigate = useNavigate();
   const [disableLeft, setDisableLeft] = useState(true);
   const [disableRight, setDisableRight] = useState(true);

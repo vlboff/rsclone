@@ -8,7 +8,7 @@ import {
 import { getTrack } from "../api/getTrack";
 import SongAlbumPlaylistPageHeader from "../components/SongAlbumPlaylistPageHeader";
 import { IconPreloader } from "../icons";
-import { convertTrackTime, getCopyrightsDate } from "../utils/utils";
+import { getCopyrightsDate } from "../utils/utils";
 import PageControlPanel from "../components/PageControlPanel";
 import { getArtistsTopTrack } from "../api/getArtistsTopTrack";
 import TracklistRow from "../components/TracklistRow";
@@ -44,6 +44,7 @@ function TrackPage({
   const [topTracks, setTopTracks] = useState<IArtistsTopTrecks | null>(null);
   const [albums, setAlbums] = useState<IArtistsAlbums | null>(null);
   const [album, setAlbum] = useState<IAlbum | null>(null);
+  const audio = document.querySelector('.playback') as HTMLAudioElement;
 
   useEffect(() => {
     setHeaderName(track ? track.name : "");
@@ -110,6 +111,7 @@ function TrackPage({
             setTrackID={setTrackID}
             duration={item.duration_ms}
             setRandomColor={setRandomColor}
+            isPlaying={(item.id === audio.dataset.track_id) ? true : false}
           />
         ))}
       </div>
@@ -156,6 +158,7 @@ function TrackPage({
             artistID={item.artists[0].id}
             duration={item.duration_ms}
             setRandomColor={setRandomColor}
+            isPlaying={(item.id === audio.dataset.track_id) ? true : false}
           />
         ))}
 

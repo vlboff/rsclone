@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { ICategory, ISearchResult } from '../components/interfaces/apiInterfaces';
-import Mix from "../components/Mix";
-import SearchResultArtist from "../components/view/SearchResultArtist";
-import SearchResultSong from "../components/view/SearchResultSong";
 import { SearchIcon } from '../icons'
 import { searchItems } from '../api/searchItems';
 import { getCategories } from '../api/getCategories';
 import CategoryCard from '../components/CategoryCard';
-import { convertTrackTime } from "../utils/utils";
-import { Link, redirect, Route, Routes, useNavigate } from 'react-router-dom';
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import TracksSearchPage from './TracksSearchPage';
 import AllSearchPage from './AllSearchPage';
 import ArtistsSearchPage from './ArtistsSearchPage';
@@ -39,13 +35,13 @@ function SearchPage({
       setCategories(await getCategories(token));
     }
     foo();
-  }, []);
+  }, [token]);
 
   const navigate = useNavigate();
   
   useEffect(() => {
     if (searchKey === '') navigate('/search');
-  }, [searchKey])
+  }, [searchKey, navigate])
 
   function toggleTagClass(e: React.MouseEvent<Element, MouseEvent>) {
     const links = Array.from(document.querySelectorAll('.search-tag'));

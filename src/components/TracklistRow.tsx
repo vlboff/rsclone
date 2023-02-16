@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { IconPlayTracklistRow, IconHeart } from "../icons";
 import { IconHeart, IconButtonPlay, IconButtonPause } from "../icons";
 import { playPauseTrack, selectAndGetTrack } from "../utils/playback";
 import { getTracklistRowData, convertTrackTime } from "../utils/utils";
@@ -21,12 +20,7 @@ interface ITracklistRow {
   data?: string;
   duration: number;
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
-  id: string;
   isPlaying: boolean
-}
-
-interface Imounths {
-  [key: number]: string;
 }
 
 function TracklistRow({
@@ -44,51 +38,18 @@ function TracklistRow({
   data,
   duration,
   setRandomColor,
-  id,
   isPlaying
 }: ITracklistRow) {
-
-  const getData = (date: string) => {
-    let dateAdded = new Date(date);
-    const mounths: Imounths = {
-      0: "Jan",
-      1: "Feb",
-      2: "Mar",
-      3: "Apr",
-      4: "May",
-      5: "Jun",
-      6: "Jul",
-      7: "Aug",
-      8: "Sep",
-      9: "Oct",
-      10: "Nov",
-      11: "Dec",
-    };
-
-    return `${
-      mounths[dateAdded.getMonth()]
-    } ${dateAdded.getDate()}, ${dateAdded.getFullYear()}`;
-  };
-
-  const getTime = (duration: number) => {
-    const seconds = Math.round((duration / 1000) % 60);
-    const minutes = Math.round((duration / (1000 * 60)) % 60);
-
-    return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
-  };
-
-  const audio = document.querySelector('.playback') as HTMLAudioElement;
-
 
   return (
     <div
       className="tracklist-row tracklist-song"
-      id={id}
-      onClick={() => selectAndGetTrack(id)}
+      id={trackID}
+      onClick={() => selectAndGetTrack(trackID)}
     >
       <div className="track-number">
         <span className="number">{number}</span>
-        <button className='player-tool-button play-pause-song' onClick={() => { playPauseTrack(id) }}>
+        <button className='player-tool-button play-pause-song' onClick={() => { playPauseTrack(trackID) }}>
           {!isPlaying ? <IconButtonPlay/> : <IconButtonPause/>}
         </button>
       </div>

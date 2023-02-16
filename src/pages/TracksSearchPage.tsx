@@ -27,7 +27,7 @@ function TracksSearchPage({
       setTracks(data.tracks.items);
     };
     foo();
-  }, [searchKey]);
+  }, [searchKey, token]);
 
   return (
     <div className="tracklist-search-page">
@@ -55,7 +55,6 @@ function TracksSearchPage({
           setAlbumID={setAlbumID}
           duration={item.duration_ms}
           setRandomColor={setRandomColor}
-          id={item.id}
           isPlaying={(item.id === audio.dataset.track_id) ? true : false}
         />
       ))}

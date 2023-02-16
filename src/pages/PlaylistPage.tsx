@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getPlaylists } from "../api/getPlaylist";
 import { IPlaylist } from "../components/interfaces/apiInterfaces";
-import extractColors from "extract-colors";
 import { IconClock, IconPreloader } from "../icons";
 import TracklistRow from "../components/TracklistRow";
 import { getSeparateByCommas } from "../utils/utils";
@@ -48,12 +47,6 @@ function PlaylistPage({
   useEffect(() => {
     setHeaderName(playlist ? playlist.name : "");
   }, [playlist]);
-
-  // extractColors(
-  //   document.querySelector(".playlist-header_cover") as HTMLImageElement
-  // )
-  //   .then(console.log)
-  //   .catch(console.error);
 
   const followers =
     String(playlist?.followers.total).length > 3
@@ -102,7 +95,6 @@ function PlaylistPage({
             data={item.added_at}
             duration={item.track.duration_ms}
             setRandomColor={setRandomColor}
-            id={item.track.id}
             isPlaying={(item.track.id === audio.dataset.track_id) ? true : false}
           />
         ))}

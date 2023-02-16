@@ -47,6 +47,7 @@ function ArtistPage({
   const [relatedArtists, setRelatedArtist] = useState<IRelativeArtists | null>(
     null
   );
+  const audio = document.querySelector('.playback') as HTMLAudioElement;
 
   useEffect(() => {
     if (artistID.length > 0) {
@@ -55,7 +56,7 @@ function ArtistPage({
       };
       foo();
     }
-  }, [artistID]);
+  }, [artistID, token]);
 
   useEffect(() => {
     setHeaderName(artist ? artist.name : "");
@@ -70,7 +71,7 @@ function ArtistPage({
       };
       foo();
     }
-  }, [artist]);
+  }, [artist, setHeaderName, token]);
 
   const followers =
     String(artist?.followers ? artist.followers.total : "").length > 3
@@ -108,6 +109,7 @@ function ArtistPage({
             setTrackID={setTrackID}
             duration={item.duration_ms}
             setRandomColor={setRandomColor}
+            isPlaying={(item.id === audio.dataset.track_id) ? true : false}
           />
         ))}
       </div>

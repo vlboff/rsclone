@@ -24,7 +24,7 @@ function MixesBlock({
       setPlaylists(await getCategoryPlaylists(token, categoryID));
     }
     foo();
-  }, []);
+  }, [token, categoryID]);
 
   return (
     <div className="mixes-block">
