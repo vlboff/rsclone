@@ -1,7 +1,9 @@
 import { getTrack } from "../api/getTrack";
 import { searchedTracks } from "../api/searchItems";
 import { IResponseTrack } from "../components/interfaces/apiInterfaces";
+import { currentArtistTracks } from "../pages/ArtistPage";
 import { currentPlaylist } from "../pages/PlaylistPage";
+import { currentTopTracks } from "../pages/TrackPage";
 import { convertTrackTime, getRandomNumber } from "./utils";
 import { handleVolume } from "./volume";
 
@@ -147,6 +149,12 @@ function definePlaylistOrSearchResults() {
   };
   if (window.location.href.includes('/search')) {
     return searchedTracks;
+  };
+  if (window.location.href.includes('/track')) {
+    return currentTopTracks.tracks;
+  };
+  if (window.location.href.includes('/artist')) {
+    return currentArtistTracks.tracks;
   }
 }
 

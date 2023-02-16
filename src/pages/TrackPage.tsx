@@ -28,6 +28,8 @@ interface ITrackPage {
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
+export let currentTopTracks: IArtistsTopTrecks;
+
 function TrackPage({
   trackID,
   albumID,
@@ -45,7 +47,9 @@ function TrackPage({
   const [albums, setAlbums] = useState<IArtistsAlbums | null>(null);
   const [album, setAlbum] = useState<IAlbum | null>(null);
   const audio = document.querySelector('.playback') as HTMLAudioElement;
-
+  if (topTracks) {
+    currentTopTracks = topTracks
+  }
   useEffect(() => {
     setHeaderName(track ? track.name : "");
     setArtistID(track ? track.album.artists[0].id : "");

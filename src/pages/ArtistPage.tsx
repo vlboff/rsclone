@@ -29,6 +29,8 @@ interface IArtistPage {
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
+export let currentArtistTracks: IArtistsTopTrecks;
+
 function ArtistPage({
   trackID,
   albumID,
@@ -47,6 +49,9 @@ function ArtistPage({
   const [relatedArtists, setRelatedArtist] = useState<IRelativeArtists | null>(
     null
   );
+  if (topTracks) {
+    currentArtistTracks = topTracks;
+  }
   const audio = document.querySelector('.playback') as HTMLAudioElement;
 
   useEffect(() => {
