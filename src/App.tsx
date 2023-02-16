@@ -155,7 +155,7 @@ function App() {
               />
             </Routes>
           </div>
-          <PlayingBar />
+          <PlayingBar setTrackID={setTrackID} setArtistID={setArtistID} setRandomColor={setRandomColor}/>
         </main>
       )}
     </Router>

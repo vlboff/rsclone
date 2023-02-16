@@ -3,7 +3,13 @@ import { Link } from 'react-router-dom';
 import { IconButtonBack, IconButtonNext, IconButtonPlay, IconHeart, IconHide, IconMicrophone, IconQueue, IconRepeat, IconShow, IconShuffle, IconVolumeOn } from '../../icons';
 import { nextTrack, playPauseTrack, prevTrack, repeatTrack, shuffleTracks } from '../../utils/playback';
 
-function PlayingBar() {
+interface IPlayingBar {
+  setTrackID: React.Dispatch<React.SetStateAction<string>>;
+  setArtistID: React.Dispatch<React.SetStateAction<string>>;
+  setRandomColor: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function PlayingBar({setTrackID, setArtistID, setRandomColor}: IPlayingBar) {
   function expandCoverArt() {
     (document.querySelector('.playing-widget') as HTMLElement).style.transform = 'translate(-72px)';
     (document.querySelector('.cover-art_expanded') as HTMLElement).style.transform = 'translateY(-100%)';
@@ -13,6 +19,27 @@ function PlayingBar() {
     (document.querySelector('.cover-art_expanded') as HTMLElement).style.transform = 'translateY(0)';
     (document.querySelector('.playing-widget') as HTMLElement).style.transform = 'translate(0px)';
   }
+
+  const trackName = (document.querySelector('.playing-bar .track-name') as HTMLElement).querySelector('a') as unknown as HTMLLinkElement;
+  const trackAuthor = (document.querySelector('.playing-bar .track-author') as HTMLElement).querySelector('a') as unknown as HTMLLinkElement;
+
+  const trackAuthorLink = (document.querySelector('.playing-bar .track-author') as HTMLElement).querySelector('.track-author_link') as HTMLLinkElement;
+  const trackNameLink = (document.querySelector('.playing-bar .track-name') as HTMLElement).querySelector('.track-name_link') as HTMLLinkElement;
+
+useEffect(() => {
+  if (trackName.textContent) {
+    if (trackName.textContent.length > 0) {
+      setTrackID(trackNameLink.href.slice(trackNameLink.href.lastIndexOf('/') + 1));
+    }
+  }
+
+  if (trackAuthor.textContent) {
+    if (trackAuthor.textContent.length > 0) {
+      setArtistID(trackAuthorLink.href.slice(trackAuthorLink.href.lastIndexOf('/') + 1));
+    }
+  }
+}, [trackName, trackAuthor])
+
 
   return (
     <div className='playing-bar__container'>
@@ -42,11 +69,15 @@ function PlayingBar() {
               </div>
             </div>
             <div className="track-info">
-              <div className='track-name'>
-                <Link className="track-name_link" to={''}></Link>
+              <div className='track-name' onClick={() => setTrackID(trackNameLink.href.slice(trackNameLink.href.lastIndexOf('/') + 1))}>
+                <Link className="track-name_link" to={`/track/${trackNameLink.href.slice(trackNameLink.href.lastIndexOf('/') + 1)}`} onClick={() => {
+                  setRandomColor(`#${Math.random().toString(16).slice(3, 9)}`);
+                }}></Link>
               </div>
-              <div className='track-author'>
-                <Link className="track-author_link" to={''}></Link>
+              <div className='track-author' onClick={() => setArtistID(trackAuthorLink.href.slice(trackAuthorLink.href.lastIndexOf('/') + 1))}>
+                <Link className="track-author_link" to={`/artist/${trackAuthorLink.href.slice(trackAuthorLink.href.lastIndexOf('/') + 1)}`} onClick={() => {
+                  setRandomColor(`#${Math.random().toString(16).slice(3, 9)}`);
+                }}></Link>
               </div>
             </div>
             <button className='add-button player-tool-button'>
@@ -65,7 +96,9 @@ function PlayingBar() {
               </div>
               <button className='play-pause-button' onClick={() => {
                 const id = (document.querySelector('.playback') as HTMLAudioElement).dataset.track_id!;
-                playPauseTrack(id)
+                playPauseTrack(id);
+                setTrackID(trackNameLink.href.slice(trackNameLink.href.lastIndexOf('/') + 1));
+                setArtistID(trackAuthorLink.href.slice(trackAuthorLink.href.lastIndexOf('/') + 1));
               }}>
                 <IconButtonPlay />
               </button>
