@@ -101,8 +101,12 @@ function showCoverArts(data: IResponseTrack) {
 function showTrackInfo(data: IResponseTrack) {
   const trackName = (document.querySelector('.playing-bar .track-name') as HTMLElement).querySelector('a') as unknown as HTMLLinkElement;
   const trackAuthor = (document.querySelector('.playing-bar .track-author') as HTMLElement).querySelector('a') as unknown as HTMLLinkElement;
+  const trackNameLink = (document.querySelector('.playing-bar .track-name') as HTMLElement).querySelector('.track-name_link') as HTMLLinkElement;
+  const trackAuthorLink = (document.querySelector('.playing-bar .track-author') as HTMLElement).querySelector('.track-author_link') as HTMLLinkElement;
   trackName.innerText = data.name;
   trackAuthor.innerText = data.artists[0].name;
+  trackNameLink.href = `/track/${data.id}`;
+  trackAuthorLink.href = `/artist/${data.artists[0].id}`;
 }
 
 function showTrackDuration(audio: HTMLAudioElement) {
