@@ -1,25 +1,26 @@
 import React, { useState } from 'react'
 import LikedSongs from '../components/LikedSongs'
 import { useEffect } from 'react';
-import { getUserId } from '../api/getUserId';
 import { getUserPlaylist } from '../api/getUserPlaylist';
 import Mix from '../components/Mix';
 import { IPlaylistsItems } from '../components/interfaces/apiInterfaces';
+import { getUserId } from '../api/getUserId';
 
 interface ILibraryPage {
   setPlaylistsID: React.Dispatch<React.SetStateAction<string>>;
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
+  myPlaylists: [];
+  userId: string;
+  setMyPlaylists: React.Dispatch<React.SetStateAction<[]>>;
+  setUserId: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function Library({setPlaylistsID, setRandomColor}: ILibraryPage) {
+function Library({setPlaylistsID, setRandomColor, myPlaylists, userId, setMyPlaylists, setUserId}: ILibraryPage) {
   const token = window.localStorage.getItem('token');
-  const [userId, setUserId] = useState('');
-  const [myPlaylists, setMyPlaylists] = useState([]);
 
   useEffect(() => {
     async function getUser() {
-      const id = await getUserId(token)
-      setUserId(id)
+      let id = await getUserId(token)
       setMyPlaylists(await getUserPlaylist(token, id))
     }
     getUser();
@@ -37,15 +38,20 @@ function Library({setPlaylistsID, setRandomColor}: ILibraryPage) {
                 />
                   {myPlaylists.length > 0 
                   ? myPlaylists.map((playlist: IPlaylistsItems) => (
-                    <Mix 
+                    <div 
                       key={`${playlist.name}${Math.random()}`}
-                      image={playlist.images.length > 0 ? playlist.images[0].url : ''}
-                      name={playlist.name}
-                      description={playlist.description}
-                      id={playlist.id}
-                      setPlaylistsID={setPlaylistsID}
-                      setRandomColor={setRandomColor}
-                    />
+                    >
+                      <Mix 
+                        image={playlist.images.length > 0 ? playlist.images[0].url : ''}
+                        name={playlist.name}
+                        description={playlist.description}
+                        id={playlist.id}
+                        setPlaylistsID={setPlaylistsID}
+                        setRandomColor={setRandomColor}
+                        userId={userId}
+                        setMyPlaylists={setMyPlaylists}
+                      />
+                    </div>
                   ))
                   : ''}
             </div>

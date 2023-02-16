@@ -16,7 +16,7 @@ function AuthPage(props: { AUTH_ENDPOINT: string; CLIENT_ID: string; REDIRECT_UR
               <IconRSSLogo />
             </a>
           </div>
-          <button className="login-btn"><a href={`${props.AUTH_ENDPOINT}?client_id=${props.CLIENT_ID}&redirect_uri=${props.REDIRECT_URI}&response_type=${props.RESPONSE_TYPE}&scope=user-library-read,playlist-modify-public`}>Login to Spotify</a></button>
+          <button className="login-btn"><a href={`${props.AUTH_ENDPOINT}?client_id=${props.CLIENT_ID}&redirect_uri=${props.REDIRECT_URI}&response_type=${props.RESPONSE_TYPE}&scope=user-library-read,playlist-modify-public,user-library-modify`}>Login to Spotify</a></button>
         </div>
         <div className="auth-page__preview"></div>
       </div>

@@ -28,7 +28,7 @@ function LikedSongs({ setRandomColor }: ILikedSongs) {
         setRandomColor(`#${Math.random().toString(16).slice(3, 9)}`)
       }
     >
-        <div className='liked-songs-box__tracks'>
+        <div className='liked-songs-box__tracks'> 
         </div>
         <div className='linked-songs-box__bottom'>
           <div className='linked-songs-box__info'>

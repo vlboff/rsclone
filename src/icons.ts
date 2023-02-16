@@ -31,6 +31,8 @@ import { ReactComponent as IconLibraryActive } from './assets/icons/lib-active.s
 import { ReactComponent as IconClock } from "./assets/icons/clock.svg";
 import { ReactComponent as IconPlayTracklistRow } from "./assets/icons/play-tracklist-row.svg";
 import { ReactComponent as IconPreloader } from "./assets/icons/preloader.svg";
+import { ReactComponent as IconActiveLike } from './assets/icons/like-active.svg';
+import { ReactComponent as IconOptions } from './assets/icons/options.svg';
 
 export {
   IconHeart, 
@@ -66,4 +68,6 @@ export {
   IconClock,
   IconPlayTracklistRow,
   IconPreloader,
+  IconActiveLike,
+  IconOptions,
 };

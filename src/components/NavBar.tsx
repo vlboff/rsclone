@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import {
   IconSpotifyLogo,
@@ -10,6 +10,9 @@ import {
   IconLibrary,
   IconLibraryActive
 } from "../icons";
+import { getUserId } from "../api/getUserId";
+import { createPlaylist } from '../api/createPlaylist';
+import { getUserPlaylist } from '../api/getUserPlaylist';
 
 interface IListItem {
   icon: React.SVGProps<SVGSVGElement>;
@@ -37,7 +40,14 @@ enum iconColor {
   black = "black",
 }
 
-function NavBar() {
+interface INavBar {
+  userId: string;
+  myPlaylists: [];
+  setUserId: React.Dispatch<React.SetStateAction<string>>;
+  setMyPlaylists: React.Dispatch<React.SetStateAction<[]>>;
+}
+
+function NavBar({userId, myPlaylists, setUserId, setMyPlaylists}: INavBar) {
   const currentIconColor = iconColor.white;
 
   const listItem: IListItem[] = [
@@ -59,12 +69,12 @@ function NavBar() {
       name: listItemNames.library,
       page: listPages.library,
     },
-    {
-      icon: <IconAddPlayListIcon fill={currentIconColor} />,
-      activIcon: <IconAddPlayListIcon fill={currentIconColor} />,
-      name: listItemNames.createPlaylist,
-      page: listPages.createPlaylist,
-    },
+    // {
+    //   icon: <IconAddPlayListIcon fill={currentIconColor} />,
+    //   activIcon: <IconAddPlayListIcon fill={currentIconColor} />,
+    //   name: listItemNames.createPlaylist,
+    //   page: listPages.createPlaylist,
+    // },
   ];
 
   const [activeMode, setActiveMode] = useState<string>(listItem[0].name);
@@ -74,7 +84,19 @@ function NavBar() {
       ? (item.activIcon as React.SVGProps<SVGSVGElement>)
       : (item.icon as React.SVGProps<SVGSVGElement>);
 
+  const token = window.localStorage.getItem('token');
 
+  useEffect(() => {
+    async function getUser() {
+      setUserId(await getUserId(token))
+    }
+    getUser()
+  }, [])
+
+  const createNewPlaylist = async () => {
+    await createPlaylist(token, userId);
+    setMyPlaylists(await getUserPlaylist(token, userId))
+  }
 
   return (
     <nav className="nav-bar">
@@ -94,6 +116,12 @@ function NavBar() {
             </>
           </li>
         ))}
+        <li 
+          onClick={() => createNewPlaylist()}
+        >
+          <IconAddPlayListIcon/>
+          <span>Create Playlist</span>
+        </li>
       </ul>
     </nav>
   );

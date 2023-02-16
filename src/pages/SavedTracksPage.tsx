@@ -20,7 +20,6 @@ function SavedTracksPage({randomColor}: ISavedTracksPage) {
         getSavedTracks()
     }, [])
 
-    console.log(randomColor)
     return savedTracks ? (
         <div className="playlist-page">
           <div
@@ -82,6 +81,9 @@ function SavedTracksPage({randomColor}: ISavedTracksPage) {
                 album={item.track.album.name}
                 data={item.added_at}
                 duration={item.track.duration_ms}
+                id={item.track.id}
+                addedTrack={true}
+                setSavedTracks={setSavedTracks}
               />
             ))}
           </div>

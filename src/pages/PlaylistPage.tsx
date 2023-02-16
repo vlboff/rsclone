@@ -4,6 +4,9 @@ import { IPlaylist } from "../components/interfaces/apiInterfaces";
 import extractColors from "extract-colors";
 import { IconHeart, IconPlayCard, IconClock, IconPreloader } from "../icons";
 import TracklistRow from "../components/TracklistRow";
+import { getUserPlaylist } from "../api/getUserPlaylist";
+import { getUserId } from "../api/getUserId";
+import { checkSavedTracks } from "../api/checkSavedTracks";
 
 interface IPlaylistPage {
   playlistID: string;
@@ -18,6 +21,10 @@ function PlaylistPage({
 }: IPlaylistPage) {
   const token = window.localStorage.getItem("token");
   const [playlist, setPlaylists] = useState<IPlaylist | null>(null);
+  const [list, setList] = useState<[]>([])
+  const [strId, setStrId] = useState('')
+  const [listIds, setListIds] = useState([]);
+
 
   useEffect(() => {
     if (playlistID.length > 0) {
@@ -30,6 +37,10 @@ function PlaylistPage({
 
   useEffect(() => {
     setPlaylistName(playlist ? playlist.name : "");
+
+    if(playlist !== null) {
+      setStrId(getTracksIds())
+    }
   }, [playlist]);
 
   // extractColors(
@@ -37,6 +48,14 @@ function PlaylistPage({
   // )
   //   .then(console.log)
   //   .catch(console.error);
+
+  useEffect(() => {
+    async function getListOfSavedPlaylists() {
+      let id = await getUserId(token)
+      setList(await getUserPlaylist(token, id))
+    }
+    getListOfSavedPlaylists()
+  }, [])
 
   const getFollowers = (followers: string) => {
     const reverse = followers.split("").reverse().join("");
@@ -60,6 +79,30 @@ function PlaylistPage({
     String(playlist?.followers.total).length > 3
       ? getFollowers(String(playlist?.followers.total))
       : playlist?.followers.total;
+
+  function getTracksIds() {
+      let ids = ''
+      let index = 0
+
+      playlist?.tracks.items.forEach((item) => {
+        if(index === 50) {
+          return ids
+        }
+        ids += item.track.id + ','
+        index++
+      })
+      return ids
+    }
+
+  useEffect(() => {
+    if(strId) {
+      const checkTrack = async () => {
+        let result = await checkSavedTracks(token, strId)
+        setListIds(result)
+      }
+      checkTrack()
+    }
+  }, [strId])
 
   return playlist ? (
     <div className="playlist-page">
@@ -108,7 +151,7 @@ function PlaylistPage({
           <div className="play-btn">
             <IconPlayCard height={28} width={28} />
           </div>
-          <IconHeart height={32} width={32} className={"like-btn"} />
+          <IconHeart height={32} width={32} className={"like-btn"}/>
         </div>
         <div className="tracklist-table_title">
           <div className="title-number">#</div>
@@ -130,6 +173,12 @@ function PlaylistPage({
             album={item.track.album.name}
             data={item.added_at}
             duration={item.track.duration_ms}
+            id={item.track.id}
+            uri={item.track.uri}
+            list={list}
+            playlistId={playlist.id}
+            addedTrack={listIds[playlist?.tracks.items.indexOf(item)]}
+            setPlaylists={setPlaylists}
           />
         ))}
       </div>

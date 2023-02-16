@@ -12,6 +12,7 @@ import PlaylistPage from "./pages/PlaylistPage";
 import { useAppDispatch } from "./store/hook";
 import { addScrollHeight } from "./store/scrollHeightSlice";
 import SavedTracksPage from "./pages/SavedTracksPage";
+import { getUserId } from "./api/getUserId";
 
 function App() {
   const CLIENT_ID = "1f1f06f4b7fc4796921496a5f9a14d20";
@@ -23,6 +24,9 @@ function App() {
   const [playlistID, setPlaylistsID] = useState<string>("");
   const [randomColor, setRandomColor] = useState<string>("");
   const [playlistName, setPlaylistName] = useState<string>("");
+  const [userId, setUserId] = useState<string>('');
+  const [myPlaylists, setMyPlaylists] = useState<[]>([]);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -62,7 +66,12 @@ function App() {
       ) : (
         <main>
           <SettingsBar playlistName={playlistName} />
-          <NavBar />
+          <NavBar 
+            userId={userId}
+            myPlaylists={myPlaylists}
+            setUserId={setUserId}
+            setMyPlaylists={setMyPlaylists}
+          />
           <div
             className="main-view"
             onScroll={(e) =>
@@ -94,6 +103,10 @@ function App() {
                   <Library
                     setPlaylistsID={setPlaylistsID}
                     setRandomColor={setRandomColor}
+                    myPlaylists={myPlaylists}
+                    userId={userId}
+                    setMyPlaylists={setMyPlaylists}
+                    setUserId={setUserId}
                   />
                 } 
               />
