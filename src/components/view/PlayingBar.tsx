@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { IconButtonBack, IconButtonNext, IconButtonPlay, IconHeart, IconHide, IconMicrophone, IconQueue, IconRepeat, IconShow, IconShuffle, IconVolumeOn } from '../../icons';
-import { handlePlayingBarControls, nextTrack, prevTrack, repeatTrack, shuffleTracks } from '../../utils/playback';
+import { nextTrack, playPauseTrack, prevTrack, repeatTrack, shuffleTracks } from '../../utils/playback';
 
 function PlayingBar() {
-
   function expandCoverArt() {
     (document.querySelector('.playing-widget') as HTMLElement).style.transform = 'translate(-72px)';
     (document.querySelector('.cover-art_expanded') as HTMLElement).style.transform = 'translateY(-100%)';
@@ -43,10 +43,10 @@ function PlayingBar() {
             </div>
             <div className="track-info">
               <div className='track-name'>
-                <a href="/"></a>
+                <Link className="track-name_link" to={''}></Link>
               </div>
               <div className='track-author'>
-                <a href="/"></a>
+                <Link className="track-author_link" to={''}></Link>
               </div>
             </div>
             <button className='add-button player-tool-button'>
@@ -63,7 +63,10 @@ function PlayingBar() {
                   <IconButtonBack />
                 </button>
               </div>
-              <button className='play-pause-button' onClick={() => handlePlayingBarControls()}>
+              <button className='play-pause-button' onClick={() => {
+                const id = (document.querySelector('.playback') as HTMLAudioElement).dataset.track_id!;
+                playPauseTrack(id)
+              }}>
                 <IconButtonPlay />
               </button>
               <div className="player-controls__buttons-right">
@@ -78,7 +81,7 @@ function PlayingBar() {
             <div className="playback-bar">
               <div className='playback-position'>--:--</div>
               <div className="timeline">
-                <input type="range" id="timeline__range"/>
+                <input type="range" id="timeline__range" />
               </div>
               <div className='playback-duration'>--:--</div>
             </div>

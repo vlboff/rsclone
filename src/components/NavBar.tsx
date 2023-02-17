@@ -110,10 +110,10 @@ function NavBar({userId, myPlaylists, setUserId, setMyPlaylists}: INavBar) {
             onClick={() => setActiveMode(item.name)}
             className={item.name === activeMode ? "active" : ""}
           >
-            <>
-              {isActive(item)}
-              <NavLink to={item.page}>{item.name}</NavLink>
-            </>
+            <NavLink to={item.page}>
+              <>{isActive(item)}</>
+              <p>{item.name}</p>
+            </NavLink>
           </li>
         ))}
         <li 

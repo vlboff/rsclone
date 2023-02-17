@@ -14,7 +14,7 @@ function ButtonMenu() {
       setUser(await getUser(token))
     };
     getUsername();
-  }, [])
+  }, [token])
 
   const logOut = () => {
     window.localStorage.removeItem("token")

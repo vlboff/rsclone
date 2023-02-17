@@ -1,23 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { getPlaylists } from "../api/getPlaylist";
 import { IPlaylist } from "../components/interfaces/apiInterfaces";
-import extractColors from "extract-colors";
-import { IconHeart, IconPlayCard, IconClock, IconPreloader } from "../icons";
+import { IconClock, IconPreloader } from "../icons";
 import TracklistRow from "../components/TracklistRow";
 import { getUserPlaylist } from "../api/getUserPlaylist";
 import { getUserId } from "../api/getUserId";
 import { checkSavedTracks } from "../api/checkSavedTracks";
+import { getSeparateByCommas } from "../utils/utils";
+import SongAlbumPlaylistPageHeader from "../components/SongAlbumPlaylistPageHeader";
+import PageControlPanel from "../components/PageControlPanel";
 
 interface IPlaylistPage {
   playlistID: string;
   randomColor: string;
-  setPlaylistName: React.Dispatch<React.SetStateAction<string>>;
+  setHeaderName: React.Dispatch<React.SetStateAction<string>>;
+  setTrackID: React.Dispatch<React.SetStateAction<string>>;
+  setAlbumID: React.Dispatch<React.SetStateAction<string>>;
+  setArtistID: React.Dispatch<React.SetStateAction<string>>;
+  setRandomColor: React.Dispatch<React.SetStateAction<string>>;
 }
+
+export let currentPlaylist: IPlaylist;
 
 function PlaylistPage({
   playlistID,
   randomColor,
-  setPlaylistName,
+  setHeaderName,
+  setTrackID,
+  setAlbumID,
+  setArtistID,
+  setRandomColor,
 }: IPlaylistPage) {
   const token = window.localStorage.getItem("token");
   const [playlist, setPlaylists] = useState<IPlaylist | null>(null);
@@ -25,6 +37,11 @@ function PlaylistPage({
   const [strId, setStrId] = useState('')
   const [listIds, setListIds] = useState([]);
 
+  const audio = document.querySelector('.playback') as HTMLAudioElement;
+
+  if (playlist) {
+    currentPlaylist = playlist;
+  }
 
   useEffect(() => {
     if (playlistID.length > 0) {
@@ -36,7 +53,7 @@ function PlaylistPage({
   }, [setPlaylists]);
 
   useEffect(() => {
-    setPlaylistName(playlist ? playlist.name : "");
+    setHeaderName(playlist ? playlist.name : "");
 
     if(playlist !== null) {
       setStrId(getTracksIds())
@@ -77,7 +94,7 @@ function PlaylistPage({
 
   const followers =
     String(playlist?.followers.total).length > 3
-      ? getFollowers(String(playlist?.followers.total))
+      ? getSeparateByCommas(String(playlist?.followers.total))
       : playlist?.followers.total;
 
   function getTracksIds() {
@@ -106,53 +123,19 @@ function PlaylistPage({
 
   return playlist ? (
     <div className="playlist-page">
-      <div
-        className="playlist-header"
-        style={{
-          backgroundColor: randomColor,
-        }}
-      >
-        <img
-          src={`${playlist?.images[0].url}`}
-          alt="cover"
-          className="playlist-header_cover"
-          crossOrigin="anonymous"
-        />
-        <div className="playlist-header_item">
-          <h2 className="playlist_title">playlist</h2>
-          <h1 className="playlist_name">{`${
-            playlist ? playlist.name : ""
-          }`}</h1>
-          <p className="playlist_dscr">{`${
-            playlist ? playlist.description : ""
-          }`}</p>
-          <div className="playlist_info">
-            <span className="playlist_owner">{`${
-              playlist ? playlist.owner.display_name : ""
-            }`}</span>
-            <span className="playlist_followers">{`${
-              playlist ? followers : 0
-            } likes`}</span>
-            <span className="playlist_tracks">{`${
-              playlist ? playlist.tracks.total : 0
-            } songs`}</span>
-          </div>
-        </div>
-      </div>
+      <SongAlbumPlaylistPageHeader
+        color={randomColor}
+        image={playlist.images[0].url}
+        title={"playlist"}
+        name={playlist.name}
+        description={playlist.description}
+        owner={playlist.owner.display_name}
+        followers={followers}
+        tracks={playlist.tracks.total}
+      />
 
       <div className="tracklist-table">
-        <div
-          className="tracklist-gradient"
-          style={{
-            background: `linear-gradient(0deg, #22222260 0, ${randomColor} 500%)`,
-          }}
-        ></div>
-        <div className="control-panel">
-          <div className="play-btn">
-            <IconPlayCard height={28} width={28} />
-          </div>
-          <IconHeart height={32} width={32} className={"like-btn"}/>
-        </div>
+        <PageControlPanel color={randomColor} setIconHeart={false} />
         <div className="tracklist-table_title">
           <div className="title-number">#</div>
           <div className="title-info">title</div>
@@ -169,16 +152,23 @@ function PlaylistPage({
             number={index + 1}
             image={item.track.album.images[0].url}
             name={item.track.name}
+            trackID={item.track.id}
+            setTrackID={setTrackID}
             artist={item.track.artists[0].name}
+            artistID={item.track.artists[0].id}
+            setArtistID={setArtistID}
             album={item.track.album.name}
+            albumID={item.track.album.id}
+            setAlbumID={setAlbumID}
             data={item.added_at}
             duration={item.track.duration_ms}
-            id={item.track.id}
             uri={item.track.uri}
             list={list}
             playlistId={playlist.id}
             addedTrack={listIds[playlist?.tracks.items.indexOf(item)]}
             setPlaylists={setPlaylists}
+            setRandomColor={setRandomColor}
+            isPlaying={(item.track.id === audio.dataset.track_id) ? true : false}
           />
         ))}
       </div>

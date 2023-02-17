@@ -9,22 +9,32 @@ interface IMix {
   image: string;
   name: string;
   description: string;
-  id: string;
-  setPlaylistsID: React.Dispatch<React.SetStateAction<string>>;
+  playlistID?: string;
+  setPlaylistsID?: React.Dispatch<React.SetStateAction<string>>;
+  artistID?: string;
+  setArtistID?: React.Dispatch<React.SetStateAction<string>>;
+  albumID?: string;
+  setAlbumID?: React.Dispatch<React.SetStateAction<string>>;
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
   userId?: string;
   setMyPlaylists?: React.Dispatch<React.SetStateAction<[]>>;
+  circle?: boolean;
 }
 
 function Mix({
   image,
   name,
   description,
-  id,
+  playlistID,
   setPlaylistsID,
+  artistID,
+  setArtistID,
+  albumID,
+  setAlbumID,
   setRandomColor,
   userId,
-  setMyPlaylists
+  setMyPlaylists,
+  circle,
 }: IMix) {
   const [activeCardMode, setActiveCardMode] = useState("");
   const [active, setActive] = useState(true);
@@ -66,13 +76,38 @@ function Mix({
   }
 
   const deletePlaylist = async (e: React.MouseEvent<HTMLElement>) => {
-    await removePlaylist(id, token)
-    setActive(!active)
+    if(playlistID) {
+      await removePlaylist(playlistID, token)
+      setActive(!active)
+    }
     if(setMyPlaylists !== undefined && userId !== undefined) {
       setMyPlaylists(await getUserPlaylist(token, userId))
     }
   }
  
+  const setIdValue = () => {
+    if (setPlaylistsID && playlistID) {
+      setPlaylistsID(playlistID);
+    } else if (setArtistID && artistID) {
+      setArtistID(artistID);
+    } else if (setAlbumID && albumID) {
+      setAlbumID(albumID);
+    }
+  };
+
+  const setPath = () => {
+    if (setPlaylistsID && playlistID) {
+      return `/playlist/${playlistID}`;
+    } else if (setArtistID && artistID) {
+      return `/artist/${artistID}`;
+    } else if (setAlbumID && albumID) {
+      return `/album/${albumID}`;
+    } else {
+      return "/";
+    }
+  };
+
+
   return (
     <>
       <div
@@ -88,18 +123,24 @@ function Mix({
       </div>
 
       <Link
-        to={`/playlist/${id}`}
+        to={setPath()}
         className={"playlist-link"}
         onClick={() =>
           setRandomColor(`#${Math.random().toString(16).slice(3, 9)}`)
         }
       >
-        <div
-          className={`card ${activeCardMode}`}
-          onClick={() => setPlaylistsID(id)}
-        >
-          <div className="card-img">
-            <img src={image ? image : 'https://lab.possan.se/thirtify/images/placeholder-playlist.png'} alt="/" />
+        <div className={`card ${activeCardMode}`} onClick={() => setIdValue()}>
+          <div
+            className="card-img"
+            style={circle ? { borderRadius: "50%" } : { borderRadius: "none" }}
+          >
+            <img
+              src={image ? image : 'https://lab.possan.se/thirtify/images/placeholder-playlist.png'}
+              alt="/"
+              style={
+                circle ? { borderRadius: "50%" } : { borderRadius: "none" }
+              }
+            />
           </div>
           <div className="card-text">
             <div className="card-name">{name}</div>

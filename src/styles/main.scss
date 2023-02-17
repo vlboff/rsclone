@@ -14,6 +14,9 @@
 @import './components/Mix';
 @import './components/TracklistRow';
 @import './components/Preload';
+@import './components/PageHeader';
+@import './components/PageControlPanel';
+@import './components/ArtistsAlbumsBlock';
 
 @import './layout/SearchPage';
 @import './components/SearchBar';
@@ -30,6 +33,8 @@
 @import './pages/Library';
 @import './components/LikedSongs';
 
+@import './pages/TrackPage';
+@import './pages/ArtistPage';
 
 * {
   box-sizing: border-box;

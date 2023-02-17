@@ -45,7 +45,7 @@ function Library({setPlaylistsID, setRandomColor, myPlaylists, userId, setMyPlay
                         image={playlist.images.length > 0 ? playlist.images[0].url : ''}
                         name={playlist.name}
                         description={playlist.description}
-                        id={playlist.id}
+                        playlistID={playlist.id}
                         setPlaylistsID={setPlaylistsID}
                         setRandomColor={setRandomColor}
                         userId={userId}

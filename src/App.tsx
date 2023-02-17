@@ -13,6 +13,9 @@ import { useAppDispatch } from "./store/hook";
 import { addScrollHeight } from "./store/scrollHeightSlice";
 import SavedTracksPage from "./pages/SavedTracksPage";
 import { getUserId } from "./api/getUserId";
+import AlbumPage from "./pages/AlbumPage";
+import TrackPage from "./pages/TrackPage";
+import ArtistPage from "./pages/ArtistPage";
 
 function App() {
   const CLIENT_ID = "1f1f06f4b7fc4796921496a5f9a14d20";
@@ -22,10 +25,15 @@ function App() {
 
   const [token, setToken] = useState<string | null>("");
   const [playlistID, setPlaylistsID] = useState<string>("");
+  const [albumID, setAlbumID] = useState<string>("");
+  const [artistID, setArtistID] = useState<string>("");
+  const [trackID, setTrackID] = useState<string>("");
   const [randomColor, setRandomColor] = useState<string>("");
+
   const [playlistName, setPlaylistName] = useState<string>("");
   const [userId, setUserId] = useState<string>('');
   const [myPlaylists, setMyPlaylists] = useState<[]>([]);
+  const [headerName, setHeaderName] = useState<string>("");
 
   const dispatch = useAppDispatch();
 
@@ -65,7 +73,7 @@ function App() {
         </Routes>
       ) : (
         <main>
-          <SettingsBar playlistName={playlistName} />
+          <SettingsBar headerName={headerName} />
           <NavBar 
             userId={userId}
             myPlaylists={myPlaylists}
@@ -89,10 +97,13 @@ function App() {
                 }
               />
               <Route
-                path="/search"
+                path="/search/*"
                 element={
                   <SearchPage
                     setPlaylistsID={setPlaylistsID}
+                    setAlbumID={setAlbumID}
+                    setArtistID={setArtistID}
+                    setTrackID={setTrackID}
                     setRandomColor={setRandomColor}
                   />
                 }
@@ -115,6 +126,10 @@ function App() {
                 element={
                   <SavedTracksPage
                     randomColor={randomColor}
+                    setTrackID={setTrackID}
+                    setArtistID={setArtistID}
+                    setAlbumID={setAlbumID}
+                    setRandomColor={setRandomColor}
                   />
                 } 
               />
@@ -124,7 +139,55 @@ function App() {
                   <PlaylistPage
                     playlistID={playlistID}
                     randomColor={randomColor}
-                    setPlaylistName={setPlaylistName}
+                    setHeaderName={setHeaderName}
+                    setTrackID={setTrackID}
+                    setAlbumID={setAlbumID}
+                    setArtistID={setArtistID}
+                    setRandomColor={setRandomColor}
+                  />
+                }
+              />
+              <Route
+                path={`/album/${albumID}`}
+                element={
+                  <AlbumPage
+                    albumID={albumID}
+                    randomColor={randomColor}
+                    setTrackID={setTrackID}
+                    setHeaderName={setHeaderName}
+                    setRandomColor={setRandomColor}
+                  />
+                }
+              />
+              <Route
+                path={`/track/${trackID}`}
+                element={
+                  <TrackPage
+                    trackID={trackID}
+                    albumID={albumID}
+                    artistID={artistID}
+                    randomColor={randomColor}
+                    setTrackID={setTrackID}
+                    setArtistID={setArtistID}
+                    setAlbumID={setAlbumID}
+                    setHeaderName={setHeaderName}
+                    setRandomColor={setRandomColor}
+                  />
+                }
+              />
+              <Route
+                path={`/artist/${artistID}`}
+                element={
+                  <ArtistPage
+                    trackID={trackID}
+                    albumID={albumID}
+                    artistID={artistID}
+                    randomColor={randomColor}
+                    setTrackID={setTrackID}
+                    setArtistID={setArtistID}
+                    setAlbumID={setAlbumID}
+                    setHeaderName={setHeaderName}
+                    setRandomColor={setRandomColor}
                   />
                 }
               />

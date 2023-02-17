@@ -4,14 +4,22 @@ import { ISavedTracks, IResponseTrack } from '../components/interfaces/apiInterf
 import { useEffect, useState } from 'react';
 import { IconHeart, IconPlayCard, IconClock, IconPreloader } from "../icons";
 import TracklistRow from "../components/TracklistRow";
+import PageControlPanel from '../components/PageControlPanel';
+import SongAlbumPlaylistPageHeader from "../components/SongAlbumPlaylistPageHeader";
 
 interface ISavedTracksPage {
     randomColor: string;
+    setTrackID: React.Dispatch<React.SetStateAction<string>>;
+    setAlbumID: React.Dispatch<React.SetStateAction<string>>;
+    setArtistID: React.Dispatch<React.SetStateAction<string>>;
+    setRandomColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function SavedTracksPage({randomColor}: ISavedTracksPage) {
+function SavedTracksPage({randomColor, setTrackID, setRandomColor, setAlbumID, setArtistID}: ISavedTracksPage) {
     const token = window.localStorage.getItem('token');
     const [savedTracks, setSavedTracks] = useState<ISavedTracks | null>(null)
+
+    const audio = document.querySelector('.playback') as HTMLAudioElement;
 
     useEffect(() => {
         async function getSavedTracks() {
@@ -22,45 +30,18 @@ function SavedTracksPage({randomColor}: ISavedTracksPage) {
 
     return savedTracks ? (
         <div className="playlist-page">
-          <div
-            className="playlist-header"
-            style={{
-              backgroundColor: '#5135AD',
-            }}
-          >
-            <img
-              src='https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png'
-              alt="cover"
-              className="playlist-header_cover"
-              crossOrigin="anonymous"
-            />
-            <div className="playlist-header_item">
-              <h2 className="playlist_title">playlist</h2>
-              <h1 className="playlist_name">Liked Songs</h1>
-              <p className="playlist_dscr"></p>
-              <div className="playlist_info">
-                {/* <span className="playlist_owner"></span>
-                <span className="playlist_followers"></span> */}
-                <span className="playlist_tracks">{`${
-                  savedTracks ? savedTracks.total : 0
-                } songs`}</span>
-              </div>
-            </div>
-          </div>
-    
+        <SongAlbumPlaylistPageHeader
+          color={'#5135AD'}
+          image={'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png'}
+          title={"playlist"}
+          name={'Liked Songs'}
+          description={''}
+          owner={''}
+          followers={''}
+          tracks={savedTracks ? savedTracks.total : 0}
+        />
           <div className="tracklist-table">
-            <div
-              className="tracklist-gradient"
-              style={{
-                background: `linear-gradient(0deg, #22222260 0, #5135AD 500%)`,
-              }}
-            ></div>
-            <div className="control-panel">
-              <div className="play-btn">
-                <IconPlayCard height={28} width={28} />
-              </div>
-              <IconHeart height={32} width={32} className={"like-btn"} />
-            </div>
+          `<PageControlPanel color='#5135AD' setIconHeart={false} />
             <div className="tracklist-table_title">
               <div className="title-number">#</div>
               <div className="title-info">title</div>
@@ -79,11 +60,18 @@ function SavedTracksPage({randomColor}: ISavedTracksPage) {
                 name={item.track.name}
                 artist={item.track.artists[0].name}
                 album={item.track.album.name}
+                artistID={item.track.artists[0].id}
+                setArtistID={setArtistID}
                 data={item.added_at}
                 duration={item.track.duration_ms}
-                id={item.track.id}
+                trackID={item.track.id}
                 addedTrack={true}
                 setSavedTracks={setSavedTracks}
+                setTrackID={setTrackID}
+                albumID={item.track.album.id}
+                setAlbumID={setAlbumID}
+                setRandomColor={setRandomColor}
+                isPlaying={(item.track.id === audio.dataset.track_id) ? true : false}
               />
             ))}
           </div>
