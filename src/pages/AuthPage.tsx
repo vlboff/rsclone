@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Disclaimer from "../components/UI/Disclaimer";
+import ModalWindow from "../components/UI/ModalWindow";
 import { IconRSSLogo, IconSpotifyLogoWithoutName } from "../icons";
 
 function AuthPage(props: { AUTH_ENDPOINT: string; CLIENT_ID: string; REDIRECT_URI: string; RESPONSE_TYPE: string; }) {
+
+  const [modalWindow, setModalWindow] = useState(true);
 
   return (
     <div className="auth-page">
@@ -17,9 +21,13 @@ function AuthPage(props: { AUTH_ENDPOINT: string; CLIENT_ID: string; REDIRECT_UR
             </a>
           </div>
           <button className="login-btn"><a href={`${props.AUTH_ENDPOINT}?client_id=${props.CLIENT_ID}&redirect_uri=${props.REDIRECT_URI}&response_type=${props.RESPONSE_TYPE}`}>Login to Spotify</a></button>
+          <div className="disclaimer__button" onClick={() => setModalWindow(!modalWindow)}>Disclaimer</div>
         </div>
         <div className="auth-page__preview"></div>
       </div>
+      <ModalWindow visible={modalWindow} setVisible={setModalWindow}>
+        <Disclaimer />
+      </ModalWindow>
     </div>
   )
 

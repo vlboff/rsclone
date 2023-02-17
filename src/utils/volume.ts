@@ -7,43 +7,50 @@ export function handleVolume() {
   const audio = document.querySelector('.playback') as HTMLAudioElement;
   let backgroundColor = '#fff';
 
-  volume.value = '1';
-  volume.style.background = '#fff';
-  volume.max = '1';
-  volume.step = '0.01';
-
-  muteButton.addEventListener('click', () => {
-    if (!isMuted) {
-      audio.volume = 0;
-      volume.value = '0';
-      volume.style.background = '#535353';
-      changeVolumeIcon(volume.value);
-      isMuted = true;
-    } else {
-      audio.volume = currentVolume;
-      changeVolumeIcon(volume.value);
-      volume.value = currentVolume.toString();
-      volume.style.background = currentVolume ? `linear-gradient(to right, ${backgroundColor} 0%, ${backgroundColor} ${currentVolume * 100}%, #535353 ${currentVolume * 100}%, #535353 100%)` : backgroundColor;
-      isMuted = false;
-    }
-  })
-
-  volume.addEventListener('input', () => {
-    volume.style.background = `linear-gradient(to right, ${backgroundColor} 0%, ${backgroundColor} ${+volume.value * 100}%, #535353 ${+volume.value * 100}%, #535353 100%)`;
-    audio.volume = +volume.value;
-    currentVolume = audio.volume;
-    changeVolumeIcon(volume.value);
-  })
-
-  volume.onmouseover = function () {
-    backgroundColor = '#1db954';
-    volume.style.background = `linear-gradient(to right, ${backgroundColor} 0%, ${backgroundColor} ${+volume.value * 100}%, #535353 ${+volume.value * 100}%, #535353 100%)`;
-  };
-
-  volume.onmouseleave = function () {
-    backgroundColor = '#fff';
-    volume.style.background = `linear-gradient(to right, ${backgroundColor} 0%, ${backgroundColor} ${+volume.value * 100}%, #535353 ${+volume.value * 100}%, #535353 100%)`;
+  if (volume) {
+    volume.value = '1';
+    volume.style.background = '#fff';
+    volume.max = '1';
+    volume.step = '0.01';
   }
+
+  if (muteButton) {
+    muteButton.addEventListener('click', () => {
+      if (!isMuted) {
+        audio.volume = 0;
+        volume.value = '0';
+        volume.style.background = '#535353';
+        changeVolumeIcon(volume.value);
+        isMuted = true;
+      } else {
+        audio.volume = currentVolume;
+        changeVolumeIcon(volume.value);
+        volume.value = currentVolume.toString();
+        volume.style.background = currentVolume ? `linear-gradient(to right, ${backgroundColor} 0%, ${backgroundColor} ${currentVolume * 100}%, #535353 ${currentVolume * 100}%, #535353 100%)` : backgroundColor;
+        isMuted = false;
+      }
+    })
+  }
+
+  if (volume) {
+    volume.addEventListener('input', () => {
+      volume.style.background = `linear-gradient(to right, ${backgroundColor} 0%, ${backgroundColor} ${+volume.value * 100}%, #535353 ${+volume.value * 100}%, #535353 100%)`;
+      audio.volume = +volume.value;
+      currentVolume = audio.volume;
+      changeVolumeIcon(volume.value);
+    });
+    
+    volume.onmouseover = function () {
+      backgroundColor = '#1db954';
+      volume.style.background = `linear-gradient(to right, ${backgroundColor} 0%, ${backgroundColor} ${+volume.value * 100}%, #535353 ${+volume.value * 100}%, #535353 100%)`;
+    };
+  
+    volume.onmouseleave = function () {
+      backgroundColor = '#fff';
+      volume.style.background = `linear-gradient(to right, ${backgroundColor} 0%, ${backgroundColor} ${+volume.value * 100}%, #535353 ${+volume.value * 100}%, #535353 100%)`;
+    }
+  }
+
 }
 
 function changeVolumeIcon(volume: string) {
