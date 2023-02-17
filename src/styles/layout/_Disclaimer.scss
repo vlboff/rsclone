@@ -1,0 +1,33 @@
+.disclaimer {
+  h3 {
+    text-align: center;
+  }
+  p {
+    text-indent: 30px;
+    text-align: justify;
+    margin: 15px 0;
+    line-height: 20px;
+  }
+}
+
+.disclaimer__contatcs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 5px;
+
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+}
+
+.disclaimer__button {
+  margin-top: -10px;
+  font-size: 14px;
+  border-bottom: 1px dotted black;
+  cursor: pointer;
+}
