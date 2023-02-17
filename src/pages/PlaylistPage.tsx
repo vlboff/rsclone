@@ -125,7 +125,7 @@ function PlaylistPage({
     <div className="playlist-page">
       <SongAlbumPlaylistPageHeader
         color={randomColor}
-        image={playlist.images[0].url}
+        image={playlist.images.length ? playlist.images[0].url : 'https://lab.possan.se/thirtify/images/placeholder-playlist.png'}
         title={"playlist"}
         name={playlist.name}
         description={playlist.description}
