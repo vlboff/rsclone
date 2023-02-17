@@ -7,9 +7,12 @@ import HomePage from "./pages/HomePage";
 import SettingsBar from "./components/SettingsBar";
 import "./styles/main.scss";
 import SearchPage from "./pages/SearchPage";
+import Library from "./pages/Library";
 import PlaylistPage from "./pages/PlaylistPage";
 import { useAppDispatch } from "./store/hook";
 import { addScrollHeight } from "./store/scrollHeightSlice";
+import SavedTracksPage from "./pages/SavedTracksPage";
+import { getUserId } from "./api/getUserId";
 import AlbumPage from "./pages/AlbumPage";
 import TrackPage from "./pages/TrackPage";
 import ArtistPage from "./pages/ArtistPage";
@@ -26,7 +29,12 @@ function App() {
   const [artistID, setArtistID] = useState<string>("");
   const [trackID, setTrackID] = useState<string>("");
   const [randomColor, setRandomColor] = useState<string>("");
+
+  const [playlistName, setPlaylistName] = useState<string>("");
+  const [userId, setUserId] = useState<string>('');
+  const [myPlaylists, setMyPlaylists] = useState<[]>([]);
   const [headerName, setHeaderName] = useState<string>("");
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -66,7 +74,12 @@ function App() {
       ) : (
         <main>
           <SettingsBar headerName={headerName} />
-          <NavBar />
+          <NavBar 
+            userId={userId}
+            myPlaylists={myPlaylists}
+            setUserId={setUserId}
+            setMyPlaylists={setMyPlaylists}
+          />
           <div
             className="main-view"
             onScroll={(e) =>
@@ -94,6 +107,31 @@ function App() {
                     setRandomColor={setRandomColor}
                   />
                 }
+              />
+              <Route 
+                path="/library" 
+                element={
+                  <Library
+                    setPlaylistsID={setPlaylistsID}
+                    setRandomColor={setRandomColor}
+                    myPlaylists={myPlaylists}
+                    userId={userId}
+                    setMyPlaylists={setMyPlaylists}
+                    setUserId={setUserId}
+                  />
+                } 
+              />
+              <Route 
+                path="/library/liked-tracks" 
+                element={
+                  <SavedTracksPage
+                    randomColor={randomColor}
+                    setTrackID={setTrackID}
+                    setArtistID={setArtistID}
+                    setAlbumID={setAlbumID}
+                    setRandomColor={setRandomColor}
+                  />
+                } 
               />
               <Route
                 path={`/playlist/${playlistID}`}

@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IconPlayCard } from "../icons";
+import { removePlaylist } from "../api/removePlaylist";
+import { getUserPlaylist } from "../api/getUserPlaylist";
+import { getUserId } from '../api/getUserId';
 
 interface IMix {
   image: string;
@@ -13,6 +16,8 @@ interface IMix {
   albumID?: string;
   setAlbumID?: React.Dispatch<React.SetStateAction<string>>;
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
+  userId?: string;
+  setMyPlaylists?: React.Dispatch<React.SetStateAction<[]>>;
   circle?: boolean;
 }
 
@@ -27,9 +32,14 @@ function Mix({
   albumID,
   setAlbumID,
   setRandomColor,
+  userId,
+  setMyPlaylists,
   circle,
 }: IMix) {
   const [activeCardMode, setActiveCardMode] = useState("");
+  const [active, setActive] = useState(true);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const token = window.localStorage.getItem('token');
 
   const dscrWithoutLinks = (description: string) => {
     if (description.includes("<")) {
@@ -45,10 +55,36 @@ function Mix({
     }
   };
 
+  document.addEventListener('click', () => {
+    if(active === false) {
+      setActive(!active)
+    }
+  })
+
   const playMusic = () => {
     // play
   };
 
+  const showContextMenu = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    setActive(!active)
+    const newPosition = {
+      x: e.pageX,
+      y: e.pageY,
+    };
+    setPosition(newPosition);
+  }
+
+  const deletePlaylist = async (e: React.MouseEvent<HTMLElement>) => {
+    if(playlistID) {
+      await removePlaylist(playlistID, token)
+      setActive(!active)
+    }
+    if(setMyPlaylists !== undefined && userId !== undefined) {
+      setMyPlaylists(await getUserPlaylist(token, userId))
+    }
+  }
+ 
   const setIdValue = () => {
     if (setPlaylistsID && playlistID) {
       setPlaylistsID(playlistID);
@@ -71,11 +107,14 @@ function Mix({
     }
   };
 
+
   return (
-    <div
+    <>
+      <div
       className="card-wrapper"
       onMouseEnter={() => setActiveCardMode("hover")}
       onMouseLeave={() => setActiveCardMode("")}
+      onContextMenu={showContextMenu}
     >
       <div className={`card-play-btn ${activeCardMode}`}>
         <div className="circle" onClick={playMusic}>
@@ -96,7 +135,7 @@ function Mix({
             style={circle ? { borderRadius: "50%" } : { borderRadius: "none" }}
           >
             <img
-              src={image}
+              src={image ? image : 'https://lab.possan.se/thirtify/images/placeholder-playlist.png'}
               alt="/"
               style={
                 circle ? { borderRadius: "50%" } : { borderRadius: "none" }
@@ -109,7 +148,16 @@ function Mix({
           </div>
         </div>
       </Link>
-    </div>
+      </div>
+      
+      {setMyPlaylists !== undefined
+      ? 
+      <div style={{ top: position.y, left: position.x }} className={active ? 'modal-context hidden' : 'modal-context'} hidden>
+        <button className='modal-btn context-btn' onClick={deletePlaylist} >Delete</button>
+      </div>
+      : ''}
+    </>
+    
   );
 }
 

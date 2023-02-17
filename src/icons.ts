@@ -26,9 +26,13 @@ import { ReactComponent as ArrowLeftIcon } from "./assets/icons/arrow-left.svg";
 import { ReactComponent as IconRSSLogo } from "./assets/icons/rs_school_js.svg";
 import { ReactComponent as IconSpotifyLogoWithoutName } from "./assets/icons/Spotify-Icon-Black-Logo.svg";
 import { ReactComponent as IconMoreInfo } from "./assets/icons/more-info.svg";
+import { ReactComponent as IconLibrary } from './assets/icons/lib-in-active.svg';
+import { ReactComponent as IconLibraryActive } from './assets/icons/lib-active.svg';
 import { ReactComponent as IconClock } from "./assets/icons/clock.svg";
 import { ReactComponent as IconPlayTracklistRow } from "./assets/icons/play-tracklist-row.svg";
 import { ReactComponent as IconPreloader } from "./assets/icons/preloader.svg";
+import { ReactComponent as IconActiveLike } from './assets/icons/like-active.svg';
+import { ReactComponent as IconOptions } from './assets/icons/options.svg';
 
 export {
   IconHeart, 
@@ -59,7 +63,11 @@ export {
   ArrowRightIcon,
   ArrowLeftIcon,
   IconMoreInfo,
+  IconLibrary,
+  IconLibraryActive,
   IconClock,
   IconPlayTracklistRow,
   IconPreloader,
+  IconActiveLike,
+  IconOptions,
 };

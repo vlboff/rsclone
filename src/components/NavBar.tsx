@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import {
   IconSpotifyLogo,
@@ -7,18 +7,32 @@ import {
   IconSearch,
   IconSearchActive,
   IconAddPlayListIcon,
+  IconLibrary,
+  IconLibraryActive
 } from "../icons";
+import { getUserId } from "../api/getUserId";
+import { createPlaylist } from '../api/createPlaylist';
+import { getUserPlaylist } from '../api/getUserPlaylist';
 
 interface IListItem {
   icon: React.SVGProps<SVGSVGElement>;
   activIcon?: React.SVGProps<SVGSVGElement>;
   name: string;
+  page: string;
 }
 
 enum listItemNames {
   home = "Home",
   search = "Search",
+  library = 'Your Library',
   createPlaylist = "Create Playlist",
+}
+
+enum listPages {
+  home = '',
+  search = 'search',
+  library = 'library',
+  createPlaylist = 'library'
 }
 
 enum iconColor {
@@ -26,7 +40,14 @@ enum iconColor {
   black = "black",
 }
 
-function NavBar() {
+interface INavBar {
+  userId: string;
+  myPlaylists: [];
+  setUserId: React.Dispatch<React.SetStateAction<string>>;
+  setMyPlaylists: React.Dispatch<React.SetStateAction<[]>>;
+}
+
+function NavBar({userId, myPlaylists, setUserId, setMyPlaylists}: INavBar) {
   const currentIconColor = iconColor.white;
 
   const listItem: IListItem[] = [
@@ -34,17 +55,26 @@ function NavBar() {
       icon: <IconHome fill={currentIconColor} />,
       activIcon: <IconHomeActive fill={currentIconColor} />,
       name: listItemNames.home,
+      page: listPages.home,
     },
     {
       icon: <IconSearch fill={currentIconColor} />,
       activIcon: <IconSearchActive fill={currentIconColor} />,
       name: listItemNames.search,
+      page: listPages.search,
     },
     {
-      icon: <IconAddPlayListIcon fill={currentIconColor} />,
-      activIcon: <IconAddPlayListIcon fill={currentIconColor} />,
-      name: listItemNames.createPlaylist,
+      icon: <IconLibrary />,
+      activIcon: <IconLibraryActive fill={currentIconColor} />,
+      name: listItemNames.library,
+      page: listPages.library,
     },
+    // {
+    //   icon: <IconAddPlayListIcon fill={currentIconColor} />,
+    //   activIcon: <IconAddPlayListIcon fill={currentIconColor} />,
+    //   name: listItemNames.createPlaylist,
+    //   page: listPages.createPlaylist,
+    // },
   ];
 
   const [activeMode, setActiveMode] = useState<string>(listItem[0].name);
@@ -54,7 +84,19 @@ function NavBar() {
       ? (item.activIcon as React.SVGProps<SVGSVGElement>)
       : (item.icon as React.SVGProps<SVGSVGElement>);
 
+  const token = window.localStorage.getItem('token');
 
+  useEffect(() => {
+    async function getUser() {
+      setUserId(await getUserId(token))
+    }
+    getUser()
+  }, [])
+
+  const createNewPlaylist = async () => {
+    await createPlaylist(token, userId);
+    setMyPlaylists(await getUserPlaylist(token, userId))
+  }
 
   return (
     <nav className="nav-bar">
@@ -68,12 +110,18 @@ function NavBar() {
             onClick={() => setActiveMode(item.name)}
             className={item.name === activeMode ? "active" : ""}
           >
-            <NavLink to={item.name === 'Search' ? 'search' : ''}>
+            <NavLink to={item.page}>
               <>{isActive(item)}</>
               <p>{item.name}</p>
             </NavLink>
           </li>
         ))}
+        <li 
+          onClick={() => createNewPlaylist()}
+        >
+          <IconAddPlayListIcon/>
+          <span>Create Playlist</span>
+        </li>
       </ul>
     </nav>
   );
