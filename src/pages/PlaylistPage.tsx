@@ -3,6 +3,9 @@ import { getPlaylists } from "../api/getPlaylist";
 import { IPlaylist } from "../components/interfaces/apiInterfaces";
 import { IconClock, IconPreloader } from "../icons";
 import TracklistRow from "../components/TracklistRow";
+import { getUserPlaylist } from "../api/getUserPlaylist";
+import { getUserId } from "../api/getUserId";
+import { checkSavedTracks } from "../api/checkSavedTracks";
 import { getSeparateByCommas } from "../utils/utils";
 import SongAlbumPlaylistPageHeader from "../components/SongAlbumPlaylistPageHeader";
 import PageControlPanel from "../components/PageControlPanel";
@@ -30,7 +33,12 @@ function PlaylistPage({
 }: IPlaylistPage) {
   const token = window.localStorage.getItem("token");
   const [playlist, setPlaylists] = useState<IPlaylist | null>(null);
+  const [list, setList] = useState<[]>([])
+  const [strId, setStrId] = useState('')
+  const [listIds, setListIds] = useState([]);
+
   const audio = document.querySelector('.playback') as HTMLAudioElement;
+
   if (playlist) {
     currentPlaylist = playlist;
   }
@@ -46,18 +54,78 @@ function PlaylistPage({
 
   useEffect(() => {
     setHeaderName(playlist ? playlist.name : "");
+
+    if(playlist !== null) {
+      setStrId(getTracksIds())
+    }
   }, [playlist]);
+
+  // extractColors(
+  //   document.querySelector(".playlist-header_cover") as HTMLImageElement
+  // )
+  //   .then(console.log)
+  //   .catch(console.error);
+
+  useEffect(() => {
+    async function getListOfSavedPlaylists() {
+      let id = await getUserId(token)
+      setList(await getUserPlaylist(token, id))
+    }
+    getListOfSavedPlaylists()
+  }, [])
+
+  const getFollowers = (followers: string) => {
+    const reverse = followers.split("").reverse().join("");
+    let str = "";
+    for (let i = 0; i < followers.length; i++) {
+      if (i % 3 === 0) {
+        str += `,${reverse[i]}`;
+      } else {
+        str += reverse[i];
+      }
+    }
+
+    if (str[0] === ",") {
+      return str.slice(1).split("").reverse().join("");
+    } else {
+      return str.split("").reverse().join("");
+    }
+  };
 
   const followers =
     String(playlist?.followers.total).length > 3
       ? getSeparateByCommas(String(playlist?.followers.total))
       : playlist?.followers.total;
 
+  function getTracksIds() {
+      let ids = ''
+      let index = 0
+
+      playlist?.tracks.items.forEach((item) => {
+        if(index === 50) {
+          return ids
+        }
+        ids += item.track.id + ','
+        index++
+      })
+      return ids
+    }
+
+  useEffect(() => {
+    if(strId) {
+      const checkTrack = async () => {
+        let result = await checkSavedTracks(token, strId)
+        setListIds(result)
+      }
+      checkTrack()
+    }
+  }, [strId])
+
   return playlist ? (
     <div className="playlist-page">
       <SongAlbumPlaylistPageHeader
         color={randomColor}
-        image={playlist.images[0].url}
+        image={playlist.images.length ? playlist.images[0].url : 'https://lab.possan.se/thirtify/images/placeholder-playlist.png'}
         title={"playlist"}
         name={playlist.name}
         description={playlist.description}
@@ -94,6 +162,11 @@ function PlaylistPage({
             setAlbumID={setAlbumID}
             data={item.added_at}
             duration={item.track.duration_ms}
+            uri={item.track.uri}
+            list={list}
+            playlistId={playlist.id}
+            addedTrack={listIds[playlist?.tracks.items.indexOf(item)]}
+            setPlaylists={setPlaylists}
             setRandomColor={setRandomColor}
             isPlaying={(item.track.id === audio.dataset.track_id) ? true : false}
           />
