@@ -135,7 +135,7 @@ function PlaylistPage({
       />
 
       <div className="tracklist-table">
-        <PageControlPanel color={randomColor} setIconHeart={false} />
+        <PageControlPanel color={randomColor} setIconHeart={false} playlist={playlist} />
         <div className="tracklist-table_title">
           <div className="title-number">#</div>
           <div className="title-info">title</div>

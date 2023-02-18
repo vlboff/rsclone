@@ -99,7 +99,7 @@ function ArtistPage({
       />
 
       <div className="tracklist-table">
-        <PageControlPanel color={randomColor} setIconHeart={false} />
+        <PageControlPanel color={randomColor} setIconHeart={false} topTracks={topTracks} />
       </div>
 
       <div className="popular-tracks">

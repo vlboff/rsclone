@@ -96,7 +96,7 @@ function TrackPage({
       />
 
       <div className="tracklist-table">
-        <PageControlPanel color={randomColor} setIconHeart={true} />
+        <PageControlPanel color={randomColor} setIconHeart={true} track={track} />
       </div>
 
       <div className="popular-tracks">
