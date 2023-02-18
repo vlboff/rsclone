@@ -1,5 +1,6 @@
 import React from "react";
 import { IconPlayCard, IconHeart } from "../icons";
+import { handleBigGreenButton } from "../utils/playback";
 
 interface IPageControlPanel {
   color: string;
@@ -16,7 +17,11 @@ function PageControlPanel({ color, setIconHeart }: IPageControlPanel) {
         }}
       ></div>
       <div className="control-panel">
-        <div className="play-btn">
+        <div className="play-btn" onClick={() => {
+          const id = (document.querySelector('.playback') as HTMLAudioElement).dataset.track_id;
+          handleBigGreenButton(id);
+        }
+        }>
           <IconPlayCard height={28} width={28} />
         </div>
         {setIconHeart ? (
