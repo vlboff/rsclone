@@ -154,6 +154,7 @@ function Mix({
       ? 
       <div style={{ top: position.y, left: position.x }} className={active ? 'modal-context hidden' : 'modal-context'} hidden>
         <button className='modal-btn context-btn' onClick={deletePlaylist} >Delete</button>
+        <button className='modal-btn context-btn'>Edit playlist</button>
       </div>
       : ''}
     </>
