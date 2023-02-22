@@ -16,6 +16,7 @@ import { getUserId } from "./api/getUserId";
 import AlbumPage from "./pages/AlbumPage";
 import TrackPage from "./pages/TrackPage";
 import ArtistPage from "./pages/ArtistPage";
+import SectionPage from "./pages/SectionPage";
 
 function App() {
   const CLIENT_ID = "1f1f06f4b7fc4796921496a5f9a14d20";
@@ -28,10 +29,12 @@ function App() {
   const [albumID, setAlbumID] = useState<string>("");
   const [artistID, setArtistID] = useState<string>("");
   const [trackID, setTrackID] = useState<string>("");
+  const [categoryID, setCategoryID] = useState<string>("");
   const [randomColor, setRandomColor] = useState<string>("");
+  const [categoryName, setCategoryName] = useState<string>("");
 
   const [playlistName, setPlaylistName] = useState<string>("");
-  const [userId, setUserId] = useState<string>('');
+  const [userId, setUserId] = useState<string>("");
   const [myPlaylists, setMyPlaylists] = useState<[]>([]);
   const [headerName, setHeaderName] = useState<string>("");
 
@@ -74,7 +77,7 @@ function App() {
       ) : (
         <main>
           <SettingsBar headerName={headerName} />
-          <NavBar 
+          <NavBar
             userId={userId}
             myPlaylists={myPlaylists}
             setUserId={setUserId}
@@ -93,6 +96,8 @@ function App() {
                   <HomePage
                     setPlaylistsID={setPlaylistsID}
                     setRandomColor={setRandomColor}
+                    setCategoryID={setCategoryID}
+                    setCategoryName={setCategoryName}
                   />
                 }
               />
@@ -108,8 +113,8 @@ function App() {
                   />
                 }
               />
-              <Route 
-                path="/library" 
+              <Route
+                path="/library"
                 element={
                   <Library
                     setPlaylistsID={setPlaylistsID}
@@ -119,10 +124,10 @@ function App() {
                     setMyPlaylists={setMyPlaylists}
                     setUserId={setUserId}
                   />
-                } 
+                }
               />
-              <Route 
-                path="/library/liked-tracks" 
+              <Route
+                path="/library/liked-tracks"
                 element={
                   <SavedTracksPage
                     randomColor={randomColor}
@@ -131,7 +136,7 @@ function App() {
                     setAlbumID={setAlbumID}
                     setRandomColor={setRandomColor}
                   />
-                } 
+                }
               />
               <Route
                 path={`/playlist/${playlistID}`}
@@ -188,6 +193,17 @@ function App() {
                     setAlbumID={setAlbumID}
                     setHeaderName={setHeaderName}
                     setRandomColor={setRandomColor}
+                  />
+                }
+              />
+              <Route
+                path={`/section/${categoryID}`}
+                element={
+                  <SectionPage
+                    setPlaylistsID={setPlaylistsID}
+                    setRandomColor={setRandomColor}
+                    categoryID={categoryID}
+                    categoryName={categoryName}
                   />
                 }
               />
