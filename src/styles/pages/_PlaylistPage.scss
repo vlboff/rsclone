@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
   display: grid;
-  grid-template-columns: [index] 16px [first] 6fr [var1] 4fr [var2] 3fr [last] minmax(120px,1fr);
+  grid-template-columns: [index] 16px [first] 6fr [var1] 4fr [var2] 3fr [last] minmax(120px, 1fr);
   height: 36px;
   grid-gap: 16px;
   align-items: center;
@@ -37,6 +37,11 @@
   height: 1px;
   background-color: #b3b3b3;
   opacity: 0.3;
+}
+
+.no-tracks_ad {
+  color: #FFFFFF;
+  font-size: 1.5rem;
 }
 
 .copyrights {

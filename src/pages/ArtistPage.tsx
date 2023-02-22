@@ -52,7 +52,7 @@ function ArtistPage({
   if (topTracks) {
     currentArtistTracks = topTracks;
   }
-  const audio = document.querySelector('.playback') as HTMLAudioElement;
+  const audio = document.querySelector(".playback") as HTMLAudioElement;
 
   useEffect(() => {
     if (artistID.length > 0) {
@@ -104,19 +104,27 @@ function ArtistPage({
 
       <div className="popular-tracks">
         <div className="popular-tracks_title">Popular</div>
-        {topTracks?.tracks.map((item, index) => (
-          <TracklistRow
-            key={`${item.name}${Math.random()}`}
-            number={index + 1}
-            image={item.album.images[0].url}
-            name={item.name}
-            trackID={item.id}
-            setTrackID={setTrackID}
-            duration={item.duration_ms}
-            setRandomColor={setRandomColor}
-            isPlaying={(item.id === audio.dataset.track_id) ? true : false}
-          />
-        ))}
+        {topTracks ? (
+          topTracks.tracks.length > 0 ? (
+            topTracks.tracks.map((item, index) => (
+              <TracklistRow
+                key={`${item.name}${Math.random()}`}
+                number={index + 1}
+                image={item.album.images[0].url}
+                name={item.name}
+                trackID={item.id}
+                setTrackID={setTrackID}
+                duration={item.duration_ms}
+                setRandomColor={setRandomColor}
+                isPlaying={item.id === audio.dataset.track_id ? true : false}
+              />
+            ))
+          ) : (
+            <p className="no-tracks_ad">Sorry... No trial version of tracks</p>
+          )
+        ) : (
+          ""
+        )}
       </div>
 
       <ArtistsAlbumsBlock

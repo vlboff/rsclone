@@ -24,7 +24,7 @@ function AlbumPage({
 }: IAlbumPage) {
   const token = window.localStorage.getItem("token");
   const [album, setAlbum] = useState<IAlbum | null>(null);
-  const audio = document.querySelector('.playback') as HTMLAudioElement;
+  const audio = document.querySelector(".playback") as HTMLAudioElement;
 
   useEffect(() => {
     if (albumID.length > 0) {
@@ -66,20 +66,24 @@ function AlbumPage({
           </div>
         </div>
         <div className="line"></div>
-        {album?.tracks.items.map((item) => (
-          <TracklistRow
-            key={`${item.name}${Math.random()}`}
-            number={item.track_number}
-            name={item.name}
-            trackID={item.id}
-            setTrackID={setTrackID}
-            artist={item.artists[0].name}
-            artistID={item.artists[0].id}
-            duration={item.duration_ms}
-            setRandomColor={setRandomColor}
-            isPlaying={(item.id === audio.dataset.track_id) ? true : false}
-          />
-        ))}
+        {album.tracks.items.length > 0 ? (
+          album.tracks.items.map((item) => (
+            <TracklistRow
+              key={`${item.name}${Math.random()}`}
+              number={item.track_number}
+              name={item.name}
+              trackID={item.id}
+              setTrackID={setTrackID}
+              artist={item.artists[0].name}
+              artistID={item.artists[0].id}
+              duration={item.duration_ms}
+              setRandomColor={setRandomColor}
+              isPlaying={item.id === audio.dataset.track_id ? true : false}
+            />
+          ))
+        ) : (
+          <p className="no-tracks_ad">Sorry... No trial version of tracks</p>
+        )}
         <div className="copyrights">
           <div className="copyrights-date">
             {getCopyrightsDate(album.release_date)}
