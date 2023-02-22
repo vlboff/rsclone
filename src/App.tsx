@@ -110,6 +110,8 @@ function App() {
                     setArtistID={setArtistID}
                     setTrackID={setTrackID}
                     setRandomColor={setRandomColor}
+                    setCategoryID={setCategoryID}
+                    setCategoryName={setCategoryName}
                   />
                 }
               />

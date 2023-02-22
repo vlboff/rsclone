@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import { ICategory, ISearchResult } from '../components/interfaces/apiInterfaces';
-import { SearchIcon } from '../icons'
-import { searchItems } from '../api/searchItems';
-import { getCategories } from '../api/getCategories';
-import CategoryCard from '../components/CategoryCard';
-import { Link, Route, Routes, useNavigate } from 'react-router-dom';
-import TracksSearchPage from './TracksSearchPage';
-import AllSearchPage from './AllSearchPage';
-import ArtistsSearchPage from './ArtistsSearchPage';
-import AlbumsSearchPage from './AlbumsSearchPage';
+import React, { useEffect, useState } from "react";
+import {
+  ICategory,
+  ISearchResult,
+} from "../components/interfaces/apiInterfaces";
+import { SearchIcon } from "../icons";
+import { searchItems } from "../api/searchItems";
+import { getCategories } from "../api/getCategories";
+import CategoryCard from "../components/CategoryCard";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import TracksSearchPage from "./TracksSearchPage";
+import AllSearchPage from "./AllSearchPage";
+import ArtistsSearchPage from "./ArtistsSearchPage";
+import AlbumsSearchPage from "./AlbumsSearchPage";
 
 interface ISearchPage {
   setPlaylistsID: React.Dispatch<React.SetStateAction<string>>;
@@ -16,6 +19,8 @@ interface ISearchPage {
   setArtistID: React.Dispatch<React.SetStateAction<string>>;
   setTrackID: React.Dispatch<React.SetStateAction<string>>;
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
+  setCategoryID: React.Dispatch<React.SetStateAction<string>>;
+  setCategoryName: React.Dispatch<React.SetStateAction<string>>;
 }
 
 function SearchPage({
@@ -24,11 +29,15 @@ function SearchPage({
   setArtistID,
   setTrackID,
   setRandomColor,
+  setCategoryID,
+  setCategoryName,
 }: ISearchPage) {
   const token = window.localStorage.getItem("token");
   const [searchKey, setSearchKey] = useState("");
   const [searchResult, setSearchResult] = useState<ISearchResult | null>(null);
   const [categories, setCategories] = useState([]);
+
+  console.log(categories);
 
   useEffect(() => {
     async function foo() {
@@ -38,17 +47,17 @@ function SearchPage({
   }, [token]);
 
   const navigate = useNavigate();
-  
+
   useEffect(() => {
-    if (searchKey === '') navigate('/search');
-  }, [searchKey, navigate])
+    if (searchKey === "") navigate("/search");
+  }, [searchKey, navigate]);
 
   function toggleTagClass(e: React.MouseEvent<Element, MouseEvent>) {
-    const links = Array.from(document.querySelectorAll('.search-tag'));
-    links.forEach(link => {
-      link.classList.remove('search-tag_active');
+    const links = Array.from(document.querySelectorAll(".search-tag"));
+    links.forEach((link) => {
+      link.classList.remove("search-tag_active");
     });
-    (e.target as HTMLLinkElement).classList.add('search-tag_active');
+    (e.target as HTMLLinkElement).classList.add("search-tag_active");
   }
 
   function renderSearchResult() {
@@ -67,10 +76,34 @@ function SearchPage({
             ) : (
               <>
                 <div className="search-tags">
-                  <Link to="" className='search-tag search-tag_active' onClick={(e) => toggleTagClass(e)}>All</Link>
-                  <Link to={`${searchKey}/artists`} className='search-tag' onClick={(e) => toggleTagClass(e)}>Artists</Link>
-                  <Link to={`${searchKey}/tracks`} className='search-tag' onClick={(e) => toggleTagClass(e)}>Songs</Link>
-                  <Link to={`${searchKey}/albums`} className='search-tag' onClick={(e) => toggleTagClass(e)}>Albums</Link>
+                  <Link
+                    to=""
+                    className="search-tag search-tag_active"
+                    onClick={(e) => toggleTagClass(e)}
+                  >
+                    All
+                  </Link>
+                  <Link
+                    to={`${searchKey}/artists`}
+                    className="search-tag"
+                    onClick={(e) => toggleTagClass(e)}
+                  >
+                    Artists
+                  </Link>
+                  <Link
+                    to={`${searchKey}/tracks`}
+                    className="search-tag"
+                    onClick={(e) => toggleTagClass(e)}
+                  >
+                    Songs
+                  </Link>
+                  <Link
+                    to={`${searchKey}/albums`}
+                    className="search-tag"
+                    onClick={(e) => toggleTagClass(e)}
+                  >
+                    Albums
+                  </Link>
                 </div>
                 <Routes>
                   <Route
@@ -86,8 +119,16 @@ function SearchPage({
                       />
                     }
                   />
-                  <Route path=":searchKey/artists" element={<ArtistsSearchPage searchKey={searchKey} setPlaylistsID={setPlaylistsID}
-                    setRandomColor={setRandomColor} />} />
+                  <Route
+                    path=":searchKey/artists"
+                    element={
+                      <ArtistsSearchPage
+                        searchKey={searchKey}
+                        setPlaylistsID={setPlaylistsID}
+                        setRandomColor={setRandomColor}
+                      />
+                    }
+                  />
                   <Route
                     path=":searchKey/tracks"
                     element={
@@ -99,8 +140,16 @@ function SearchPage({
                       />
                     }
                   />
-                  <Route path=":searchKey/albums" element={<AlbumsSearchPage searchKey={searchKey} setPlaylistsID={setPlaylistsID}
-                    setRandomColor={setRandomColor} />} />
+                  <Route
+                    path=":searchKey/albums"
+                    element={
+                      <AlbumsSearchPage
+                        searchKey={searchKey}
+                        setPlaylistsID={setPlaylistsID}
+                        setRandomColor={setRandomColor}
+                      />
+                    }
+                  />
                 </Routes>
               </>
             )}
@@ -119,8 +168,9 @@ function SearchPage({
             className="search__input"
             type="text"
             placeholder="What do you want to listen to?"
-            onChange={(e) => {setSearchKey(e.target.value)}
-            }
+            onChange={(e) => {
+              setSearchKey(e.target.value);
+            }}
             onKeyUp={async () =>
               setSearchResult(await searchItems(searchKey, token))
             }
@@ -139,11 +189,19 @@ function SearchPage({
             {categories.length > 0
               ? categories.map((category: ICategory) => {
                   return (
-                    <CategoryCard
-                      image={category.icons[0].url}
-                      name={category.name}
-                      key={category.name}
-                    />
+                    <Link
+                      to={`/section/${category.id}`}
+                      onClick={() => {
+                        setCategoryID(category.id);
+                        setCategoryName(category.name);
+                      }}
+                    >
+                      <CategoryCard
+                        image={category.icons[0].url}
+                        name={category.name}
+                        key={category.name}
+                      />
+                    </Link>
                   );
                 })
               : ""}
