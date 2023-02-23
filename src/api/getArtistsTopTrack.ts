@@ -12,5 +12,8 @@ export async function getArtistsTopTrack(token: string | null, id: string) {
       },
     }
   );
+
+  const filteredTracks = data.tracks.filter((item: { preview_url: null; }) => item.preview_url !== null);
+  data.tracks = filteredTracks;
   return data;
 }

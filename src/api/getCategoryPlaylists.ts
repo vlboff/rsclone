@@ -11,7 +11,7 @@ export async function getCategoryPlaylists(
         Authorization: `Bearer ${token}`,
       },
       params: {
-        limit: 7,
+        limit: 10,
         country: "BY",
       },
     }

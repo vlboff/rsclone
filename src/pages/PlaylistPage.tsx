@@ -33,11 +33,11 @@ function PlaylistPage({
 }: IPlaylistPage) {
   const token = window.localStorage.getItem("token");
   const [playlist, setPlaylists] = useState<IPlaylist | null>(null);
-  const [list, setList] = useState<[]>([])
-  const [strId, setStrId] = useState('')
+  const [list, setList] = useState<[]>([]);
+  const [strId, setStrId] = useState("");
   const [listIds, setListIds] = useState([]);
 
-  const audio = document.querySelector('.playback') as HTMLAudioElement;
+  const audio = document.querySelector(".playback") as HTMLAudioElement;
 
   if (playlist) {
     currentPlaylist = playlist;
@@ -55,8 +55,8 @@ function PlaylistPage({
   useEffect(() => {
     setHeaderName(playlist ? playlist.name : "");
 
-    if(playlist !== null) {
-      setStrId(getTracksIds())
+    if (playlist !== null) {
+      setStrId(getTracksIds());
     }
   }, [playlist]);
 
@@ -68,11 +68,11 @@ function PlaylistPage({
 
   useEffect(() => {
     async function getListOfSavedPlaylists() {
-      let id = await getUserId(token)
-      setList(await getUserPlaylist(token, id))
+      let id = await getUserId(token);
+      setList(await getUserPlaylist(token, id));
     }
-    getListOfSavedPlaylists()
-  }, [])
+    getListOfSavedPlaylists();
+  }, []);
 
   const getFollowers = (followers: string) => {
     const reverse = followers.split("").reverse().join("");
@@ -98,34 +98,38 @@ function PlaylistPage({
       : playlist?.followers.total;
 
   function getTracksIds() {
-      let ids = ''
-      let index = 0
+    let ids = "";
+    let index = 0;
 
-      playlist?.tracks.items.forEach((item) => {
-        if(index === 50) {
-          return ids
-        }
-        ids += item.track.id + ','
-        index++
-      })
-      return ids
-    }
+    playlist?.tracks.items.forEach((item) => {
+      if (index === 50) {
+        return ids;
+      }
+      ids += item.track.id + ",";
+      index++;
+    });
+    return ids;
+  }
 
   useEffect(() => {
-    if(strId) {
+    if (strId) {
       const checkTrack = async () => {
-        let result = await checkSavedTracks(token, strId)
-        setListIds(result)
-      }
-      checkTrack()
+        let result = await checkSavedTracks(token, strId);
+        setListIds(result);
+      };
+      checkTrack();
     }
-  }, [strId])
+  }, [strId]);
 
   return playlist ? (
     <div className="playlist-page">
       <SongAlbumPlaylistPageHeader
         color={randomColor}
-        image={playlist.images.length ? playlist.images[0].url : 'https://lab.possan.se/thirtify/images/placeholder-playlist.png'}
+        image={
+          playlist.images.length
+            ? playlist.images[0].url
+            : "https://lab.possan.se/thirtify/images/placeholder-playlist.png"
+        }
         title={"playlist"}
         name={playlist.name}
         description={playlist.description}
@@ -135,7 +139,7 @@ function PlaylistPage({
       />
 
       <div className="tracklist-table">
-        <PageControlPanel color={randomColor} setIconHeart={false} />
+        <PageControlPanel color={randomColor} setIconHeart={false} playlist={playlist} />
         <div className="tracklist-table_title">
           <div className="title-number">#</div>
           <div className="title-info">title</div>
@@ -146,31 +150,41 @@ function PlaylistPage({
           </div>
         </div>
         <div className="line"></div>
-        {playlist?.tracks.items.map((item, index) => (
-          <TracklistRow
-            key={`${item.track.name}${Math.random()}`}
-            number={index + 1}
-            image={item.track.album.images[0].url}
-            name={item.track.name}
-            trackID={item.track.id}
-            setTrackID={setTrackID}
-            artist={item.track.artists[0].name}
-            artistID={item.track.artists[0].id}
-            setArtistID={setArtistID}
-            album={item.track.album.name}
-            albumID={item.track.album.id}
-            setAlbumID={setAlbumID}
-            data={item.added_at}
-            duration={item.track.duration_ms}
-            uri={item.track.uri}
-            list={list}
-            playlistId={playlist.id}
-            addedTrack={listIds[playlist?.tracks.items.indexOf(item)]}
-            setPlaylists={setPlaylists}
-            setRandomColor={setRandomColor}
-            isPlaying={(item.track.id === audio.dataset.track_id) ? true : false}
-          />
-        ))}
+        {playlist ? (
+          playlist.tracks.items.length > 0 ? (
+            playlist.tracks.items.map((item, index) => (
+              <TracklistRow
+                key={`${item.track.name}${Math.random()}`}
+                number={index + 1}
+                image={item.track.album.images[0].url}
+                name={item.track.name}
+                trackID={item.track.id}
+                setTrackID={setTrackID}
+                artist={item.track.artists[0].name}
+                artistID={item.track.artists[0].id}
+                setArtistID={setArtistID}
+                album={item.track.album.name}
+                albumID={item.track.album.id}
+                setAlbumID={setAlbumID}
+                data={item.added_at}
+                duration={item.track.duration_ms}
+                uri={item.track.uri}
+                list={list}
+                playlistId={playlist.id}
+                addedTrack={listIds[playlist?.tracks.items.indexOf(item)]}
+                setPlaylists={setPlaylists}
+                setRandomColor={setRandomColor}
+                isPlaying={
+                  item.track.id === audio.dataset.track_id ? true : false
+                }
+              />
+            ))
+          ) : (
+            <p className="no-tracks_ad">Sorry... No trial version of tracks</p>
+          )
+        ) : (
+          ""
+        )}
       </div>
     </div>
   ) : (
