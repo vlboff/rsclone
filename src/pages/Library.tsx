@@ -5,6 +5,8 @@ import { getUserPlaylist } from '../api/getUserPlaylist';
 import Mix from '../components/Mix';
 import { IPlaylistsItems } from '../components/interfaces/apiInterfaces';
 import { getUserId } from '../api/getUserId';
+import EditPlaylist from '../components/EditPlaylist';
+import { changePlaylistDetails } from '../api/changePlaylistDetails';
 
 interface ILibraryPage {
   setPlaylistsID: React.Dispatch<React.SetStateAction<string>>;

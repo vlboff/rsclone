@@ -33,6 +33,7 @@ import { ReactComponent as IconPlayTracklistRow } from "./assets/icons/play-trac
 import { ReactComponent as IconPreloader } from "./assets/icons/preloader.svg";
 import { ReactComponent as IconActiveLike } from './assets/icons/like-active.svg';
 import { ReactComponent as IconOptions } from './assets/icons/options.svg';
+import { ReactComponent as IconCancel } from './assets/icons/cancel.svg';
 
 export {
   IconHeart, 
@@ -70,4 +71,5 @@ export {
   IconPreloader,
   IconActiveLike,
   IconOptions,
+  IconCancel,
 };

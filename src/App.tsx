@@ -15,6 +15,7 @@ import SavedTracksPage from "./pages/SavedTracksPage";
 import AlbumPage from "./pages/AlbumPage";
 import TrackPage from "./pages/TrackPage";
 import ArtistPage from "./pages/ArtistPage";
+import EditPlaylist from "./components/EditPlaylist";
 import SectionPage from "./pages/SectionPage";
 
 function App() {

@@ -4,6 +4,8 @@ import { IconPlayCard } from "../icons";
 import { removePlaylist } from "../api/removePlaylist";
 import { getUserPlaylist } from "../api/getUserPlaylist";
 import { getUserId } from '../api/getUserId';
+import { changePlaylistDetails } from "../api/changePlaylistDetails";
+import EditPlaylist from '../components/EditPlaylist';
 
 interface IMix {
   image: string;
@@ -34,12 +36,13 @@ function Mix({
   setRandomColor,
   userId,
   setMyPlaylists,
-  circle,
+  circle
 }: IMix) {
   const [activeCardMode, setActiveCardMode] = useState("");
   const [active, setActive] = useState(true);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const token = window.localStorage.getItem('token');
+  const [modalActive, setModalActive] = useState(false);
 
   const dscrWithoutLinks = (description: string) => {
     if (description.includes("<")) {
@@ -107,7 +110,6 @@ function Mix({
     }
   };
 
-
   return (
     <>
       <div
@@ -154,10 +156,25 @@ function Mix({
       ? 
       <div style={{ top: position.y, left: position.x }} className={active ? 'modal-context hidden' : 'modal-context'} hidden>
         <button className='modal-btn context-btn' onClick={deletePlaylist} >Delete</button>
+        <button 
+          className='modal-btn context-btn' 
+          onClick={() => setModalActive(!modalActive)}
+        >
+          Edit playlist
+        </button>
       </div>
       : ''}
+
+      {modalActive ?
+        <EditPlaylist
+          setModalActive={setModalActive}
+          modalActive={modalActive}
+          playlistID={playlistID ? playlistID : ''}
+          userId={userId ? userId : ''}
+          setMyPlaylists={setMyPlaylists}
+        />
+        : ''}
     </>
-    
   );
 }
 
