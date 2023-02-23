@@ -12,6 +12,7 @@ const ModalWindow = ({ children, visible, setVisible }: IModalChildren) => {
     rootClasses.push('modal-window_active');
   }
 
+  console.log(children)
   return (
     <div className={rootClasses.join(' ')} onClick={() => {
       setVisible(false);

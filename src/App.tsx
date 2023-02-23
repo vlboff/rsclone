@@ -16,6 +16,7 @@ import { getUserId } from "./api/getUserId";
 import AlbumPage from "./pages/AlbumPage";
 import TrackPage from "./pages/TrackPage";
 import ArtistPage from "./pages/ArtistPage";
+import EditPlaylist from "./components/EditPlaylist";
 
 function App() {
   const CLIENT_ID = "1f1f06f4b7fc4796921496a5f9a14d20";

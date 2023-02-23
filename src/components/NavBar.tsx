@@ -13,6 +13,7 @@ import {
 import { getUserId } from "../api/getUserId";
 import { createPlaylist } from '../api/createPlaylist';
 import { getUserPlaylist } from '../api/getUserPlaylist';
+import EditPlaylist from "./EditPlaylist";
 
 interface IListItem {
   icon: React.SVGProps<SVGSVGElement>;
@@ -85,6 +86,7 @@ function NavBar({userId, myPlaylists, setUserId, setMyPlaylists}: INavBar) {
       : (item.icon as React.SVGProps<SVGSVGElement>);
 
   const token = window.localStorage.getItem('token');
+  const [activeModal, setActiveModal] = useState(false)
 
   useEffect(() => {
     async function getUser() {
@@ -93,37 +95,46 @@ function NavBar({userId, myPlaylists, setUserId, setMyPlaylists}: INavBar) {
     getUser()
   }, [])
 
-  const createNewPlaylist = async () => {
-    await createPlaylist(token, userId);
+  const createNewPlaylist = async (name: string, description: string) => {
+    await createPlaylist(token, userId, name, description);
     setMyPlaylists(await getUserPlaylist(token, userId))
   }
 
   return (
-    <nav className="nav-bar">
-      <div className="nav-bar_logo">
-        <IconSpotifyLogo fill="white" stroke="white" />
-      </div>
-      <ul>
-        {listItem.map((item) => (
-          <li
-            key={item.name}
-            onClick={() => setActiveMode(item.name)}
-            className={item.name === activeMode ? "active" : ""}
+    <>
+       <nav className="nav-bar">
+        <div className="nav-bar_logo">
+          <IconSpotifyLogo fill="white" stroke="white" />
+        </div>
+        <ul>
+          {listItem.map((item) => (
+            <li
+              key={item.name}
+              onClick={() => setActiveMode(item.name)}
+              className={item.name === activeMode ? "active" : ""}
+            >
+              <NavLink to={item.page}>
+                <>{isActive(item)}</>
+                <p>{item.name}</p>
+              </NavLink>
+            </li>
+          ))}
+          <li 
+            onClick={() => setActiveModal(!activeModal)}
           >
-            <NavLink to={item.page}>
-              <>{isActive(item)}</>
-              <p>{item.name}</p>
-            </NavLink>
+            <IconAddPlayListIcon/>
+            <span>Create Playlist</span>
           </li>
-        ))}
-        <li 
-          onClick={() => createNewPlaylist()}
-        >
-          <IconAddPlayListIcon/>
-          <span>Create Playlist</span>
-        </li>
-      </ul>
-    </nav>
+        </ul>
+      </nav>
+      <EditPlaylist
+        createNewPlaylist={createNewPlaylist}
+        modalActive={activeModal}
+        setModalActive={setActiveModal}
+        userId={userId}
+      />
+    </>
+   
   );
 }
 
