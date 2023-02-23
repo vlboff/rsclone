@@ -9,5 +9,8 @@ export async function getAlbum(token: string | null, id: string) {
       market: "BY",
     },
   });
+
+  const filteredTracks = data.tracks.items.filter((item: {preview_url: null; }) => item.preview_url !== null);
+  data.tracks.items = filteredTracks;
   return data;
 }

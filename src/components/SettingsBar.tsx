@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  ArrowRightIcon,
-  ArrowLeftIcon,
-  IconPlayCard,
-} from "../icons";
+import { ArrowRightIcon, ArrowLeftIcon, IconPlayCard } from "../icons";
 import ButtonMenu from "./ButtonMenu";
 import { useAppSelector } from "../store/hook";
 import { useNavigate } from "react-router-dom";

@@ -46,9 +46,9 @@ function TrackPage({
   const [topTracks, setTopTracks] = useState<IArtistsTopTrecks | null>(null);
   const [albums, setAlbums] = useState<IArtistsAlbums | null>(null);
   const [album, setAlbum] = useState<IAlbum | null>(null);
-  const audio = document.querySelector('.playback') as HTMLAudioElement;
+  const audio = document.querySelector(".playback") as HTMLAudioElement;
   if (topTracks) {
-    currentTopTracks = topTracks
+    currentTopTracks = topTracks;
   }
   useEffect(() => {
     setHeaderName(track ? track.name : "");
@@ -105,19 +105,27 @@ function TrackPage({
           {track.album.artists[0].name}
         </div>
 
-        {topTracks?.tracks.map((item, index) => (
-          <TracklistRow
-            key={`${item.name}${Math.random()}`}
-            number={index + 1}
-            image={item.album.images[0].url}
-            name={item.name}
-            trackID={item.id}
-            setTrackID={setTrackID}
-            duration={item.duration_ms}
-            setRandomColor={setRandomColor}
-            isPlaying={(item.id === audio.dataset.track_id) ? true : false}
-          />
-        ))}
+        {topTracks ? (
+          topTracks.tracks.length > 0 ? (
+            topTracks.tracks.map((item, index) => (
+              <TracklistRow
+                key={`${item.name}${Math.random()}`}
+                number={index + 1}
+                image={item.album.images[0].url}
+                name={item.name}
+                trackID={item.id}
+                setTrackID={setTrackID}
+                duration={item.duration_ms}
+                setRandomColor={setRandomColor}
+                isPlaying={item.id === audio.dataset.track_id ? true : false}
+              />
+            ))
+          ) : (
+            <p className="no-tracks_ad">Sorry... No trial version of tracks</p>
+          )
+        ) : (
+          ""
+        )}
       </div>
 
       <ArtistsAlbumsBlock
@@ -151,20 +159,28 @@ function TrackPage({
           </div>
         </div>
 
-        {album?.tracks.items.map((item) => (
-          <TracklistRow
-            key={`${item.name}${Math.random()}`}
-            number={item.track_number}
-            name={item.name}
-            trackID={item.id}
-            setTrackID={setTrackID}
-            artist={item.artists[0].name}
-            artistID={item.artists[0].id}
-            duration={item.duration_ms}
-            setRandomColor={setRandomColor}
-            isPlaying={(item.id === audio.dataset.track_id) ? true : false}
-          />
-        ))}
+        {album ? (
+          album.tracks.items.length > 0 ? (
+            album.tracks.items.map((item) => (
+              <TracklistRow
+                key={`${item.name}${Math.random()}`}
+                number={item.track_number}
+                name={item.name}
+                trackID={item.id}
+                setTrackID={setTrackID}
+                artist={item.artists[0].name}
+                artistID={item.artists[0].id}
+                duration={item.duration_ms}
+                setRandomColor={setRandomColor}
+                isPlaying={item.id === audio.dataset.track_id ? true : false}
+              />
+            ))
+          ) : (
+            <p className="no-tracks_ad">Sorry... No trial version of tracks</p>
+          )
+        ) : (
+          ""
+        )}
 
         <div className="copyrights">
           <div className="copyrights-date">
