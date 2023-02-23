@@ -1,5 +1,6 @@
 .card-wrapper {
   position: relative;
+  cursor: pointer;
 }
 
 .card {
@@ -12,7 +13,6 @@
   padding: 20px;
   background: #181818;
   border-radius: 6px;
-  cursor: pointer;
 }
 
 
@@ -79,11 +79,11 @@
   box-shadow: 0 8px 8px rgb(0 0 0 / 30%);
 }
 
-.card-play-btn:hover {
-  transform: scale(1.1);
-  transition: all 0.5s;
-  cursor: default;
-}
+// .card-play-btn:hover {
+//   transform: scale(1.1);
+//   transition: all 0.5s;
+//   cursor: default;
+// }
 
 .hover {
   display: flex;

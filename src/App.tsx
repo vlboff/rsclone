@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { HashRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import PlayingBar from "./components/view/PlayingBar";
 import AuthPage from "./pages/AuthPage";
@@ -12,7 +12,6 @@ import PlaylistPage from "./pages/PlaylistPage";
 import { useAppDispatch } from "./store/hook";
 import { addScrollHeight } from "./store/scrollHeightSlice";
 import SavedTracksPage from "./pages/SavedTracksPage";
-import { getUserId } from "./api/getUserId";
 import AlbumPage from "./pages/AlbumPage";
 import TrackPage from "./pages/TrackPage";
 import ArtistPage from "./pages/ArtistPage";
