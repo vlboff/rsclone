@@ -92,9 +92,9 @@ function SettingsBar({ headerName }: ISettingsBar) {
           </button>
         </div>
         <div className={`settings-bar__control  ${activeMode}`}>
-          <div className="play-btn">
+          {/* <div className="play-btn">
             <IconPlayCard height={24} width={24} />
-          </div>
+          </div> */}
           <p className="playlist-name">{headerName}</p>
         </div>
       </div>
