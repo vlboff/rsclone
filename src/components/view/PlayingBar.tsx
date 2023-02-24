@@ -75,9 +75,6 @@ function PlayingBar() {
                 <p className="track-author_link"></p>
               </div>
             </div>
-            <button className="add-button player-tool-button">
-              <IconHeart />
-            </button>
           </div>
           <div className="player-controls">
             <div className="player-controls__buttons">
