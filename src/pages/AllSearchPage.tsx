@@ -47,13 +47,13 @@ function AllSearchPage({
           {searchResult.tracks.items.slice(0, 4).map((item) => {
             return (
               <SearchResultSong
-                image={item.album.images[0].url}
+                image={item.album!.images[0].url}
                 name={item.name}
                 author={item.artists[0].name}
                 artistID={item.artists[0].id}
                 duration={convertTrackTime(item.duration_ms)}
                 id={item.id}
-                key={item.id + item.album.images[0].url}
+                key={item.id + item.album!.images[0].url}
                 setTrackID={setTrackID}
                 setRandomColor={setRandomColor}
                 setArtistID={setArtistID}

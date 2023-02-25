@@ -1,6 +1,7 @@
 import { getTrack } from "../api/getTrack";
 import { searchedTracks } from "../api/searchItems";
 import { IResponseTrack } from "../components/interfaces/apiInterfaces";
+import { currentAlbumTracks } from "../pages/AlbumPage";
 import { currentArtistTracks } from "../pages/ArtistPage";
 import { currentPlaylist } from "../pages/PlaylistPage";
 import { currentTopTracks } from "../pages/TrackPage";
@@ -95,8 +96,8 @@ function switchAllTracksIconsToPlay() {
 function showCoverArts(data: IResponseTrack) {
   const coverArt = (document.querySelector('.cover-art') as HTMLElement).querySelector('img') as HTMLImageElement;
   const coverArtExpanded = (document.querySelector('.cover-art_expanded') as HTMLElement).querySelector('img') as HTMLImageElement;
-  coverArt.src = data.album.images[0].url;
-  coverArtExpanded.src = data.album.images[0].url;
+  coverArt.src = data.album!.images[0].url;
+  coverArtExpanded.src = data.album!.images[0].url;
 }
 
 function showTrackInfo(data: IResponseTrack) {
@@ -156,6 +157,9 @@ function definePlaylistOrSearchResults() {
   };
   if (window.location.href.includes('/artist')) {
     return currentArtistTracks.tracks;
+  };
+  if (window.location.href.includes('/album')) {
+    return currentAlbumTracks.tracks.items;
   }
 }
 

@@ -44,14 +44,14 @@ function TracksSearchPage({
         <TracklistRow
           key={`${item.name}${Math.random()}`}
           number={index + 1}
-          image={item.album.images[0].url}
+          image={item.album!.images[0].url}
           name={item.name}
           trackID={item.id}
           setTrackID={setTrackID}
           artist={item.artists[0].name}
           artistID={item.artists[0].id}
-          album={item.album.name}
-          albumID={item.album.id}
+          album={item.album!.name}
+          albumID={item.album!.id}
           setAlbumID={setAlbumID}
           duration={item.duration_ms}
           setRandomColor={setRandomColor}

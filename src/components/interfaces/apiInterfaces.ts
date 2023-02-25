@@ -47,7 +47,7 @@ export interface IResponseAlbum {
 }
 
 export interface IResponseTrack {
-  album: {
+  album?: {
     album_type: string;
     artists: [
       {
@@ -82,11 +82,11 @@ export interface IResponseTrack {
     uri: string;
   };
   artists: IResponseArtist[];
-  available_markets: string[];
+  available_markets?: string[];
   disc_number: number;
   duration_ms: number;
   explicit: boolean;
-  external_ids: {
+  external_ids?: {
     isrc: string;
   };
   external_urls: {
@@ -95,8 +95,9 @@ export interface IResponseTrack {
   href: string;
   id: string;
   is_local: boolean;
+  is_playavle?: boolean;
   name: string;
-  popularity: number;
+  popularity?: number;
   preview_url: string;
   track_number: number;
   type: string;
