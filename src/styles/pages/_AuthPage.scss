@@ -46,3 +46,22 @@
 .rs-school-logo {
   width: 150px;
 }
+
+.auth-page .auth-page__preview {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+
+  .auth-page__preview__container {
+    width: 100%;
+    height: 70%;
+    border-radius: 15px 15px 0 0;
+    overflow: hidden;
+    box-shadow: 0px 0px 35px rgba(107, 107, 107, 0.678);
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
