@@ -78,10 +78,30 @@
   font-size: 14px;
   line-height: 22.4px;
   cursor: default;
+
+  a {
+    color: $text-main-color;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .track-author {
   font-size: 11px;
   line-height: 17.6px;
   cursor: default;
+
+  a {
+    color: $text-main-color;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
