@@ -44,3 +44,17 @@
 .like-btn:hover {
   fill: #FFFFFF;
 }
+
+@media (max-width: 749px)  {
+  .tracklist-table {
+    padding: 24px 4px;
+  }
+
+  .tracklist-gradient {
+    display: none;
+  }
+
+  .control-panel {
+    display: none;
+  }
+}

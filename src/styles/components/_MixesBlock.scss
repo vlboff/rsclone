@@ -33,7 +33,20 @@
 .mixes {
   display: flex;
   flex-wrap: nowrap;
-  padding-top: 20px;
-  gap: 24px;
   overflow: scroll;
+  gap: 24px;
+}
+
+.mixes::-webkit-scrollbar {
+  background: none;
+  width: 0;
+  height: 4px;
+}
+
+.mixes::-webkit-scrollbar-thumb {
+  background: #535353;
+}
+
+.mixes::-webkit-scrollbar-thumb:hover {
+  background: #b3b3b3;
 }
