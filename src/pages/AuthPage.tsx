@@ -23,8 +23,13 @@ function AuthPage(props: { AUTH_ENDPOINT: string; CLIENT_ID: string; REDIRECT_UR
           <button className="login-btn"><a href={`${props.AUTH_ENDPOINT}?client_id=${props.CLIENT_ID}&redirect_uri=${props.REDIRECT_URI}&response_type=${props.RESPONSE_TYPE}&scope=user-library-read,playlist-modify-public,user-library-modify`}>Login to Spotify</a></button>
           <div className="disclaimer__button" onClick={() => setModalWindow(!modalWindow)}>Disclaimer</div>
         </div>
-        <div className="auth-page__preview"></div>
+        <div className="auth-page__preview">
+          <div className="auth-page__preview__container">
+            <iframe src="https://www.youtube.com/embed/1HVi1fXe2q4?controls=0" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+          </div>
+        </div>
       </div>
+
       <ModalWindow visible={modalWindow} setVisible={setModalWindow}>
         <Disclaimer />
       </ModalWindow>
