@@ -132,7 +132,7 @@ function SearchPage({
                     element={
                       <ArtistsSearchPage
                         searchKey={searchKey}
-                        setPlaylistsID={setPlaylistsID}
+                        setArtistID={setArtistID}
                         setRandomColor={setRandomColor}
                       />
                     }
@@ -144,6 +144,7 @@ function SearchPage({
                         searchKey={searchKey}
                         setTrackID={setTrackID}
                         setAlbumID={setAlbumID}
+                        setArtistID={setArtistID}
                         setRandomColor={setRandomColor}
                       />
                     }
@@ -153,7 +154,7 @@ function SearchPage({
                     element={
                       <AlbumsSearchPage
                         searchKey={searchKey}
-                        setPlaylistsID={setPlaylistsID}
+                        setAlbumID={setAlbumID}
                         setRandomColor={setRandomColor}
                       />
                     }

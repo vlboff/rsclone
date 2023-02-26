@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { IAlbum, IArtistsTopTrecks } from "../components/interfaces/apiInterfaces";
+import {
+  IAlbum,
+  IArtistsTopTrecks,
+} from "../components/interfaces/apiInterfaces";
 import { IconPreloader, IconClock } from "../icons";
 import { getAlbum } from "../api/getAlbum";
 import SongAlbumPlaylistPageHeader from "../components/SongAlbumPlaylistPageHeader";
@@ -27,7 +30,7 @@ function AlbumPage({
   const token = window.localStorage.getItem("token");
   const [album, setAlbum] = useState<IAlbum | null>(null);
   const audio = document.querySelector(".playback") as HTMLAudioElement;
-  if (album ) {
+  if (album) {
     currentAlbumTracks = album;
   }
 
