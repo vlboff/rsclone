@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/rsclone/static/css/main.cb86985b.css",
+    "main.css": "/rsclone/static/css/main.e35c3caf.css",
     "main.js": "/rsclone/static/js/main.cfc672f8.js",
     "static/media/rs_school_js.svg": "/rsclone/static/media/rs_school_js.ad178c0df28bc133be34b982d62f431d.svg",
     "static/media/spotify-logo.svg": "/rsclone/static/media/spotify-logo.7265e7c216468e45fb66e2d970a8251a.svg",
@@ -39,11 +39,11 @@
     "static/media/playCard-icon.svg": "/rsclone/static/media/playCard-icon.e86b89e0b892225611878a5ad91f0848.svg",
     "static/media/button-play.svg": "/rsclone/static/media/button-play.b0e5fde6d6cfe38fed664d4dcfe39e1e.svg",
     "static/media/cancel.svg": "/rsclone/static/media/cancel.a5bbe406862bbd84f75b41e4425041c1.svg",
-    "main.cb86985b.css.map": "/rsclone/static/css/main.cb86985b.css.map",
+    "main.e35c3caf.css.map": "/rsclone/static/css/main.e35c3caf.css.map",
     "main.cfc672f8.js.map": "/rsclone/static/js/main.cfc672f8.js.map"
   },
   "entrypoints": [
-    "static/css/main.cb86985b.css",
+    "static/css/main.e35c3caf.css",
     "static/js/main.cfc672f8.js"
   ]
 }
