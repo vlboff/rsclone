@@ -9,6 +9,9 @@ import SongAlbumPlaylistPageHeader from "../components/SongAlbumPlaylistPageHead
 import PageControlPanel from "../components/PageControlPanel";
 import TracklistRow from "../components/TracklistRow";
 import { getCopyrightsDate } from "../utils/utils";
+import { getUserPlaylist } from "../api/getUserPlaylist";
+import { getUserId } from "../api/getUserId";
+import { checkSavedTracks } from "../api/checkSavedTracks";
 
 interface IAlbumPage {
   albumID: string;
@@ -34,6 +37,10 @@ function AlbumPage({
     currentAlbumTracks = album;
   }
 
+  const [list, setList] = useState<[]>([]);
+  const [strId, setStrId] = useState("");
+  const [listIds, setListIds] = useState([]);
+
   useEffect(() => {
     if (albumID.length > 0) {
       const foo = async () => {
@@ -45,7 +52,44 @@ function AlbumPage({
 
   useEffect(() => {
     setHeaderName(album ? album.name : "");
+
+    if (album !== null) {
+      setStrId(getTracksIds());
+    }
+
   }, [album]);
+
+  function getTracksIds() {
+    let ids = "";
+    let index = 0;
+
+    album?.tracks.items.forEach((item) => {
+      if (index === 50) {
+        return ids;
+      }
+      ids += item.id + ",";
+      index++;
+    });
+    return ids;
+  }
+
+  useEffect(() => {
+    if (strId) {
+      const checkTrack = async () => {
+        let result = await checkSavedTracks(token, strId);
+        setListIds(result);
+      };
+      checkTrack();
+    }
+  }, [strId]);
+
+  useEffect(() => {
+    async function getListOfSavedPlaylists() {
+      let id = await getUserId(token);
+      setList(await getUserPlaylist(token, id));
+    }
+    getListOfSavedPlaylists();
+  }, []);
 
   return album ? (
     <div className="album-page">
@@ -87,6 +131,9 @@ function AlbumPage({
               duration={item.duration_ms}
               setRandomColor={setRandomColor}
               isPlaying={item.id === audio.dataset.track_id ? true : false}
+              list={list}
+              addedTrack={listIds[album.tracks.items.indexOf(item)]}
+              uri={item.uri}
             />
           ))
         ) : (
