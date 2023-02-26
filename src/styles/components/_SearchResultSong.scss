@@ -14,13 +14,21 @@
   justify-content: space-between;
   align-items: center;
   color: $text-additional-color;
+  position: relative;
 
   &:hover {
     background-color: #282828;
 
-    button {
+    .player-tool-button:not(:last-of-type) {
       visibility: visible;
     }
+
+    .search-result-song__image {
+      button {
+        visibility: visible;
+      }
+    }
+
   }
 
   .track-info {
@@ -36,8 +44,35 @@
     }
   }
 
-  button {
+  .player-tool-button:not(:last-of-type) {
     visibility: hidden;
+  }
+
+  .search-result-song__image {
+    button {
+      visibility: hidden;
+    }
+  }
+
+  .more-info {
+    position: absolute;
+    color: white;
+    top: 0;
+    left: 73%;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    padding: 2px;
+    background-color: #282828;
+    border-radius: 4px;
+    box-shadow: 0 16px 24px rgb(0 0 0 / 30%), 0 6px 8px rgb(0 0 0 / 20%);
+  }
+
+  .hidden {
+    display: none;
   }
 }
 

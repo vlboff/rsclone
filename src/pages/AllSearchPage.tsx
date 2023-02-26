@@ -3,6 +3,10 @@ import Mix from "../components/Mix";
 import SearchResultArtist from "../components/view/SearchResultArtist";
 import SearchResultSong from "../components/view/SearchResultSong";
 import { convertTrackTime } from "../utils/utils";
+import { getUserPlaylist } from "../api/getUserPlaylist";
+import { getUserId } from "../api/getUserId";
+import { checkSavedTracks } from "../api/checkSavedTracks";
+import React, { useEffect, useState } from "react";
 
 interface ISearchPage {
   setPlaylistsID: React.Dispatch<React.SetStateAction<string>>;
@@ -21,6 +25,47 @@ function AllSearchPage({
   setArtistID,
   searchResult,
 }: ISearchPage) {
+  const [list, setList] = useState<[]>([]);
+  const [strId, setStrId] = useState("");
+  const [listIds, setListIds] = useState([]);
+  const token = window.localStorage.getItem("token");
+
+  useEffect(() => {
+    setStrId(getTracksIds());
+  }, [searchResult])
+
+  function getTracksIds() {
+    let ids = "";
+    let index = 0;
+
+    searchResult.tracks.items.forEach((item) => {
+      if (index === 50) {
+        return ids;
+      }
+      ids += item.id + ",";
+      index++;
+    });
+    return ids;
+  }
+
+  useEffect(() => {
+    if (strId.length > 0) {
+      const checkTrack = async () => {
+        let result = await checkSavedTracks(token, strId);
+        setListIds(result);
+      };
+      checkTrack();
+    }
+  }, [strId]);
+
+  useEffect(() => {
+    async function getListOfSavedPlaylists() {
+      let id = await getUserId(token);
+      setList(await getUserPlaylist(token, id));
+    }
+    getListOfSavedPlaylists();
+  }, []);
+
   return (
     <div className="render-search-results">
       <div className="render-search-results__artist-and-track-container">
@@ -57,6 +102,9 @@ function AllSearchPage({
                 setTrackID={setTrackID}
                 setRandomColor={setRandomColor}
                 setArtistID={setArtistID}
+                list={list}
+                addedTrack={listIds[searchResult.tracks.items.indexOf(item)]}
+                uri={item.uri}
               />
             );
           })}

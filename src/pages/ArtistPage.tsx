@@ -16,6 +16,9 @@ import SongAlbumPlaylistPageHeader from "../components/SongAlbumPlaylistPageHead
 import TracklistRow from "../components/TracklistRow";
 import { IconPreloader } from "../icons";
 import { getSeparateByCommas } from "../utils/utils";
+import { getUserPlaylist } from "../api/getUserPlaylist";
+import { getUserId } from "../api/getUserId";
+import { checkSavedTracks } from "../api/checkSavedTracks";
 
 interface IArtistPage {
   trackID: string;
@@ -49,6 +52,11 @@ function ArtistPage({
   const [relatedArtists, setRelatedArtist] = useState<IRelativeArtists | null>(
     null
   );
+
+  const [list, setList] = useState<[]>([]);
+  const [strId, setStrId] = useState("");
+  const [listIds, setListIds] = useState([]);
+
   if (topTracks) {
     currentArtistTracks = topTracks;
   }
@@ -78,6 +86,14 @@ function ArtistPage({
     }
   }, [artist, setHeaderName, token]);
 
+  useEffect(() => {
+
+    if (topTracks !== null) {
+      setStrId(getTracksIds());
+    }
+
+  }, [topTracks]);
+
   const followers =
     String(artist?.followers ? artist.followers.total : "").length > 3
       ? getSeparateByCommas(
@@ -86,6 +102,42 @@ function ArtistPage({
       : artist?.followers
       ? artist.followers.total
       : "";
+
+
+
+  function getTracksIds() {
+    let ids = "";
+    let index = 0;
+
+    topTracks?.tracks.forEach((item) => {
+      if (index === 50) {
+        return ids;
+      }
+      ids += item.id + ",";
+      index++;
+    });
+    return ids;
+  }
+
+  useEffect(() => {
+    if (strId) {
+      const checkTrack = async () => {
+        let result = await checkSavedTracks(token, strId);
+        setListIds(result);
+      };
+      checkTrack();
+    }
+  }, [strId]);
+
+  useEffect(() => {
+    async function getListOfSavedPlaylists() {
+      let id = await getUserId(token);
+      setList(await getUserPlaylist(token, id));
+    }
+    getListOfSavedPlaylists();
+  }, []);
+
+
 
   return artist ? (
     <div className="artist-page">
@@ -117,6 +169,9 @@ function ArtistPage({
                 duration={item.duration_ms}
                 setRandomColor={setRandomColor}
                 isPlaying={item.id === audio.dataset.track_id ? true : false}
+                list={list}
+                addedTrack={listIds[topTracks.tracks.indexOf(item)]}
+                uri={item.uri}
               />
             ))
           ) : (

@@ -37,8 +37,6 @@ function SearchPage({
   const [searchResult, setSearchResult] = useState<ISearchResult | null>(null);
   const [categories, setCategories] = useState([]);
 
-  console.log(categories);
-
   useEffect(() => {
     async function foo() {
       setCategories(await getCategories(token));

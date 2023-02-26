@@ -3,6 +3,9 @@ import { searchItems } from "../api/searchItems";
 import { IResponseTrack } from "../components/interfaces/apiInterfaces";
 import TracklistRow from "../components/TracklistRow";
 import { IconClock } from "../icons";
+import { getUserPlaylist } from "../api/getUserPlaylist";
+import { getUserId } from "../api/getUserId";
+import { checkSavedTracks } from "../api/checkSavedTracks";
 
 interface ITracksSearchPage {
   searchKey: string;
@@ -21,6 +24,10 @@ function TracksSearchPage({
   const [tracks, setTracks] = useState<IResponseTrack[] | null>(null);
   const audio = document.querySelector('.playback') as HTMLAudioElement;
 
+  const [list, setList] = useState<[]>([]);
+  const [strId, setStrId] = useState("");
+  const [listIds, setListIds] = useState([]);
+
   useEffect(() => {
     const foo = async () => {
       const data = await searchItems(searchKey, token);
@@ -28,6 +35,44 @@ function TracksSearchPage({
     };
     foo();
   }, [searchKey, token]);
+
+  useEffect(() => {
+    setStrId(getTracksIds());
+  }, [tracks])
+
+
+  function getTracksIds() {
+    let ids = "";
+    let index = 0;
+
+    tracks?.forEach((item) => {
+      if (index === 50) {
+        return ids;
+      }
+      ids += item.id + ",";
+      index++;
+    });
+    return ids;
+  }
+
+  useEffect(() => {
+    if (strId.length > 0) {
+      const checkTrack = async () => {
+        let result = await checkSavedTracks(token, strId);
+        setListIds(result);
+      };
+      checkTrack();
+    }
+  }, [strId]);
+
+  useEffect(() => {
+    async function getListOfSavedPlaylists() {
+      let id = await getUserId(token);
+      setList(await getUserPlaylist(token, id));
+    }
+    getListOfSavedPlaylists();
+  }, []);
+
 
   return (
     <div className="tracklist-search-page">
@@ -56,6 +101,10 @@ function TracksSearchPage({
           duration={item.duration_ms}
           setRandomColor={setRandomColor}
           isPlaying={(item.id === audio.dataset.track_id) ? true : false}
+          list={list}
+          addedTrack={listIds[tracks.indexOf(item)]}
+          uri={item.uri}
+          
         />
       ))}
     </div>
