@@ -3,6 +3,7 @@
   width: 260px;
   padding: 25px;
   background-color: black;
+  z-index: 1;
 }
 
 .nav-bar_logo {
@@ -57,4 +58,34 @@ li:active {
 
 .active {
   opacity: 1;
+}
+
+@media (max-width: 749px) {
+  .nav-bar {
+    width: 100%;
+    padding: 0 25px;
+    .nav-bar_logo {
+      display: none;
+    }
+  }
+
+  ul {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  ul::after {
+    content: '';
+    display: none;
+  }
+
+  ul > li > a > p {
+    display: none;
+  }
+
+  ul > li > span {
+    display: none;
+  }
+
+
 }

@@ -105,3 +105,13 @@
     }
   }
 }
+
+@media (max-width: 749px) {
+  .playing-widget {
+    width: 20%;
+  }
+
+  .track-info {
+    display: none;
+  }
+}

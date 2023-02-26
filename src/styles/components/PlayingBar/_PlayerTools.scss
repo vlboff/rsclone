@@ -49,3 +49,19 @@
   }
 }
 
+@media (max-width: 749px) {
+  .player-tools {
+    width: 20%;
+  }
+
+  .volume-bar__range {
+    transform: rotate(270deg);
+    width: 20vh;
+    height: 5%;
+  }
+
+  .volume-bar {
+    width: 100%;
+  }
+
+}

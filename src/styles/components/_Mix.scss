@@ -121,3 +121,13 @@
     border-radius: 50%;
   }
 }
+
+
+@media (max-width: 749px) {
+  .card {
+    width: 167px;
+    padding: 0;
+    background: none;
+    border-radius: none;
+  }
+}

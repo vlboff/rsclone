@@ -64,3 +64,14 @@ main {
   position: relative;
   width: 100%;
 }
+
+@media (max-width: 749px) {
+  main {
+    grid-template-areas:
+        "settings-bar"
+        "main-view"
+        "playing-bar"
+        "nav-bar";
+  }
+}
+

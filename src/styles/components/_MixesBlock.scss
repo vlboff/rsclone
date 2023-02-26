@@ -32,7 +32,8 @@
 
 .mixes {
   display: flex;
+  flex-wrap: nowrap;
   padding-top: 20px;
   gap: 24px;
-  overflow: hidden;
+  overflow: scroll;
 }
