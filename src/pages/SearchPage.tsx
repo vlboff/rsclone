@@ -37,7 +37,15 @@ function SearchPage({
   const [searchResult, setSearchResult] = useState<ISearchResult | null>(null);
   const [categories, setCategories] = useState([]);
 
-  console.log(categories);
+  useEffect(() => {
+    async function foo() {
+      if (window.sessionStorage.getItem('searchKey')) {
+        setSearchKey((window.sessionStorage.getItem('searchKey') || ''));
+        setSearchResult(await searchItems(window.sessionStorage.getItem('searchKey') || '', token));
+      }
+    };
+    foo();
+  }, []);
 
   useEffect(() => {
     async function foo() {
@@ -167,12 +175,14 @@ function SearchPage({
           <input
             className="search__input"
             type="text"
-            placeholder="What do you want to listen to?"
+            placeholder={window.sessionStorage.getItem('searchKey') || "What do you want to listen to?"}
             onChange={(e) => {
               setSearchKey(e.target.value);
             }}
-            onKeyUp={async () =>
-              setSearchResult(await searchItems(searchKey, token))
+            onKeyUp={async () => {
+              setSearchResult(await searchItems(searchKey, token));
+              window.sessionStorage.setItem('searchKey', searchKey);
+            }
             }
           />
         </label>
@@ -180,30 +190,31 @@ function SearchPage({
       {searchResult ? (
         renderSearchResult()
       ) : (document.querySelector(".search__input") as HTMLInputElement) !==
-          null &&
+        null &&
         (document.querySelector(".search__input") as HTMLInputElement).value ===
-          "" ? (
+        "" ? (
         <>
           <h3 className="search__cards-title">Browse all</h3>
           <div className="search__cards">
             {categories.length > 0
               ? categories.map((category: ICategory) => {
-                  return (
-                    <Link
-                      to={`/section/${category.id}`}
-                      onClick={() => {
-                        setCategoryID(category.id);
-                        setCategoryName(category.name);
-                      }}
-                    >
-                      <CategoryCard
-                        image={category.icons[0].url}
-                        name={category.name}
-                        key={category.name}
-                      />
-                    </Link>
-                  );
-                })
+                return (
+                  <Link
+                    to={`/section/${category.id}`}
+                    onClick={() => {
+                      setCategoryID(category.id);
+                      setCategoryName(category.name);
+                    }}
+                    key={category.name}
+                  >
+                    <CategoryCard
+                      image={category.icons[0].url}
+                      name={category.name}
+                      key={category.name}
+                    />
+                  </Link>
+                );
+              })
               : ""}
           </div>
         </>
