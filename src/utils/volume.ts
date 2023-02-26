@@ -24,9 +24,9 @@ export function handleVolume() {
         isMuted = true;
       } else {
         audio.volume = currentVolume;
-        changeVolumeIcon(volume.value);
         volume.value = currentVolume.toString();
         volume.style.background = currentVolume ? `linear-gradient(to right, ${backgroundColor} 0%, ${backgroundColor} ${currentVolume * 100}%, #535353 ${currentVolume * 100}%, #535353 100%)` : backgroundColor;
+        changeVolumeIcon(volume.value);
         isMuted = false;
       }
     })

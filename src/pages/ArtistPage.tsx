@@ -162,7 +162,7 @@ function ArtistPage({
               <TracklistRow
                 key={`${item.name}${Math.random()}`}
                 number={index + 1}
-                image={item.album.images[0].url}
+                image={item.album!.images[0].url}
                 name={item.name}
                 trackID={item.id}
                 setTrackID={setTrackID}

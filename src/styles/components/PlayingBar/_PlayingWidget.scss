@@ -77,6 +77,8 @@
 .track-name {
   font-size: 14px;
   line-height: 22.4px;
+  cursor: default;
+
   a {
     color: $text-main-color;
     text-decoration: none;
@@ -91,13 +93,14 @@
 .track-author {
   font-size: 11px;
   line-height: 17.6px;
+  cursor: default;
+
   a {
-    color: $text-additional-color;
+    color: $text-main-color;
     text-decoration: none;
     cursor: pointer;
 
     &:hover {
-      color: $text-main-color;
       text-decoration: underline;
     }
   }

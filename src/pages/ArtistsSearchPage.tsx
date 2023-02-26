@@ -4,13 +4,16 @@ import { IResponseArtist } from "../components/interfaces/apiInterfaces";
 import Mix from "../components/Mix";
 
 interface ISearchPage {
-  setPlaylistsID: React.Dispatch<React.SetStateAction<string>>;
+  setArtistID: React.Dispatch<React.SetStateAction<string>>;
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
-  searchKey: string
+  searchKey: string;
 }
 
-function ArtistsSearchPage({ setPlaylistsID, setRandomColor, searchKey }: ISearchPage) {
-
+function ArtistsSearchPage({
+  setArtistID,
+  setRandomColor,
+  searchKey,
+}: ISearchPage) {
   const token = window.localStorage.getItem("token");
   const [artists, setArtists] = useState<IResponseArtist[] | null>(null);
 
@@ -24,18 +27,24 @@ function ArtistsSearchPage({ setPlaylistsID, setRandomColor, searchKey }: ISearc
 
   return (
     <div className="mixes mixes-search">
-      {artists && artists.map((artist) => (
-        <Mix
-          key={artist.id}
-          image={artist.images?.length ? artist.images[0].url : 'https://lab.possan.se/thirtify/images/placeholder-playlist.png'}
-          name={artist.name}
-          description='Artist'
-          setPlaylistsID={setPlaylistsID}
-          setRandomColor={setRandomColor}
-        />
-      ))}
+      {artists &&
+        artists.map((artist) => (
+          <Mix
+            key={artist.id}
+            image={
+              artist.images?.length
+                ? artist.images[0].url
+                : "https://lab.possan.se/thirtify/images/placeholder-playlist.png"
+            }
+            name={artist.name}
+            description="Artist"
+            artistID={artist.id}
+            setArtistID={setArtistID}
+            setRandomColor={setRandomColor}
+          />
+        ))}
     </div>
-  )
+  );
 }
 
 export default ArtistsSearchPage;

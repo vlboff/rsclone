@@ -1,6 +1,7 @@
 import { getTrack } from "../api/getTrack";
 import { searchedTracks } from "../api/searchItems";
 import { IResponseTrack } from "../components/interfaces/apiInterfaces";
+import { currentAlbumTracks } from "../pages/AlbumPage";
 import { currentArtistTracks } from "../pages/ArtistPage";
 import { currentPlaylist } from "../pages/PlaylistPage";
 import { currentTopTracks } from "../pages/TrackPage";
@@ -41,7 +42,7 @@ export function playPauseTrack(id: string) {
   if (id === '') return;
   const audio = document.querySelector('.playback') as HTMLAudioElement;
   const playingBarIcon = document.querySelector('.playing-bar .play-pause-button') as HTMLButtonElement;
-  const bigGreenButton = document.querySelector('.control-panel .play-btn') as HTMLDivElement;
+  // const bigGreenButton = document.querySelector('.control-panel .play-btn') as HTMLDivElement;
 
   showTrackCurrentTimeAndTimeline(audio);
 
@@ -51,21 +52,11 @@ export function playPauseTrack(id: string) {
       isPlaying = true;
       togglePlayPauseIcon(id);
       playingBarIcon.innerHTML = pauseIcon;
-      if (bigGreenButton) {
-        bigGreenButton.innerHTML = pauseIcon;
-        (bigGreenButton.querySelector('svg') as SVGElement).attributes[2].value = '28';
-        (bigGreenButton.querySelector('svg') as SVGElement).attributes[1].value = '28';
-      }
     } else {
       audio.pause();
       isPlaying = false;
       togglePlayPauseIcon(id);
       playingBarIcon.innerHTML = playIcon;
-      if (bigGreenButton) {
-        bigGreenButton.innerHTML = playIcon;
-        (bigGreenButton.querySelector('svg') as SVGElement).attributes[2].value = '24';
-        (bigGreenButton.querySelector('svg') as SVGElement).attributes[1].value = '24';
-      }
     }
   }, 400)
 
@@ -81,10 +72,10 @@ export function playPauseTrack(id: string) {
 function togglePlayPauseIcon(id: string) {
   const trackButton = document.getElementById(id)?.querySelector('.player-tool-button') as HTMLButtonElement;
   if (trackButton) {
-    if (trackButton.innerHTML === playIcon) {
+    if (trackButton.innerHTML === playIcon && isPlaying) {
       switchAllTracksIconsToPlay();
       trackButton.innerHTML = pauseIcon;
-    } else {
+    } else if (trackButton.innerHTML !== playIcon && !isPlaying) {
       trackButton.innerHTML = playIcon;
     }
   } else {
@@ -105,19 +96,15 @@ function switchAllTracksIconsToPlay() {
 function showCoverArts(data: IResponseTrack) {
   const coverArt = (document.querySelector('.cover-art') as HTMLElement).querySelector('img') as HTMLImageElement;
   const coverArtExpanded = (document.querySelector('.cover-art_expanded') as HTMLElement).querySelector('img') as HTMLImageElement;
-  coverArt.src = data.album.images[0].url;
-  coverArtExpanded.src = data.album.images[0].url;
+  coverArt.src = data.album!.images[0].url;
+  coverArtExpanded.src = data.album!.images[0].url;
 }
 
 function showTrackInfo(data: IResponseTrack) {
-  const trackName = (document.querySelector('.playing-bar .track-name') as HTMLElement).querySelector('a') as unknown as HTMLLinkElement;
-  const trackAuthor = (document.querySelector('.playing-bar .track-author') as HTMLElement).querySelector('a') as unknown as HTMLLinkElement;
-  const trackNameLink = (document.querySelector('.playing-bar .track-name') as HTMLElement).querySelector('.track-name_link') as HTMLLinkElement;
-  const trackAuthorLink = (document.querySelector('.playing-bar .track-author') as HTMLElement).querySelector('.track-author_link') as HTMLLinkElement;
+  const trackName = document.querySelector('.playing-bar .track-name') as HTMLElement;
+  const trackAuthor = document.querySelector('.playing-bar .track-author') as HTMLElement;
   trackName.innerText = data.name;
   trackAuthor.innerText = data.artists[0].name;
-  trackNameLink.href = `/track/${data.id}`;
-  trackAuthorLink.href = `/artist/${data.artists[0].id}`;
 }
 
 function showTrackDuration(audio: HTMLAudioElement) {
@@ -170,6 +157,9 @@ function definePlaylistOrSearchResults() {
   };
   if (window.location.href.includes('/artist')) {
     return currentArtistTracks.tracks;
+  };
+  if (window.location.href.includes('/album')) {
+    return currentAlbumTracks.tracks.items;
   }
 }
 
@@ -214,14 +204,14 @@ export function shuffleTracks() {
   isShuffled = !isShuffled;
 }
 
-export function handleBigGreenButton(id: string | undefined) {
-  const playlist = definePlaylistOrSearchResults();
+// export function handleBigGreenButton(id: string | undefined) {
+//   const playlist = definePlaylistOrSearchResults();
 
-  if (id) {
-    selectAndGetTrack(id);
-    playPauseTrack(id);
-  } else if (playlist) {
-    selectAndGetTrack(playlist[0].id);
-    playPauseTrack(playlist[0].id);
-  };
-}
+//   if (id) {
+//     selectAndGetTrack(id);
+//     playPauseTrack(id);
+//   } else if (playlist) {
+//     selectAndGetTrack(playlist[0].id);
+//     playPauseTrack(playlist[0].id);
+//   };
+// }

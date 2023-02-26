@@ -11,6 +11,7 @@ interface ITracksSearchPage {
   searchKey: string;
   setTrackID: React.Dispatch<React.SetStateAction<string>>;
   setAlbumID: React.Dispatch<React.SetStateAction<string>>;
+  setArtistID: React.Dispatch<React.SetStateAction<string>>;
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -18,11 +19,12 @@ function TracksSearchPage({
   searchKey,
   setTrackID,
   setAlbumID,
+  setArtistID,
   setRandomColor,
 }: ITracksSearchPage) {
   const token = window.localStorage.getItem("token");
   const [tracks, setTracks] = useState<IResponseTrack[] | null>(null);
-  const audio = document.querySelector('.playback') as HTMLAudioElement;
+  const audio = document.querySelector(".playback") as HTMLAudioElement;
 
   const [list, setList] = useState<[]>([]);
   const [strId, setStrId] = useState("");
@@ -89,26 +91,26 @@ function TracksSearchPage({
         <TracklistRow
           key={`${item.name}${Math.random()}`}
           number={index + 1}
-          image={item.album.images[0].url}
+          image={item.album!.images[0].url}
           name={item.name}
           trackID={item.id}
           setTrackID={setTrackID}
           artist={item.artists[0].name}
           artistID={item.artists[0].id}
-          album={item.album.name}
-          albumID={item.album.id}
+          album={item.album!.name}
+          albumID={item.album!.id}
           setAlbumID={setAlbumID}
+          setArtistID={setArtistID}
           duration={item.duration_ms}
           setRandomColor={setRandomColor}
           isPlaying={(item.id === audio.dataset.track_id) ? true : false}
           list={list}
           addedTrack={listIds[tracks.indexOf(item)]}
           uri={item.uri}
-          
         />
       ))}
     </div>
-  )
+  );
 }
 
 export default TracksSearchPage;

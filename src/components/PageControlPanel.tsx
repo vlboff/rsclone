@@ -1,7 +1,12 @@
 import React from "react";
-import { IconPlayCard, IconHeart } from "../icons";
-import { handleBigGreenButton } from "../utils/playback";
-import { IAlbum, IArtistsTopTrecks, IPlaylist, IResponseArtist, IResponseTrack } from "./interfaces/apiInterfaces";
+
+import {
+  IAlbum,
+  IArtistsTopTrecks,
+  IPlaylist,
+  IResponseArtist,
+  IResponseTrack,
+} from "./interfaces/apiInterfaces";
 
 interface IPageControlPanel {
   color: string;
@@ -12,7 +17,14 @@ interface IPageControlPanel {
   topTracks?: IArtistsTopTrecks | null;
 }
 
-function PageControlPanel({ color, setIconHeart, playlist, track, album, topTracks }: IPageControlPanel) {
+function PageControlPanel({
+  color,
+  setIconHeart,
+  playlist,
+  track,
+  album,
+  topTracks,
+}: IPageControlPanel) {
   return (
     <div>
       <div
@@ -22,7 +34,7 @@ function PageControlPanel({ color, setIconHeart, playlist, track, album, topTrac
         }}
       ></div>
       <div className="control-panel">
-        <div className="play-btn" onClick={() => {
+        {/* <div className="play-btn" onClick={() => {
           if (playlist) handleBigGreenButton(playlist.tracks.items[0].track.id);
           if (track) handleBigGreenButton(track.id);
           if (album) handleBigGreenButton(album.tracks.items[0].id);
@@ -33,7 +45,7 @@ function PageControlPanel({ color, setIconHeart, playlist, track, album, topTrac
         </div>
         {setIconHeart ? (
           <IconHeart height={32} width={32} className={"like-btn"} />
-        ) : null}
+        ) : null} */}
       </div>
     </div>
   );

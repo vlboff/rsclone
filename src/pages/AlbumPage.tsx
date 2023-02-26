@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { IAlbum } from "../components/interfaces/apiInterfaces";
+import {
+  IAlbum,
+  IArtistsTopTrecks,
+} from "../components/interfaces/apiInterfaces";
 import { IconPreloader, IconClock } from "../icons";
 import { getAlbum } from "../api/getAlbum";
 import SongAlbumPlaylistPageHeader from "../components/SongAlbumPlaylistPageHeader";
@@ -18,6 +21,8 @@ interface IAlbumPage {
   setRandomColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
+export let currentAlbumTracks: IAlbum;
+
 function AlbumPage({
   albumID,
   randomColor,
@@ -28,6 +33,9 @@ function AlbumPage({
   const token = window.localStorage.getItem("token");
   const [album, setAlbum] = useState<IAlbum | null>(null);
   const audio = document.querySelector(".playback") as HTMLAudioElement;
+  if (album) {
+    currentAlbumTracks = album;
+  }
 
   const [list, setList] = useState<[]>([]);
   const [strId, setStrId] = useState("");
