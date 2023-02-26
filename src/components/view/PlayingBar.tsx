@@ -41,14 +41,12 @@ function PlayingBar() {
   return (
     <div className="playing-bar__container">
       <div className="cover-art_expanded">
-        <a href="/">
-          <div>
-            <img
-              src="https://lab.possan.se/thirtify/images/placeholder-playlist.png"
-              alt="cover art"
-            />
-          </div>
-        </a>
+        <div>
+          <img
+            src="https://lab.possan.se/thirtify/images/placeholder-playlist.png"
+            alt="cover art"
+          />
+        </div>
         <button className="hide-button" onClick={shrinkCoverArt}>
           <IconHide />
         </button>
@@ -58,14 +56,12 @@ function PlayingBar() {
           <div className="playing-widget">
             <div className="cover-art">
               <div className="cover-art__container">
-                <a href="/">
-                  <div>
-                    <img
-                      src="https://lab.possan.se/thirtify/images/placeholder-playlist.png"
-                      alt="cover art"
-                    />
-                  </div>
-                </a>
+                <div>
+                  <img
+                    src="https://lab.possan.se/thirtify/images/placeholder-playlist.png"
+                    alt="cover art"
+                  />
+                </div>
                 <button className="show-button" onClick={expandCoverArt}>
                   <IconShow />
                 </button>
@@ -73,15 +69,12 @@ function PlayingBar() {
             </div>
             <div className="track-info">
               <div className="track-name">
-                <Link className="track-name_link" to={""}></Link>
+                <p className="track-name_link"></p>
               </div>
               <div className="track-author">
-                <Link className="track-author_link" to={""}></Link>
+                <p className="track-author_link"></p>
               </div>
             </div>
-            <button className="add-button player-tool-button">
-              <IconHeart />
-            </button>
           </div>
           <div className="player-controls">
             <div className="player-controls__buttons">

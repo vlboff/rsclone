@@ -1,6 +1,5 @@
 import React from "react";
-import { IconPlayCard, IconHeart } from "../icons";
-import { handleBigGreenButton } from "../utils/playback";
+
 import {
   IAlbum,
   IArtistsTopTrecks,

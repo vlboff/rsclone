@@ -52,14 +52,14 @@ function TrackPage({
   }
   useEffect(() => {
     setHeaderName(track ? track.name : "");
-    setArtistID(track ? track.album.artists[0].id : "");
+    setArtistID(track ? track.album!.artists[0].id : "");
 
     if (track) {
       const foo = async () => {
         setTopTracks(
-          await getArtistsTopTrack(token, track.album.artists[0].id)
+          await getArtistsTopTrack(token, track.album!.artists[0].id)
         );
-        setAlbum(await getAlbum(token, track.album.id));
+        setAlbum(await getAlbum(token, track.album!.id));
         setAlbums(await getArtistsAlbums(token, track.artists[0].id));
       };
       foo();
@@ -87,11 +87,11 @@ function TrackPage({
     <div className="track-page">
       <SongAlbumPlaylistPageHeader
         color={randomColor}
-        image={track.album.images[0].url}
+        image={track.album!.images[0].url}
         title={"song"}
         name={track.name}
-        age={track.album.release_date.slice(0, 4)}
-        owner={track.album.artists[0].name}
+        age={track.album!.release_date.slice(0, 4)}
+        owner={track.album!.artists[0].name}
         duration={track.duration_ms}
       />
 
@@ -102,7 +102,7 @@ function TrackPage({
       <div className="popular-tracks">
         <div className="popular-tracks_title">Popular Tracks by</div>
         <div className="popular-tracks_artist">
-          {track.album.artists[0].name}
+          {track.album!.artists[0].name}
         </div>
 
         {topTracks ? (
@@ -111,7 +111,7 @@ function TrackPage({
               <TracklistRow
                 key={`${item.name}${Math.random()}`}
                 number={index + 1}
-                image={item.album.images[0].url}
+                image={item.album!.images[0].url}
                 name={item.name}
                 trackID={item.id}
                 setTrackID={setTrackID}
@@ -133,7 +133,7 @@ function TrackPage({
         albumID={albumID}
         setAlbumID={setAlbumID}
         artistID={artistID}
-        artistName={track.album.artists[0].name}
+        artistName={track.album!.artists[0].name}
         setRandomColor={setRandomColor}
       />
 
@@ -142,20 +142,20 @@ function TrackPage({
         albumID={albumID}
         setAlbumID={setAlbumID}
         artistID={artistID}
-        artistName={track.album.artists[0].name}
+        artistName={track.album!.artists[0].name}
         setRandomColor={setRandomColor}
       />
 
       <div className="traks-from-album">
         <div className="traks-from-album_header">
           <img
-            src={track.album.images[0].url}
+            src={track.album!.images[0].url}
             alt="cover"
             className="traks-from-album_img"
           />
           <div className="traks-from-album_dscr">
             <div className="traks-from-album_title">From the album</div>
-            <div className="traks-from-album_name">{track.album.name}</div>
+            <div className="traks-from-album_name">{track.album!.name}</div>
           </div>
         </div>
 

@@ -65,8 +65,6 @@
   }
 }
 
-.tracklist-search-page {
-  .last-block {
-    justify-self: end;
-  }
+.tracklist-search-page .tracklist-table_title {
+  grid-template-columns: [index] 16px [first] 6fr [var1] 4fr [var2] minmax(120px, 1fr);
 }
