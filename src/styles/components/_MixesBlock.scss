@@ -32,7 +32,31 @@
 
 .mixes {
   display: flex;
-  padding-top: 20px;
+  flex-wrap: nowrap;
+  overflow: scroll;
   gap: 24px;
-  overflow: hidden;
+}
+
+.mixes::-webkit-scrollbar {
+  background: none;
+  width: 0;
+  height: 4px;
+}
+
+.mixes::-webkit-scrollbar-thumb {
+  background: #535353;
+}
+
+.mixes::-webkit-scrollbar-thumb:hover {
+  background: #b3b3b3;
+}
+
+
+@media (max-width: 749px) {
+  .mixes-block-header-title {
+    font-size: 1.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

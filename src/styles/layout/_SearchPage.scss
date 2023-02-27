@@ -20,3 +20,12 @@
         padding: 25px 0;
     }
 }
+
+@media (max-width: 860px) {
+    .search {
+        padding: 40px 4px 0 4px;
+        .search__cards {
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        }
+    }
+}

@@ -57,25 +57,57 @@
 
 .page-header_owner {
   padding-left: 5px;
-  display: flex;
-  align-items: center;
-}
-
-.drop {
-  display: flex;
-  align-self: center;
-  background: #FFFFFF;
-  width: 4px;
-  height: 4px;
-  margin: 0 5px;
-  border-radius: 50%;
-}
-
-.page-header_followers {
-  display: flex;
-  align-items: center;
 }
 
 .page-header_total-duration-time {
   color: #b3b3b3;
+}
+
+@media (max-width: 749px) {
+  .page-header {
+    padding: 5px;
+    align-items: center;
+    height: 216px;
+  }
+
+  .page-header_cover {
+    width: 150px;
+    height: 150px;
+  }
+
+  .page-header_item {
+    padding-left: 4px;
+  }
+
+  .page-header_name {
+    font-size: 1.2rem;
+    margin: 0.3em 0px;
+  }
+
+  .page-header_info {
+    font-size: 0.75rem;
+    flex-direction: column;
+
+    .page-header_owner {
+      padding-right: 0;
+    }
+
+    .page-header_tracks {
+      padding-left: 0;
+    }
+  }
+
+  .page-header_title {
+    padding-left: 0;
+  }
+
+  .page-header_dscr {
+    padding-left: 0;
+    font-size: .75rem;
+  }
+
+  .page-header_owner {
+    padding-left: 0;
+  }
+
 }

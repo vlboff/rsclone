@@ -30,3 +30,15 @@
   border-bottom: 1px dotted black;
   cursor: pointer;
 }
+
+
+@media (max-width: 850px) {
+  .disclaimer {
+    padding-top: 400px;
+  }
+
+  .disclaimer__contatcs {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

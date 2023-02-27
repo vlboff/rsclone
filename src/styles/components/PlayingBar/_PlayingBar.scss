@@ -18,3 +18,9 @@
 .playing-bar__container {
   grid-area: playing-bar;
 }
+
+@media (max-width: 749px) {
+  .playing-bar__wrapper  {
+    padding: 0 2px;
+  }
+}

@@ -16,6 +16,18 @@
     .library__playlists {
         display: grid;
         gap: 24px;
-        grid-template-columns: repeat(auto-fit, 207px);
+        grid-template-columns: repeat(auto-fit, minmax(150px, 207px));
     }
 }
+
+
+
+@media (max-width: 749px) {
+    .library__container {
+        padding: 20px 4px 0 4px;
+        .library__playlists {
+            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        }
+    }
+    }

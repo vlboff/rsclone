@@ -37,6 +37,10 @@
 
     .track-name {
       font-size: 16px;
+      -webkit-line-clamp: 1;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .track-author {
@@ -105,3 +109,11 @@
   background-color: #373737;
   border-radius: 4px;
 }
+
+@media (max-width: 749px) {
+  .search-result-songs__container {
+    width: 100%;
+  }
+}
+
+

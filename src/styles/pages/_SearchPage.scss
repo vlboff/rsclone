@@ -10,10 +10,6 @@
   gap: 24px;
 }
 
-.mixes {
-  flex-wrap: wrap;
-  padding: 0;
-}
 
 .mixes-block-header-title {
   margin-bottom: 20px;
@@ -67,4 +63,16 @@
 
 .tracklist-search-page .tracklist-table_title {
   grid-template-columns: [index] 16px [first] 6fr [var1] 4fr [var2] minmax(120px, 1fr);
+}
+
+
+@media (max-width: 749px) {
+  .render-search-results__artist-and-track-container {
+    flex-direction: column;
+  }
+
+  .tracklist-search-page .tracklist-table_title {
+    grid-template-columns: [index] 1fr [first] 13fr [var1] 0fr [var2] 0fr [last] minmax(0px,1fr);
+  }
+
 }

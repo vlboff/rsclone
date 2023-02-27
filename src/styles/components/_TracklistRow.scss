@@ -30,6 +30,10 @@
         color: #FFFFFF;
         text-decoration: none;
         cursor: pointer;
+        -webkit-line-clamp: 1;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
 
       .track-name:hover {
@@ -40,6 +44,10 @@
         color: #b3b3b3;
         text-decoration: none;
         cursor: pointer;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
 
       .track-artist:hover {
@@ -184,3 +192,40 @@
 }
 
 
+@media (max-width: 980px) {
+  .tracklist-row {
+    grid-template-columns: [index] 1fr [first] 13fr [var1] 0fr [var2] 0fr [last] minmax(0px,1fr);
+    padding: 0 4px;
+
+    .track-number {
+      font-size: 0.85rem;
+    }
+
+    .track-info {
+      .track-dscr {
+        .track-name > p {
+          font-size: 0.85rem;
+          margin: 0;
+        }
+
+        .track-artist > p {
+          font-size: 0.75rem;
+          margin: 0;
+        }
+      }
+    }
+
+    .track-album {
+      display: none;
+    }
+
+    .track-data {
+      display: none;
+    }
+
+    .last-block {
+      gap: 20px;
+    }
+  }
+
+}

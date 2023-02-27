@@ -125,3 +125,18 @@
     opacity: 1;
   }
 }
+
+
+@media (max-width: 749px) {
+  .settings-bar {
+    padding: 0 2px;
+  }
+
+.settings-bar__block-left {
+  .settings-bar__control {
+    .playlist-name {
+      display: none;
+    }
+  }
+}
+}
