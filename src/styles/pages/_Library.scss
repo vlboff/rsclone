@@ -16,7 +16,7 @@
     .library__playlists {
         display: grid;
         gap: 24px;
-        grid-template-columns: repeat(auto-fit, 207px);
+        grid-template-columns: repeat(auto-fit, minmax(150px, 207px));
     }
 }
 
