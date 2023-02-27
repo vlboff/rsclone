@@ -24,6 +24,13 @@
   }
 }
 
+.account-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 30px;
+}
+
 .disclaimer__button {
   margin-top: -10px;
   font-size: 14px;
