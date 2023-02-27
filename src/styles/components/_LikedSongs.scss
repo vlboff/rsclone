@@ -43,3 +43,9 @@
         margin-top: 12px;
     }
 }
+
+@media (max-width: 749px) {
+    .liked-songs-box {
+        grid-column: span 1;
+    }
+}
