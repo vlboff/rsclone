@@ -55,9 +55,9 @@ function SettingsBar({ headerName }: ISettingsBar) {
   const scrollHeight = useAppSelector((state) => state.scroll.scrollHeight);
 
   useEffect(() => {
-    const path = window.location.pathname.slice(
-      1,
-      window.location.pathname.slice(1).indexOf("/") + 1
+    const path = window.location.hash.slice(
+      2,
+      window.location.hash.slice(2).indexOf("/") + 2
     );
 
     if (
