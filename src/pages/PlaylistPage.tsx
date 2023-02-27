@@ -36,6 +36,7 @@ function PlaylistPage({
   const [list, setList] = useState<[]>([]);
   const [strId, setStrId] = useState("");
   const [listIds, setListIds] = useState([]);
+  const [insideMyPlaylist, setInsideMyPlaylist] = useState(false)
 
   const audio = document.querySelector(".playback") as HTMLAudioElement;
 
@@ -73,6 +74,24 @@ function PlaylistPage({
     }
     getListOfSavedPlaylists();
   }, []);
+
+  useEffect(() => {
+    if(list.length > 0) {
+      let newIds = list.map((item: any) => {
+        return item.id
+      })
+      checkPlaylist(newIds)
+    }
+
+    function checkPlaylist(ids: string[]) {
+      for(let i = 0; i < ids.length; i++) {
+        if(ids[i] === playlistID) {
+          return setInsideMyPlaylist(true)
+        }
+      }
+    }
+
+  }, [list])
 
   const getFollowers = (followers: string) => {
     const reverse = followers.split("").reverse().join("");
@@ -177,6 +196,7 @@ function PlaylistPage({
                 isPlaying={
                   item.track.id === audio.dataset.track_id ? true : false
                 }
+                insideMyPlaylist={insideMyPlaylist}
               />
             ))
           ) : (

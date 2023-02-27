@@ -6,6 +6,8 @@ import { IconHeart, IconPlayCard, IconClock, IconPreloader } from "../icons";
 import TracklistRow from "../components/TracklistRow";
 import PageControlPanel from '../components/PageControlPanel';
 import SongAlbumPlaylistPageHeader from "../components/SongAlbumPlaylistPageHeader";
+import { getUserPlaylist } from "../api/getUserPlaylist";
+import { getUserId } from "../api/getUserId";
 
 interface ISavedTracksPage {
     randomColor: string;
@@ -18,12 +20,15 @@ interface ISavedTracksPage {
 function SavedTracksPage({randomColor, setTrackID, setRandomColor, setAlbumID, setArtistID}: ISavedTracksPage) {
     const token = window.localStorage.getItem('token');
     const [savedTracks, setSavedTracks] = useState<ISavedTracks | null>(null)
+    const [list, setList] = useState<[]>([]);
 
     const audio = document.querySelector('.playback') as HTMLAudioElement;
 
     useEffect(() => {
         async function getSavedTracks() {
             setSavedTracks(await getUserSavedTracks(token))
+            let id = await getUserId(token);
+            setList(await getUserPlaylist(token, id));
         }
         getSavedTracks()
     }, [])
@@ -72,6 +77,8 @@ function SavedTracksPage({randomColor, setTrackID, setRandomColor, setAlbumID, s
                 setAlbumID={setAlbumID}
                 setRandomColor={setRandomColor}
                 isPlaying={(item.track.id === audio.dataset.track_id) ? true : false}
+                list={list}
+                uri={item.track.uri}
               />
             ))}
           </div>

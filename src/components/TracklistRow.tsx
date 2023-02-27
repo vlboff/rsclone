@@ -36,7 +36,8 @@ interface ITracklistRow {
   setPlaylists?: React.Dispatch<React.SetStateAction<IPlaylist | null>>;
   setSavedTracks?: React.Dispatch<React.SetStateAction<ISavedTracks | null>>;
   setRandomColor: React.Dispatch<React.SetStateAction<string>>
-  isPlaying: boolean
+  isPlaying: boolean;
+  insideMyPlaylist?: boolean;
 }
 
 interface Imounths {
@@ -71,7 +72,8 @@ function TracklistRow({
   setPlaylists,
   setSavedTracks,
   setRandomColor,
-  isPlaying
+  isPlaying,
+  insideMyPlaylist
 }: ITracklistRow) {
   const [hover, setHover] = useState("");
   const token = window.localStorage.getItem('token');
@@ -251,12 +253,15 @@ function TracklistRow({
                 : ''
                 }
               </button>
-              <button 
-                className='modal-btn context-btn add-to-playlist'
-                onClick={deleteItemFromPlaylist}
-              >
-                Delete
-              </button>
+              {insideMyPlaylist 
+                ? 
+                  <button 
+                  className='modal-btn context-btn add-to-playlist'
+                  onClick={deleteItemFromPlaylist}
+                >
+                  Delete
+                </button>
+               : ''}
             </div>
         </div>
       </div>

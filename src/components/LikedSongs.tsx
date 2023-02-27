@@ -35,11 +35,11 @@ function LikedSongs({ setRandomColor }: ILikedSongs) {
               <h3 className='liked-songs-box__title'>Liked Songs</h3>
               <div className='liked-songs-box__amount'>{savedTracks?.total} liked songs</div>
           </div >
-          <button className='liked-songs-box__btn btn-reset'>
+          {/* <button className='liked-songs-box__btn btn-reset'>
             <div className="circle">
               <IconPlayCard />
             </div>
-          </button>
+          </button> */}
         </div >
     </Link>
   )
