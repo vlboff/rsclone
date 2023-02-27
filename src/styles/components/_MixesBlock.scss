@@ -50,3 +50,13 @@
 .mixes::-webkit-scrollbar-thumb:hover {
   background: #b3b3b3;
 }
+
+
+@media (max-width: 749px) {
+  .mixes-block-header-title {
+    font-size: 1.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

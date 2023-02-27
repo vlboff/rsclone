@@ -68,7 +68,14 @@
 
 @media (max-width: 749px) {
   .player-tool-button {
-    width: 100%;
-    height: 100%;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 400px) {
+  .player-tool-button {
+    width: 16px;
+    height: 16px;
   }
 }

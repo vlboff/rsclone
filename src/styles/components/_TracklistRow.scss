@@ -30,6 +30,10 @@
         color: #FFFFFF;
         text-decoration: none;
         cursor: pointer;
+        -webkit-line-clamp: 1;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
 
       .track-name:hover {
@@ -40,6 +44,10 @@
         color: #b3b3b3;
         text-decoration: none;
         cursor: pointer;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
 
       .track-artist:hover {
@@ -196,19 +204,13 @@
     .track-info {
       .track-dscr {
         .track-name > p {
+          font-size: 0.85rem;
           margin: 0;
-          -webkit-line-clamp: 1;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
         }
 
         .track-artist > p {
+          font-size: 0.75rem;
           margin: 0;
-          -webkit-line-clamp: 2;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
         }
       }
     }

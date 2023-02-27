@@ -58,3 +58,19 @@
     }
   }
 }
+
+
+@media (max-width: 749px) {
+  .track-page {
+    .popular-tracks {
+      padding: 0 4px;
+
+      .popular-tracks_artist {
+        font-size: 1.2rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
