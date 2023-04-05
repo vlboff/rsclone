@@ -1,6 +1,6 @@
 # RS clone
 
-This is a command work to develop music service based at Spotify API.
+This is a command work to develop music service based on Spotify API.
 
 <a href="https://avpankov.github.io/rsclone/">Deployed app</a>
 
